@@ -1,35 +1,28 @@
 import { defineStore } from 'pinia';
 import axios from 'axios';
-
-export interface PoetInfo {
-  _id: string;
-  name: string;
-  time_period: string;
-  bio: string;
-  reviewed: boolean;
-}
+import type { Poet } from './__types';
 
 export const usePoetStore = defineStore('poets', {
   state: () => {
     return {
       // for initially empty lists
-      poets: [] as PoetInfo[],
+      poets: [] as Poet[],
       // for data that is not yet loaded
-      poet: null as PoetInfo | null,
+      poet: null as Poet | null,
     };
   },
   getters: {
-    getPoets(state): PoetInfo[] {
+    getPoets(state): Poet[] {
       return state.poets;
     },
-    getPoet(state): PoetInfo | null {
+    getPoet(state): Poet | null {
       return state.poet;
     },
   },
   actions: {
     async fetchPoets() {
       try {
-        const req = await axios.get(`http://localhost:3000/api/poets`);
+        const req = await axios.get(`${import.meta.env.VITE_API_URL}/poets`);
         this.poets = req.data;
       } catch (error) {
         alert(error);

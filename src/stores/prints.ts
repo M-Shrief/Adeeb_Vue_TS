@@ -1,42 +1,25 @@
 import { defineStore } from 'pinia';
-
-export interface PrintInfo {
-  _id: string;
-  peot?: string | object;
-  poem?: string | object;
-  reviewed: boolean;
-  tags?: string;
-  verse?: [
-    {
-      _id: string;
-      first: string;
-      sec: string;
-    }
-  ];
-  qoute?: string;
-  first?: string;
-  sec?: string;
-}
+import type { Print } from './__types';
 
 export const usePrintStore = defineStore('prints', {
   state: () => {
     return {
       // for initially empty lists
-      prints: [] as PrintInfo[],
+      prints: [] as Print[],
     };
   },
   getters: {
-    getPrints(state): PrintInfo[] {
+    getPrints(state): Print[] {
       return state.prints;
     },
   },
   actions: {
-    addPrint(print: PrintInfo) {
+    addPrint(print: Print) {
       if (!this.getPrints.includes(print)) {
         this.prints.push(print);
       }
     },
-    removePrint(print: PrintInfo) {
+    removePrint(print: Print) {
       let printIndex = this.getPrints
         .map((verse) => verse._id)
         .indexOf(print._id);

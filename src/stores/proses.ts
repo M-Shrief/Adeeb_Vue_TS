@@ -1,27 +1,21 @@
 import { defineStore } from 'pinia';
 import axios from 'axios';
-
-export interface ProseInfo {
-  _id: string;
-  poet: string | object;
-  tags: string;
-  qoute: string;
-  reviewed: boolean;
-}
+// types
+import type { Prose } from './__types';
 
 export const useProseStore = defineStore('proses', {
   state: () => ({
-    proses: [] as ProseInfo[],
+    proses: [] as Prose[],
   }),
   getters: {
-    getProses(state): ProseInfo[] {
+    getProses(state): Prose[] {
       return state.proses;
     },
   },
   actions: {
     async fetchProses() {
       try {
-        const req = await axios.get(`http://localhost:3000/api/proses`);
+        const req = await axios.get(`${import.meta.env.VITE_API_URL}/proses`);
         this.proses = req.data;
       } catch (error) {
         alert(error);

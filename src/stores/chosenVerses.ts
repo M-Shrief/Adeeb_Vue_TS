@@ -1,34 +1,23 @@
 import { defineStore } from 'pinia';
 import axios from 'axios';
-
-export interface ChosenVerseInfo {
-  _id: string;
-  poet: string | object;
-  poem: string | object;
-  tags: string;
-  verse: [
-    {
-      first: string;
-      sec: string;
-      _id: string;
-    }
-  ];
-  reviewed: boolean;
-}
+// types
+import type { ChosenVerse } from './__types';
 
 export const useChosenVerseStore = defineStore('chosenVerses', {
   state: () => ({
-    chosenVerses: [] as ChosenVerseInfo[],
+    chosenVerses: [] as ChosenVerse[],
   }),
   getters: {
-    getChosenVerses(state): ChosenVerseInfo[] {
+    getChosenVerses(state): ChosenVerse[] {
       return state.chosenVerses;
     },
   },
   actions: {
     async fetchChosenVerses() {
       try {
-        const req = await axios.get(`http://localhost:3000/api/chosenverses`);
+        const req = await axios.get(
+          `${import.meta.env.VITE_API_URL}/chosenverses`
+        );
         this.chosenVerses = req.data;
       } catch (error) {
         alert(error);

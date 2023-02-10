@@ -6,13 +6,13 @@ export const usePoetStore = defineStore('poets', {
   state: () => {
     return {
       // for initially empty lists
-      poets: [] as Poet[],
+      poets: [] as Poet['details'][],
       // for data that is not yet loaded
       poet: null as Poet | null,
     };
   },
   getters: {
-    getPoets(state): Poet[] {
+    getPoets(state): Poet['details'][] {
       return state.poets;
     },
     getPoet(state): Poet | null {
@@ -29,15 +29,15 @@ export const usePoetStore = defineStore('poets', {
         console.log(error);
       }
     },
-    // async fetchPoet(id) {
-    //   try {
-    //     const apiUrl = `${import.meta.env.VITE_API_URL}/poet/${id}`;
-    //     const req = await axios.get(apiUrl);
-    //     this.poet = req.data;
-    //   } catch (error) {
-    //     alert(error);
-    //     console.log(error);
-    //   }
-    // },
+    async fetchPoet(id: any) {
+      try {
+        const apiUrl = `${import.meta.env.VITE_API_URL}/poet/${id}`;
+        const req = await axios.get(apiUrl);
+        this.poet = req.data;
+      } catch (error) {
+        alert(error);
+        console.log(error);
+      }
+    },
   },
 });

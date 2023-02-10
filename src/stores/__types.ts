@@ -1,30 +1,33 @@
 export interface Verse {
-  verse: {
-    first: string;
-    sec: string;
-    _id: string;
-  };
+  first: string;
+  sec: string;
+  _id: string;
 }
 
 export interface Poet {
-  _id: string;
-  name: string;
-  time_period: string;
-  bio: string;
-  reviewed: boolean;
+  details: {
+    _id: string;
+    name: string;
+    time_period: string;
+    bio: string;
+    reviewed: boolean;
+  };
+  authoredPoems: Poem[];
+  authoredChosenVerses: ChosenVerse[];
+  authoredProses: Prose[];
 }
 
 export interface Poem {
   _id: string;
   intro: string;
-  poet: string | Poet;
+  poet: Poet['details'];
   verses: Verse[];
   reviewed: boolean;
 }
 
 export interface ChosenVerse {
   _id: string;
-  poet: string | Poet;
+  poet: Poet['details'];
   poem: string | Poem;
   tags: string;
   verse: Verse[];
@@ -33,7 +36,7 @@ export interface ChosenVerse {
 
 export interface Prose {
   _id: string;
-  poet: string | Poet;
+  poet: Poet['details'];
   tags: string;
   qoute: string;
   reviewed: boolean;
@@ -41,7 +44,7 @@ export interface Prose {
 
 export interface Print {
   _id: string;
-  peot?: string | Poet;
+  peot?: string | Poet['details'];
   poem?: string | Poem;
   reviewed: boolean;
   tags?: string;

@@ -1,22 +1,24 @@
 import { defineStore } from 'pinia';
 import axios from 'axios';
 // types
-import type { Poet } from './__types';
+import type { Poem } from './__types';
 
 export const usePoemStore = defineStore('poems', {
   state: () => {
     return {
       // for initially empty lists
-      poems: [] as Poet[],
+      poems: [] as Poem[],
       // for data that is not yet loaded
-      poem: null as Poet | null,
+      // poem: null as Poem | null,
+      poem: {} as Poem,
     };
   },
   getters: {
-    getPoems(state): Poet[] {
+    getPoems(state): Poem[] {
       return state.poems;
     },
-    getPoem(state): Poet | null {
+    // getPoem(state): Poem | null {
+    getPoem(state): Poem {
       return state.poem;
     },
   },

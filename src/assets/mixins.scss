@@ -41,7 +41,9 @@ $breakpoint-xl: 1280px; // default development size
 }
 
 @mixin fade-transition {
-  .fade-enter-active,
+  .fade-enter-active {
+    transition: opacity 0.5s ease-in-out;
+  }
   .fade-leave-active {
     transition: opacity 0.5s ease-in-out;
   }

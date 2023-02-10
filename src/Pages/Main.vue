@@ -28,7 +28,7 @@ import { useChosenVerseStore } from '@/stores/chosenVerses';
 import { useProseStore } from '@/stores/proses';
 import { usePrintStore } from '@/stores/prints';
 // Types
-import type { PrintInfo } from '@/stores/prints';
+import type { Print } from '@/stores/__types';
 // components
 import ShowCasePoems from '@/components/ShowCasePoems.vue';
 import ShowCasePoets from '@/components/ShowCasePoets.vue';
@@ -63,7 +63,7 @@ onMounted(() => {
 });
 
 const printStore = usePrintStore();
-function addPrint(print: PrintInfo) {
+function addPrint(print: Print) {
   return printStore.addPrint(print);
 }
 </script>

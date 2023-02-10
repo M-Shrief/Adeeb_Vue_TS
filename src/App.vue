@@ -12,9 +12,11 @@ const route = useRoute();
   <header>
     <Navbar />
   </header>
-  <Transition name="fade">
-    <RouterView :key="route.path" />
-  </Transition>
+  <router-view v-slot="{ Component }">
+    <transition name="fade" appear>
+      <component :is="Component" />
+    </transition>
+  </router-view>
   <KeepAlive>
     <SelectedPrints dir="rtl" v-if="route.name != 'printing'" />
   </KeepAlive>

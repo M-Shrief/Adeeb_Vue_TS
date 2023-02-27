@@ -17,6 +17,7 @@
 
       <ShowCaseProse :proses="getProses" @print="(print) => addPrint(print)" />
     </div>
+    <SelectedPrints />
   </main>
 </template>
 <script lang="ts" setup>
@@ -34,6 +35,7 @@ import ShowCasePoems from '@/components/ShowCasePoems.vue';
 import ShowCasePoets from '@/components/ShowCasePoets.vue';
 import ShowCasePoetry from '@/components/ShowCasePoetry.vue';
 import ShowCaseProse from '@/components/ShowCaseProse.vue';
+import SelectedPrints from '../components/SelectedPrints.vue';
 
 const poemsStore = usePoemStore();
 const getPoems = computed(() => {

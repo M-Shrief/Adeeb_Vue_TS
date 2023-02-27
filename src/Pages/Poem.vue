@@ -13,6 +13,7 @@
       <ShowCasePoem :verses="getPoem.verses"
         @print="(print: Print) => addPrint({ poem: getPoem._id, ...print })" />
     </div>
+    <SelectedPrints />
   </main>
 </template>
 
@@ -26,6 +27,7 @@ import { usePrintStore } from '@/stores/prints';
 import ShowCasePoems from '@/components/ShowCasePoems.vue';
 import ShowCasePoem from '@/components/ShowCasePoem.vue';
 import ShowCasePoet from '@/components/ShowCasePoet.vue';
+import SelectedPrints from '../components/SelectedPrints.vue';
 // Types
 import type { Print } from '@/stores/__types';
 

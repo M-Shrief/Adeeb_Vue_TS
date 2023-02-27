@@ -17,6 +17,7 @@
       <ShowCaseProse :proses="getPoet.authoredProses" :grid="'grid-poet'"
         @print="(print) => addPrint(print)" />
     </div>
+    <SelectedPrints />
   </main>
 </template>
 
@@ -33,7 +34,7 @@ import ShowCasePoet from '../components/ShowCasePoet.vue';
 import ShowCasePoems from '../components/ShowCasePoems.vue';
 import ShowCasePoetry from '../components/ShowCasePoetry.vue';
 import ShowCaseProse from '../components/ShowCaseProse.vue';
-
+import SelectedPrints from '../components/SelectedPrints.vue';
 
 const poetStore = usePoetStore();
 const getPoet = computed(() => {

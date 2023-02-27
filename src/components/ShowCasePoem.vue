@@ -9,14 +9,13 @@
 </template>
 
 <script lang="ts" setup>
-import { ref, reactive } from 'vue';
 import type { Verse } from '@/stores/__types';
 
 defineProps({
-  verses: reactive({
+  verses: {
     type: Array<Verse>,
     required: true
-  })
+  }
 });
 defineEmits(['print']);
 </script>

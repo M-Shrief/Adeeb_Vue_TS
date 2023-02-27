@@ -6,13 +6,13 @@
 </template>
 
 <script lang="ts" setup>
-import { ref, reactive } from 'vue';
+// import { Poet } from '@/stores/__types';
 
 defineProps({
-  details: reactive({
+  details: {
     type: Object,
     required: true
-  })
+  }
 })
 </script>
 

@@ -5,9 +5,7 @@ import type { Poet } from './__types';
 export const usePoetStore = defineStore('poets', {
   state: () => {
     return {
-      // for initially empty lists
       poets: [] as Poet['details'][],
-      // for data that is not yet loaded
       poet: null as Poet | null,
     };
   },

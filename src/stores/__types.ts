@@ -53,3 +53,17 @@ export interface Print {
   first?: string;
   sec?: string;
 }
+
+export interface Product {
+  print: Print;
+  fontType: string;
+  fontColor: string;
+  backgroundColor: string;
+}
+
+export interface Order {
+  products: Product[];
+  name: string;
+  phone: string;
+  address: string;
+}

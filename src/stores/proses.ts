@@ -22,16 +22,16 @@ export const useProseStore = defineStore('proses', {
         console.log(error);
       }
     },
-    // async fetchRandomProses(num) {
-    //   try {
-    //     const req = await axios.get(
-    //       `${import.meta.env.VITE_API_URL}/proses_random/${num}`
-    //     );
-    //     this.proses = req.data;
-    //   } catch (error) {
-    //     alert(error);
-    //     console.log(error);
-    //   }
-    // },
+    async fetchRandomProses(num: number) {
+      try {
+        const req = await axios.get(
+          `${import.meta.env.VITE_API_URL}/proses_random/${num}`
+        );
+        this.proses = req.data;
+      } catch (error) {
+        alert(error);
+        console.log(error);
+      }
+    },
   },
 });

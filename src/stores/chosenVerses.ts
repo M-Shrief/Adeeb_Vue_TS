@@ -24,16 +24,16 @@ export const useChosenVerseStore = defineStore('chosenVerses', {
         console.log(error);
       }
     },
-    // async fetchRandomChosenVerses(num) {
-    //   try {
-    //     const req = await axios.get(
-    //       `${import.meta.env.VITE_API_URL}/chosenverses_random/${num}`
-    //     );
-    //     this.chosenVerses = req.data;
-    //   } catch (error) {
-    //     alert(error);
-    //     console.log(error);
-    //   }
-    // },
+    async fetchRandomChosenVerses(num: number) {
+      try {
+        const req = await axios.get(
+          `${import.meta.env.VITE_API_URL}/chosenverses_random/${num}`
+        );
+        this.chosenVerses = req.data;
+      } catch (error) {
+        alert(error);
+        console.log(error);
+      }
+    },
   },
 });

@@ -4,9 +4,11 @@ import type { Print } from './__types';
 export const usePrintStore = defineStore('prints', {
   state: () => {
     return {
-      // for initially empty lists
       prints: [] as Print[],
     };
+  },
+  persist: {
+    storage: sessionStorage,
   },
   getters: {
     getPrints(state): Print[] {

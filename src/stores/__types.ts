@@ -15,6 +15,8 @@ export interface Poet {
   authoredPoems: Poem[];
   authoredChosenVerses: ChosenVerse[];
   authoredProses: Prose[];
+  createdAt: string;
+  updatedAt: string;
 }
 
 export interface Poem {
@@ -23,6 +25,8 @@ export interface Poem {
   poet: Poet['details'];
   verses: Verse[];
   reviewed: boolean;
+  createdAt: string;
+  updatedAt: string;
 }
 
 export interface ChosenVerse {
@@ -32,6 +36,8 @@ export interface ChosenVerse {
   tags: string;
   verse: Verse[];
   reviewed: boolean;
+  createdAt: string;
+  updatedAt: string;
 }
 
 export interface Prose {
@@ -40,6 +46,8 @@ export interface Prose {
   tags: string;
   qoute: string;
   reviewed: boolean;
+  createdAt: string;
+  updatedAt: string;
 }
 
 export interface Print {
@@ -55,6 +63,7 @@ export interface Print {
 }
 
 export interface Product {
+  _id: string;
   print: Print;
   fontType: string;
   fontColor: string;
@@ -62,8 +71,13 @@ export interface Product {
 }
 
 export interface Order {
+  _id: string;
   products: Product[];
   name: string;
   phone: string;
   address: string;
+  reviewed: boolean;
+  completed: boolean;
+  createdAt: string;
+  updatedAt: string;
 }

@@ -1,46 +1,21 @@
-# Adeeb_vue_ts
+# "Adeeb أديب" VueTS with Node/Express API
 
-This template should help get you started developing with Vue 3 in Vite.
+A typescript project for
+["Adeeb آديب"](https://github.com/M-Shrief/M-Shrief/blob/main/Overview-%2015th%20Jan.mp4 'check a preview here to download')
+using VueJS, Pinia and vue-router, connecting with a Node/Express API leveraging
+axios requests.
 
-## Recommended IDE Setup
+## Aims and Goals
 
-[VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur) + [TypeScript Vue Plugin (Volar)](https://marketplace.visualstudio.com/items?itemName=Vue.vscode-typescript-vue-plugin).
+The Projct is assumed to be a part of a business model that it's goal to show
+Arabic litereture, consisting of Poetry and Prose. and make it possible to
+**print it** with specific colors and font.
 
-## Type Support for `.vue` Imports in TS
+## Structure
 
-TypeScript cannot handle type information for `.vue` imports by default, so we replace the `tsc` CLI with `vue-tsc` for type checking. In editors, we need [TypeScript Vue Plugin (Volar)](https://marketplace.visualstudio.com/items?itemName=Vue.vscode-typescript-vue-plugin) to make the TypeScript language service aware of `.vue` types.
+consists of 7 Pages:
 
-If the standalone TypeScript plugin doesn't feel fast enough to you, Volar has also implemented a [Take Over Mode](https://github.com/johnsoncodehk/volar/discussions/471#discussioncomment-1361669) that is more performant. You can enable it by the following steps:
-
-1. Disable the built-in TypeScript Extension
-    1) Run `Extensions: Show Built-in Extensions` from VSCode's command palette
-    2) Find `TypeScript and JavaScript Language Features`, right click and select `Disable (Workspace)`
-2. Reload the VSCode window by running `Developer: Reload Window` from the command palette.
-
-## Customize configuration
-
-See [Vite Configuration Reference](https://vitejs.dev/config/).
-
-## Project Setup
-
-```sh
-npm install
-```
-
-### Compile and Hot-Reload for Development
-
-```sh
-npm run dev
-```
-
-### Type-Check, Compile and Minify for Production
-
-```sh
-npm run build
-```
-
-### Run Unit Tests with [Vitest](https://vitest.dev/)
-
-```sh
-npm run test:unit
-```
+- 3 of these pages is content-centered: Main, Poet and Poem pages.
+- 2 of them are about Orders: Printing page to preview orders and confirming
+  them and Orders page to follow up with Order's status.
+- the rest are the About Page and Partner Page

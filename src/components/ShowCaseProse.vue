@@ -143,7 +143,7 @@ $secondaryColor: #1f2124;
   }
 
   .print-button {
-    @include print-button;
+    @include add-print-btn;
   }
 }
 </style>

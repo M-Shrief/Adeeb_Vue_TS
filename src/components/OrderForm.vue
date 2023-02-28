@@ -35,7 +35,6 @@
 </template>
 
 <script lang="ts" setup>
-import { ref } from 'vue';
 import { useRouter } from 'vue-router';
 // stores
 import { useOrderStore } from '@/stores/orders';
@@ -47,7 +46,7 @@ const router = useRouter();
 const props = defineProps({
   products: {
     type: Array<Product>,
-    required: false
+    required: true
   }
 });
 
@@ -59,14 +58,13 @@ function deleteProduct(product: Product) {
 }
 // check this https://stackoverflow.com/questions/12989741/the-property-value-does-not-exist-on-value-of-type-htmlelement
 const orderStore = useOrderStore();
-let order = ref({} as Order);
 async function confirmOrder() {
   let name = (document.getElementById("name") as HTMLInputElement).value;
   let phone = (document.getElementById("phone") as HTMLInputElement).value;
   let address = (document.getElementById("address") as HTMLInputElement).value;
   let products = props.products;
 
-  order = {
+  let order: Order = {
     name,
     phone,
     address,
@@ -79,12 +77,6 @@ async function confirmOrder() {
 
 <style lang="scss" scoped>
 @import '../assets/mixins.scss';
-
-import {
-  Product
-}
-
-from '../stores/__types';
 
 $mainColor: #e0f2e9;
 $secondaryColor: #1f2124;

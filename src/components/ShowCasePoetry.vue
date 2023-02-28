@@ -11,8 +11,8 @@
         </div>
         <router-link :to="'/poem/' + chosenVerse.poem" class="details">{{
           route.name == 'poet'
-            ? 'القصيدة الكاملة'
-            : chosenVerse.poet.name + ' - القصيدة الكاملة'
+          ? 'القصيدة الكاملة'
+          : chosenVerse.poet.name + ' - القصيدة الكاملة'
         }}</router-link>
         <button @click="$emit('print', chosenVerse)" class="print-button">
           اضف للطباعة
@@ -204,7 +204,7 @@ $secondaryColor: #fbe6c2;
   }
 
   .print-button {
-    @include print-button;
+    @include add-print-btn;
   }
 }
 </style>

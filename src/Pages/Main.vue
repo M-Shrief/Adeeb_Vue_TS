@@ -22,6 +22,8 @@
 </template>
 <script lang="ts" setup>
 import { onMounted, computed } from 'vue';
+// import { useQuery } from '@vue/apollo-composable'
+// import gql from 'graphql-tag'
 // stores
 import { usePoemStore } from '@/stores/poems';
 import { usePoetStore } from '@/stores/poets';
@@ -36,6 +38,17 @@ import ShowCasePoets from '@/components/ShowCasePoets.vue';
 import ShowCasePoetry from '@/components/ShowCasePoetry.vue';
 import ShowCaseProse from '@/components/ShowCaseProse.vue';
 import SelectedPrints from '../components/SelectedPrints.vue';
+
+
+// remove _ from _id
+// const { result } = useQuery(gql`
+//   query getPoets {
+//     poets {
+//       id
+//       name
+//     }
+//   }
+// `)
 
 const poemsStore = usePoemStore();
 const getPoems = computed(() => {

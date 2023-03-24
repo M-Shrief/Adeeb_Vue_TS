@@ -20,7 +20,7 @@
       </div>
 
       <div id="products">
-        <div v-for="product in products" :key="product.print._id" class="product"
+        <div v-for="product, index in products" :key="index" class="product"
           :style="{ color: product.fontColor, background: product.backgroundColor }"
           @dblclick="deleteProduct(product)">
           <p>{{ product.fontType }}</p>
@@ -64,13 +64,13 @@ async function confirmOrder() {
   let address = (document.getElementById("address") as HTMLInputElement).value;
   let products = props.products;
 
-  let order: Order = {
+  let order = {
     name,
     phone,
     address,
     products
-  }
-  await orderStore.newOrder(order);
+  } as Order
+  orderStore.newOrder(order);
   router.push('/orders');
 };
 </script>

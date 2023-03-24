@@ -2,8 +2,8 @@
   <section id="poets">
     <slot />
     <div :class="grid">
-      <router-link v-for="poet in poets" :key="poet._id"
-        :to="`/poet/${poet._id}`" class="poet" replace>
+      <router-link v-for="poet in poets" :key="poet._id" :to="`/poet/${poet._id}`"
+        class="poet" replace>
         <p>{{ poet.name }}</p>
       </router-link>
     </div>

@@ -11,7 +11,7 @@
         </ShowCasePoems>
       </section>
       <ShowCasePoem :verses="getPoem.verses"
-        @print="(print: Print) => addPrint({ poem: getPoem._id, ...print })" />
+        @print="(poemVerse: Verse) => addPrint({ poem: getPoem._id, verse: [poemVerse] } as Print)" />
     </div>
     <SelectedPrints />
   </main>
@@ -29,7 +29,7 @@ import ShowCasePoem from '@/components/ShowCasePoem.vue';
 import ShowCasePoet from '@/components/ShowCasePoet.vue';
 import SelectedPrints from '../components/SelectedPrints.vue';
 // Types
-import type { Print } from '@/stores/__types';
+import type { Verse, Print } from '@/stores/__types';
 
 const route = useRoute();
 

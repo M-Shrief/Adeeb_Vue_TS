@@ -6,6 +6,9 @@ const About = () => import('@/Pages/About.vue');
 // Guest_Page
 const Guest_Ordering = () => import('@/Pages/Guest/Ordering.vue');
 const Guest_History = () => import('@/Pages/Guest/History.vue');
+// Partners__Pages
+const Index = () => import('@/Pages/Partners/Index.vue');
+const Auth = () => import('@/Pages/Partners/Auth.vue');
 
 const routes = [
   {
@@ -38,6 +41,22 @@ const routes = [
     path: '/history',
     name: 'Guest_History',
     component: Guest_History,
+  },
+  // Partners
+  {
+    // show different routes after authenticating partners like /partners/orders instead of /orders
+    // you can have nested routes
+    path: '/partners',
+    name: 'partners',
+    component: Index,
+    children: [
+      // paths that start with / will be treated as root paths. This allows you to leverage the component nesting without having to use a nested URL.
+      {
+        path: '',
+        name: 'auth',
+        component: Auth,
+      },
+    ],
   },
 ];
 

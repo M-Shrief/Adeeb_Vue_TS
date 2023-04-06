@@ -2,15 +2,16 @@ import { defineStore } from 'pinia';
 import axios from 'axios';
 // types
 import type { Partner } from './__types';
+
 export const usePartnerStore = defineStore('partners', {
   state: () => ({
-    partner: null,
+    partner: null as Partner | null,
   }),
   persist: {
     storage: sessionStorage,
   },
   getters: {
-    getPartner(state) {
+    getPartner(state): Partner | null {
       return state.partner;
     },
   },

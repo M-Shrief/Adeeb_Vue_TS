@@ -52,8 +52,8 @@ export interface Print {
   poem?: string | Poem;
   reviewed: boolean;
   tags?: string;
-  verse?: Verse[];
-  qoute?: string;
+  verse: Verse[];
+  qoute: string;
   first?: string;
   sec?: string;
 }
@@ -74,6 +74,7 @@ export interface ProductGroup {
 }
 
 export interface Partner {
+  _id: string;
   fullname: string;
   phone: string;
   addresses: string;
@@ -83,7 +84,7 @@ export interface Partner {
 export interface Order {
   _id: string;
   partner?: string;
-  products: Product[];
+  products: Product[] | ProductGroup[];
   name: string;
   phone: string;
   address: string;

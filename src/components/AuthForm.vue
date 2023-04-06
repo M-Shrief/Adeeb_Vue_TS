@@ -1,12 +1,12 @@
 <template>
   <section id="auth-form">
-    <h3>{{ registered ? "تسجيل حساب جديد" : "تسجيل الدخول" }} </h3>
+    <h3>{{ isRegistered ? "تسجيل الدخول" : "تسجيل حساب جديد" }} </h3>
     <form method="POST" @submit.prevent="() => onSubmit()">
-      <div v-if="registered" class="input-cont">
+      <div v-if="!isRegistered" class="input-cont">
         <label for="fullname">الاسم: </label>
         <input type="text" name="fullname" id="fullname" required>
       </div>
-      <div v-if="registered" class="input-cont">
+      <div v-if="!isRegistered" class="input-cont">
         <label for="addresses">العنوان: </label>
         <input type="text" name="addresses" id="addresses" required>
       </div>
@@ -20,31 +20,27 @@
       </div>
       <button type="submit">التأكيد</button>
     </form>
-    <button id="toggle" @click="() => registered = !registered">
-      {{ registered ? "تسجيل الدخول" : "تسجيل حساب جديد" }}</button>
+    <button id="toggle" @click="isRegistered = !isRegistered">
+      {{ isRegistered ? "تسجيل حساب جديد" : "تسجيل الدخول" }}</button>
   </section>
 </template>
 
 <script lang="ts" setup>
+import { ref } from 'vue'
 import { useRouter } from 'vue-router';
 // stores
 import { usePartnerStore } from '@/stores/partners';
 // types
 import type { Partner } from '@/stores/__types';
 
-const props = defineProps({
-  registered: {
-    type: Boolean,
-    default: false
-  },
-})
+const isRegistered = ref(true);
 
 const router = useRouter();
 const partnerStore = usePartnerStore();
 
 async function onSubmit() {
   let partner;
-  if (!props.registered) {
+  if (isRegistered.value) {
     partner = {
       phone: (document.getElementById('phone') as HTMLInputElement).value,
       password: (document.getElementById('password') as HTMLInputElement).value,

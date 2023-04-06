@@ -1,6 +1,7 @@
 <template>
   <div id="selected-prints" dir="rtl">
-    <p><router-link to="/ordering" class="title">للطباعة</router-link></p>
+    <p><router-link :to="partner ? '/partners/ordering' : '/ordering'"
+        class="title">للطباعة</router-link> </p>
     <ul class="prints">
       <li class="prints-item" v-for="print in getPrints" :key="print._id"
         @dblclick="removePrint(print)">
@@ -18,8 +19,14 @@
 import { computed } from 'vue';
 // stores
 import { usePrintsStore } from '@/stores/prints';
+import { usePartnerStore } from '@/stores/partners';
 // types
 import type { Print } from '@/stores/__types';
+
+const partnerStore = usePartnerStore();
+const partner = computed(() => {
+  return partnerStore.getPartner;
+})
 
 const printsStore = usePrintsStore();
 const getPrints = computed(() => {

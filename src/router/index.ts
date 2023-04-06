@@ -9,6 +9,8 @@ const Guest_History = () => import('@/Pages/Guest/History.vue');
 // Partners__Pages
 const Index = () => import('@/Pages/Partners/Index.vue');
 const Auth = () => import('@/Pages/Partners/Auth.vue');
+const Partner_Ordering = () => import('@/Pages/Partners/Ordering.vue');
+const Partner_History = () => import('@/Pages/Partners/History.vue');
 
 const routes = [
   {
@@ -55,6 +57,16 @@ const routes = [
         path: '',
         name: 'auth',
         component: Auth,
+      },
+      {
+        path: 'ordering',
+        name: 'Partner_Ordering',
+        component: Partner_Ordering,
+      },
+      {
+        path: 'history',
+        name: 'Partner_History',
+        component: Partner_History,
       },
     ],
   },

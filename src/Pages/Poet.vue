@@ -26,7 +26,7 @@ import { onMounted, computed } from 'vue';
 import { useRoute } from 'vue-router';
 // stores
 import { usePoetStore } from "@/stores/poets";
-import { usePrintStore } from "@/stores/prints";
+import { usePrintsStore } from "@/stores/prints";
 // types
 import type { Print } from '@/stores/__types';
 // components
@@ -45,7 +45,7 @@ onMounted(() => {
   poetStore.fetchPoet(route.params.id);
 })
 
-const printsStore = usePrintStore();
+const printsStore = usePrintsStore();
 function addPrint(print: Print) {
   return printsStore.addPrint(print)
 }

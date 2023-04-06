@@ -29,7 +29,7 @@ import { usePoemStore } from '@/stores/poems';
 import { usePoetStore } from '@/stores/poets';
 import { useChosenVerseStore } from '@/stores/chosenVerses';
 import { useProseStore } from '@/stores/proses';
-import { usePrintStore } from '@/stores/prints';
+import { usePrintsStore } from '@/stores/prints';
 // Types
 import type { Print } from '@/stores/__types';
 // components
@@ -77,7 +77,7 @@ onMounted(() => {
   proseStore.fetchProses();
 });
 
-const printStore = usePrintStore();
+const printStore = usePrintsStore();
 function addPrint(print: Print) {
   return printStore.addPrint(print);
 }

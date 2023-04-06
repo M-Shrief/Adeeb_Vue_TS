@@ -1,7 +1,7 @@
 import { defineStore } from 'pinia';
 import type { Print } from './__types';
 
-export const usePrintStore = defineStore('prints', {
+export const usePrintsStore = defineStore('prints', {
   state: () => {
     return {
       prints: [] as Print[],
@@ -20,6 +20,10 @@ export const usePrintStore = defineStore('prints', {
       if (!this.getPrints.includes(print)) {
         this.prints.push(print);
       }
+    },
+    prepPrints(prints: Print[]) {
+      // it's normal in big orders to repeat the same print
+      this.prints = this.prints.concat(prints);
     },
     removePrint(print: Print) {
       let printIndex = this.getPrints

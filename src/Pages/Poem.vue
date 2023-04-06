@@ -22,7 +22,7 @@ import { onBeforeMount, computed, watch } from 'vue';
 import { useRoute } from 'vue-router';
 // stores
 import { usePoemStore } from '@/stores/poems';
-import { usePrintStore } from '@/stores/prints';
+import { usePrintsStore } from '@/stores/prints';
 // components
 import ShowCasePoems from '@/components/ShowCasePoems.vue';
 import ShowCasePoem from '@/components/ShowCasePoem.vue';
@@ -52,7 +52,7 @@ onBeforeMount(() => {
   poemStore.fetchPoemAndSuggestedPoems(route.params.id);
 });
 
-const printsStore = usePrintStore();
+const printsStore = usePrintsStore();
 function addPrint(print: Print) {
   return printsStore.addPrint(print);
 }

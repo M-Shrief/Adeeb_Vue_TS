@@ -25,11 +25,11 @@
 <script lang="ts" setup>
 import { computed } from 'vue';
 // stores
-import { usePrintStore } from "@/stores/prints";
+import { usePrintsStore } from "@/stores/prints";
 // types
 import type { Print } from '@/stores/__types';
 
-const printsStore = usePrintStore();
+const printsStore = usePrintsStore();
 const getPrints = computed(() => {
   return printsStore.getPrints;
 })

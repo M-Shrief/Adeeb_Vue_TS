@@ -1,11 +1,12 @@
 import { defineStore } from 'pinia';
 import axios from 'axios';
 // types
-import type { Order, Product, Print } from './__types';
+import type { Order, Product, ProductGroup, Print } from './__types';
 
 export const useOrderStore = defineStore('orders', {
   state: () => ({
     orders: [] as Order[],
+    productGroups: [] as ProductGroup[],
     products: [] as Product[],
     colors: [
       '#fff',
@@ -28,6 +29,9 @@ export const useOrderStore = defineStore('orders', {
     getProducts(state): Product[] {
       return state.products;
     },
+    getProductGroup(state): ProductGroup[] {
+      return state.productGroups;
+    },
     getColors(state): string[] {
       return state.colors;
     },
@@ -44,6 +48,16 @@ export const useOrderStore = defineStore('orders', {
         console.log(error);
       }
     },
+    async fetchPartnerOrders(partner: string) {
+      try {
+        const req = await axios.get(
+          `${import.meta.env.VITE_API_URL}/order/${partner}`
+        );
+        this.orders = req.data;
+      } catch (error) {
+        alert(error);
+      }
+    },
     newOrder(order: Order) {
       try {
         let apiOrder = `${import.meta.env.VITE_API_URL}/order/store`;
@@ -55,7 +69,6 @@ export const useOrderStore = defineStore('orders', {
     addProduct(print: Print, colors: string[]) {
       let fontType = (document.getElementById('fontType') as HTMLSelectElement)
         .value;
-
       let product = {
         print: print,
         fontType,
@@ -64,7 +77,24 @@ export const useOrderStore = defineStore('orders', {
       };
       // Note: Don't check on repeated ones
       // it's normal to get different colors for the same print
-      this.products.push(product);
+      this.products.push(product as Product);
+    },
+    addProductGroup(printsGroup: Print[], colors: string[]) {
+      let fontType = (document.getElementById('fontType') as HTMLInputElement)
+        .value;
+
+      let productGroup = {
+        prints: printsGroup,
+        fontType,
+        fontColor: colors[0],
+        backgroundColor: colors[1],
+      };
+      this.productGroups.push(productGroup as ProductGroup);
+    },
+    reset() {
+      this.orders = [];
+      this.productGroups = [];
+      this.products = [];
     },
   },
 });

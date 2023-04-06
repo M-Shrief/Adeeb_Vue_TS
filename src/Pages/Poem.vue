@@ -27,7 +27,7 @@ import { usePrintStore } from '@/stores/prints';
 import ShowCasePoems from '@/components/ShowCasePoems.vue';
 import ShowCasePoem from '@/components/ShowCasePoem.vue';
 import ShowCasePoet from '@/components/ShowCasePoet.vue';
-import SelectedPrints from '../components/SelectedPrints.vue';
+import SelectedPrints from '@/components/SelectedPrints.vue';
 // Types
 import type { Verse, Print } from '@/stores/__types';
 
@@ -60,7 +60,7 @@ function addPrint(print: Print) {
 
 
 <style lang="scss" scoped>
-@import '../assets/mixins.scss';
+@import '@/assets/mixins.scss';
 
 .container {
   display: grid;

@@ -37,7 +37,7 @@ import ShowCasePoems from '@/components/ShowCasePoems.vue';
 import ShowCasePoets from '@/components/ShowCasePoets.vue';
 import ShowCasePoetry from '@/components/ShowCasePoetry.vue';
 import ShowCaseProse from '@/components/ShowCaseProse.vue';
-import SelectedPrints from '../components/SelectedPrints.vue';
+import SelectedPrints from '@/components/SelectedPrints.vue';
 
 
 // remove _ from _id
@@ -84,7 +84,7 @@ function addPrint(print: Print) {
 </script>
 
 <style lang="scss" scoped>
-@import '../assets/mixins.scss';
+@import '@/assets/mixins.scss';
 
 h1,
 p {

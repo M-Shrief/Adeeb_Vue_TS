@@ -33,7 +33,7 @@ const props = defineProps({
 </script>
 
 <style lang="scss" scoped>
-@import '../assets/mixins.scss';
+@import '@/assets/mixins.scss';
 
 $mainColor: #f6b352;
 $secondaryColor: #1f2124;

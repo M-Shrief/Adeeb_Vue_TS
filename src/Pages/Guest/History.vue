@@ -1,7 +1,8 @@
 <template>
-  <main>
+  <main dir="rtl">
     <h2>ادخل بيانات الطلب لمتابعته</h2>
-    <form @submit.prevent="fetchOrder" dir="rtl">
+
+    <form @submit.prevent="fetchOrder">
       <div class="container">
         <label for="name">الاسم: </label>
         <input type="text" id="name" name="name" required minlength="5"
@@ -12,12 +13,12 @@
         <input type="text" id="phone" name="phone" required minlength="8"
           maxlength="18" />
       </div>
+
       <button type="submit">تأكـيد</button>
     </form>
 
-    <div v-if="getOrders[0]" v-for="order in getOrders" :key="order._id"
-      class="order" dir="rtl">
-      <section class="order-details">
+    <div v-for="order in getOrders" :key="order._id" class="order">
+      <div class="order-details">
         <div>
           <p>الاسم</p><span>{{ order.name }}</span>
         </div>
@@ -33,19 +34,19 @@
         <p><span>{{ order.reviewed ? 'تمت المراجعة' : 'غير مراجع' }}</span></p>
         <p><span>{{ order.completed ? 'تم التسليم' : 'لم يتم التسليم' }}</span>
         </p>
-      </section>
-      <section class="order-products">
-        <div v-for="product in order.products" :key="product.print._id"
-          class="product"
+      </div>
+      <div class="order-products">
+        <div v-for="product, index in order.products" :key="index" class="product"
           :style="{ color: product.fontColor, background: product.backgroundColor }">
-          <p>{{ product.fontType }}</p>
+          <p>نوع الخط: {{ product.fontType }}</p>
           <p v-if="product.print.verse"> {{ product.print.verse[0].first
           }}...</p>
           <p v-else-if="product.print.qoute">
             {{ product.print.qoute.slice(0, 30) }}...</p>
         </div>
-      </section>
+      </div>
     </div>
+
   </main>
 </template>
 
@@ -54,16 +55,18 @@ import { computed } from 'vue';
 // Stores
 import { useOrderStore } from "@/stores/orders";
 
-const ordersStore = useOrderStore();
+const orderStore = useOrderStore();
 const getOrders = computed(() => {
-  return ordersStore.getOrders;
+  return orderStore.getOrders;
 });
+
 
 function fetchOrder() {
   let name = (document.getElementById("name") as HTMLInputElement).value;
   let phone = (document.getElementById("phone") as HTMLInputElement).value;
-  ordersStore.fetchOrders(name, phone);
+  orderStore.fetchOrders(name, phone);
 }
+
 </script>
 
 <style lang="scss" scoped>
@@ -76,12 +79,18 @@ h2 {
   text-align: center;
 }
 
+
 form {
   color: $mainColor;
   background-color: $secondaryColor;
   margin: 1rem;
   border-radius: 1.5rem;
   padding: 0.5rem;
+
+  select {
+    padding: 0.2rem;
+    margin-right: 0.5rem;
+  }
 
   .container {
     padding: 0.5rem;
@@ -98,9 +107,10 @@ form {
 
   button {
     position: relative;
-    right: 45%;
-    @include submit-btn;
+    right: 50%;
+    @include submit-btn
   }
+
 }
 
 .order {
@@ -126,10 +136,11 @@ form {
 
   .order-products {
     padding: 0.4rem 0;
-    display: inline-block;
 
     .product {
+      position: relative;
       display: flex;
+      justify-content: space-around;
       flex-direction: row;
       padding: 0.2rem;
       margin: 0.3rem 2rem;
@@ -139,7 +150,26 @@ form {
       p {
         margin: 0 0.6rem;
       }
+
+      @include mQ($breakpoint-md) {
+        padding: 0.15rem;
+        margin: 0.15rem;
+
+        p {
+          font-size: 0.8rem;
+        }
+      }
+
+      @include mQ($breakpoint-sm) {
+        padding: 0.1rem;
+        margin: 0.1rem;
+
+        p {
+          font-size: 0.7rem;
+        }
+      }
     }
+
   }
 }
 </style>

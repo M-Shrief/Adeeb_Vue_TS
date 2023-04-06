@@ -1,6 +1,6 @@
 <template>
-  <div id="selected-prints">
-    <p><router-link to="/printing" class="title">للطباعة</router-link></p>
+  <div id="selected-prints" dir="rtl">
+    <p><router-link to="/ordering" class="title">للطباعة</router-link></p>
     <ul class="prints">
       <li class="prints-item" v-for="print in getPrints" :key="print._id"
         @dblclick="removePrint(print)">
@@ -17,9 +17,9 @@
 <script lang="ts" setup>
 import { computed } from 'vue';
 // stores
-import { usePrintStore } from '../stores/prints';
+import { usePrintStore } from '@/stores/prints';
 // types
-import type { Print } from '../stores/__types';
+import type { Print } from '@/stores/__types';
 
 const printsStore = usePrintStore();
 const getPrints = computed(() => {
@@ -31,7 +31,7 @@ function removePrint(print: Print) {
 </script>
 
 <style lang="scss" scoped>
-@import '../assets/mixins.scss';
+@import '@/assets/mixins.scss';
 
 $mainColor: #fbe6c2;
 $secondaryColor: #2c3e50;

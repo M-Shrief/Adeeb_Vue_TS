@@ -43,7 +43,7 @@ defineEmits(['print']);
 </script>
 
 <style lang="scss" scoped>
-@import '../assets/mixins.scss';
+@import '@/assets/mixins.scss';
 
 $mainColor: #2c3e50;
 $secondaryColor: #fbe6c2;

@@ -25,7 +25,7 @@
 <script lang="ts" setup>
 import { computed } from 'vue';
 // stores
-import { usePrintStore } from "../stores/prints";
+import { usePrintStore } from "@/stores/prints";
 // types
 import type { Print } from '@/stores/__types';
 
@@ -40,7 +40,7 @@ defineEmits(['print'])
 </script>
 
 <style lang="scss" scoped>
-@import '../assets/mixins.scss';
+@import '@/assets/mixins.scss';
 
 $mainColor: #f6b352;
 $secondaryColor: #1f2124;

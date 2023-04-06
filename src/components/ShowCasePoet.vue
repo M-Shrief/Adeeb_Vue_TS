@@ -17,7 +17,7 @@ defineProps({
 </script>
 
 <style lang="scss" scoped>
-@import '../assets/mixins.scss';
+@import '@/assets/mixins.scss';
 
 $mainColor: #004e64;
 $secondaryColor: #FBE6C2;

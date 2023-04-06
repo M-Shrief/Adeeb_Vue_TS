@@ -19,7 +19,7 @@
 
 <script lang="ts" setup>
 // components
-import PreviewColors from "../components/PreviewColors.vue";
+import PreviewColors from "@/components/PreviewColors.vue";
 
 defineProps({
   colors: {
@@ -31,7 +31,7 @@ defineEmits(['fontColor', 'backgroundColor']);
 </script>
 
 <style lang="scss" scoped>
-@import '../assets/mixins.scss';
+@import '@/assets/mixins.scss';
 
 #customization {
   display: flex;

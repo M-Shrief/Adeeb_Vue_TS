@@ -25,16 +25,16 @@
 import { onMounted, computed } from 'vue';
 import { useRoute } from 'vue-router';
 // stores
-import { usePoetStore } from "../stores/poets";
-import { usePrintStore } from "../stores/prints";
+import { usePoetStore } from "@/stores/poets";
+import { usePrintStore } from "@/stores/prints";
 // types
 import type { Print } from '@/stores/__types';
 // components
-import ShowCasePoet from '../components/ShowCasePoet.vue';
-import ShowCasePoems from '../components/ShowCasePoems.vue';
-import ShowCasePoetry from '../components/ShowCasePoetry.vue';
-import ShowCaseProse from '../components/ShowCaseProse.vue';
-import SelectedPrints from '../components/SelectedPrints.vue';
+import ShowCasePoet from '@/components/ShowCasePoet.vue';
+import ShowCasePoems from '@/components/ShowCasePoems.vue';
+import ShowCasePoetry from '@/components/ShowCasePoetry.vue';
+import ShowCaseProse from '@/components/ShowCaseProse.vue';
+import SelectedPrints from '@/components/SelectedPrints.vue';
 
 const poetStore = usePoetStore();
 const getPoet = computed(() => {
@@ -52,7 +52,7 @@ function addPrint(print: Print) {
 </script>
 
 <style lang="scss" scoped>
-@import '../assets/mixins.scss';
+@import '@/assets/mixins.scss';
 
 .container {
   display: grid;

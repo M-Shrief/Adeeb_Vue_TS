@@ -15,14 +15,15 @@
       <button type="submit" @click="prepareProse">إعداد</button>
 
     </div>
-    <PrintCustomization :colors="colors" @fontColor="(color) => fontColor = color"
-      @backgroundColor="(color) => backgroundColor = color">
+    <PrintCustomization :colors="colors"
+      @fontColor="(color: string) => fontColor = color"
+      @backgroundColor="(color: string) => backgroundColor = color">
     </PrintCustomization>
 
     <div class="preview-prints">
       <div v-for="print in getPrints" :key="print._id" class="print-item"
         :style="{ color: fontColor, background: backgroundColor, border: `1px solid ${fontColor}` }">
-        <div v-if="print.verse" v-for="verse in print.verse" :key="verse._id"
+        <div v-if="print.verses" v-for="verse in print.verses" :key="verse._id"
           class="verse">
           <p>{{ verse.first }}</p>
           <p dir="ltr">{{ verse.sec }}</p>
@@ -55,7 +56,7 @@ import { useProseStore } from "@/stores/proses";
 import { usePrintsStore } from "@/stores/prints";
 import { useOrderStore } from "@/stores/orders";
 // types
-import type { Print } from '@/stores/__types'
+import type { Print } from '@/stores/__types__'
 const printStore = usePrintsStore();
 const getPrints = computed(() => {
   return printStore.getPrints;
@@ -89,15 +90,15 @@ const chosenVerseStore = useChosenVerseStore();
 const proseStore = useProseStore();
 
 async function preparePoetry() {
-  const numPoetry = (document.getElementById('poetry') as HTMLInputElement).valueAsNumber;
-  await chosenVerseStore.fetchRandomChosenVerses(numPoetry).then(() => {
-    prepPrints(chosenVerseStore.getChosenVerses);
+  const num = (document.getElementById('poetry') as HTMLInputElement).valueAsNumber;
+  await chosenVerseStore.fetchRandomChosenVerses(num).then(() => {
+    prepPrints(chosenVerseStore.getRandomChosenVerses);
   });
 }
 async function prepareProse() {
-  const numProse = (document.getElementById('prose') as HTMLInputElement).valueAsNumber;
-  await proseStore.fetchRandomProses(numProse).then(() => {
-    prepPrints(proseStore.getProses);
+  const num = (document.getElementById('prose') as HTMLInputElement).valueAsNumber;
+  await proseStore.fetchRandomProses(num).then(() => {
+    prepPrints(proseStore.getRandomProses);
   });
 }
 </script>

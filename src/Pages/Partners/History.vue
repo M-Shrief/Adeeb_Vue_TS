@@ -1,6 +1,6 @@
 <template>
   <section id="history">
-    <h3>تاريخ طلبات الاستاذ {{ (partner as Partner).fullname }}</h3>
+    <h3>تاريخ طلبات الاستاذ {{ (partner as Partner).name }}</h3>
     <div v-if="getOrders" v-for="order in getOrders" :key="order._id"
       class="order">
       <div class="order-details">
@@ -27,7 +27,7 @@
             <div v-for="print in productGroup.prints" :key="print._id"
               class="group-print"
               :style="{ color: productGroup.fontColor, background: productGroup.backgroundColor }">
-              <p v-if="print.verse"> {{ print.verse[0].first }}...</p>
+              <p v-if="print.verses"> {{ print.verses[0].first }}...</p>
               <p v-else-if="print.qoute"> {{ print.qoute.slice(0, 30) }}...</p>
             </div>
           </div>
@@ -44,7 +44,7 @@ import { onMounted, computed } from 'vue';
 import { useOrderStore } from "@/stores/orders";
 import { usePartnerStore } from '@/stores/partners';
 // types
-import type { Partner, ProductGroup } from '@/stores/__types'
+import type { Partner, ProductGroup } from '@/stores/__types__'
 
 const partnerStore = usePartnerStore();
 const partner = computed(() => {

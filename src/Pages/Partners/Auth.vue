@@ -31,12 +31,11 @@ import { usePartnerStore } from '@/stores/partners';
 const router = useRouter();
 const partnerStore = usePartnerStore();
 
-
-if (partnerStore.getPartner) {
-  onBeforeMount(() => {
+onBeforeMount(() => {
+  if (partnerStore.getPartner) {
     router.push('/partners/ordering')
-  })
-}
+  }
+})
 
 </script>
 

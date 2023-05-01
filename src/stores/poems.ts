@@ -1,7 +1,7 @@
 import { defineStore } from 'pinia';
 import axios from 'axios';
 // types
-import type { Poem } from './__types';
+import type { Poem } from './__types__';
 
 export const usePoemStore = defineStore('poems', {
   state: () => {
@@ -30,6 +30,23 @@ export const usePoemStore = defineStore('poems', {
         console.log(error);
       }
     },
+
+    async fetchOtherPoems(id: any) {
+      try {
+        let apiPoemsIntros = `${import.meta.env.VITE_API_URL}/poems_intros`;
+        let reqPoemsIntros = await axios.get(apiPoemsIntros);
+
+        let poemIndex = reqPoemsIntros.data
+          .map((poem: Poem) => poem._id)
+          .indexOf(id);
+        reqPoemsIntros.data.splice(poemIndex, 1);
+        this.poems = reqPoemsIntros.data;
+      } catch (error) {
+        alert(error);
+        console.log(error);
+      }
+    },
+
     async fetchPoemAndSuggestedPoems(id: any) {
       try {
         let apiPoem = `${import.meta.env.VITE_API_URL}/poem/${id}`;
@@ -37,19 +54,6 @@ export const usePoemStore = defineStore('poems', {
         this.poem = reqPoem.data;
 
         this.fetchOtherPoems(id);
-      } catch (error) {
-        alert(error);
-        console.log(error);
-      }
-    },
-    async fetchOtherPoems(id: any) {
-      try {
-        let apiPoemsIntros = `${import.meta.env.VITE_API_URL}/poems_intros`;
-        let reqPoemsIntros = await axios.get(apiPoemsIntros);
-
-        this.poems = reqPoemsIntros.data;
-        let poemIndex = this.poems.map((poem) => poem._id).indexOf(id);
-        this.poems.splice(poemIndex, 1);
       } catch (error) {
         alert(error);
         console.log(error);

@@ -28,7 +28,7 @@ import { useRoute } from 'vue-router';
 import { usePoetStore } from "@/stores/poets";
 import { usePrintsStore } from "@/stores/prints";
 // types
-import type { Print } from '@/stores/__types';
+import type { Print } from '@/stores/__types__';
 // components
 import ShowCasePoet from '@/components/ShowCasePoet.vue';
 import ShowCasePoems from '@/components/ShowCasePoems.vue';

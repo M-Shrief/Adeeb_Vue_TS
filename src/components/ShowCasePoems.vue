@@ -17,7 +17,7 @@
 
 <script setup lang="ts">
 // types
-import type { Poem } from '@/stores/__types';
+import type { Poem } from '@/stores/__types__';
 
 const props = defineProps({
   poems: {

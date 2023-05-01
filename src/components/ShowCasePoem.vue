@@ -9,7 +9,7 @@
 </template>
 
 <script lang="ts" setup>
-import type { Verse } from '@/stores/__types';
+import type { Verse } from '@/stores/__types__';
 
 defineProps({
   verses: {

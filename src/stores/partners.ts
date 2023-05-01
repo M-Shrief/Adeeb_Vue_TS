@@ -1,7 +1,7 @@
 import { defineStore } from 'pinia';
 import axios from 'axios';
 // types
-import type { Partner } from './__types';
+import type { Partner } from './__types__';
 
 export const usePartnerStore = defineStore('partners', {
   state: () => ({
@@ -19,11 +19,12 @@ export const usePartnerStore = defineStore('partners', {
     async signup(partner: Partner) {
       try {
         let api = `${import.meta.env.VITE_API_URL}/partner/signup`;
+
         const req = await axios.post(api, partner);
-        this.fetchPartner(req.data._id);
         axios.defaults.withCredentials = true;
         axios.defaults.headers.common['Authorization'] =
           'Bearer ' + req.data.accessToken;
+        this.partner = req.data.partner;
       } catch (error) {
         alert(error);
       }
@@ -32,26 +33,16 @@ export const usePartnerStore = defineStore('partners', {
       try {
         let api = `${import.meta.env.VITE_API_URL}/partner/login`;
         const req = await axios.post(api, partner);
-        this.fetchPartner(req.data._id);
+        this.partner = req.data.partner;
+        axios.defaults.withCredentials = true;
         axios.defaults.headers.common['Authorization'] =
           'Bearer ' + req.data.accessToken;
-        axios.defaults.withCredentials = true;
       } catch (error) {
         alert(error);
       }
     },
-    async fetchPartner(id: string) {
-      let api = `${import.meta.env.VITE_API_URL}/partner/${id}`;
-      const req = await axios.get(api);
-
-      this.partner = req.data;
-    },
     async logout() {
-      // let api = `${import.meta.env.VITE_API_URL}/partner/logout`;
-      // await axios
-      //   .post(api)
-      //   .then(() => {})
-      //   .catch((err) => console.error(err));
+      axios.defaults.headers.common['Authorization'] = undefined;
       this.partner = null;
       axios.defaults.withCredentials = false;
     },

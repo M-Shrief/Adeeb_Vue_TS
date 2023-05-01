@@ -29,7 +29,7 @@ import ShowCasePoem from '@/components/ShowCasePoem.vue';
 import ShowCasePoet from '@/components/ShowCasePoet.vue';
 import SelectedPrints from '@/components/SelectedPrints.vue';
 // Types
-import type { Verse, Print } from '@/stores/__types';
+import type { Verse, Print } from '@/stores/__types__';
 
 const route = useRoute();
 

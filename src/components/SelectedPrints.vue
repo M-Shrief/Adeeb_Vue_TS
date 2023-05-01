@@ -21,7 +21,7 @@ import { computed } from 'vue';
 import { usePrintsStore } from '@/stores/prints';
 import { usePartnerStore } from '@/stores/partners';
 // types
-import type { Print } from '@/stores/__types';
+import type { Print } from '@/stores/__types__';
 
 const partnerStore = usePartnerStore();
 const partner = computed(() => {

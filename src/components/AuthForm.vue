@@ -31,7 +31,7 @@ import { useRouter } from 'vue-router';
 // stores
 import { usePartnerStore } from '@/stores/partners';
 // types
-import type { Partner } from '@/stores/__types';
+import type { Partner } from '@/stores/__types__';
 
 const isRegistered = ref(true);
 

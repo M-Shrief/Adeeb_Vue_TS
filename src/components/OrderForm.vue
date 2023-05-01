@@ -78,7 +78,7 @@ import { useRouter } from 'vue-router';
 import { useOrderStore } from '@/stores/orders';
 import { usePartnerStore } from '@/stores/partners';
 // types
-import type { Product, Order, Print, ProductGroup, Partner } from '@/stores/__types';
+import type { Product, Order, Print, ProductGroup, Partner } from '@/stores/__types__';
 
 const router = useRouter();
 

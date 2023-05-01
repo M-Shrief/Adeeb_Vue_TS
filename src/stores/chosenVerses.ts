@@ -1,7 +1,7 @@
 import { defineStore } from 'pinia';
 import axios from 'axios';
 // types
-import type { ChosenVerse } from './__types';
+import type { ChosenVerse } from './__types__';
 
 export const useChosenVerseStore = defineStore('chosenVerses', {
   state: () => ({

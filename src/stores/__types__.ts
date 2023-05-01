@@ -1,7 +1,7 @@
 export interface Verse {
+  _id: string;
   first: string;
   sec: string;
-  _id: string;
 }
 
 export interface Poet {
@@ -32,7 +32,7 @@ export interface ChosenVerse {
   poet: Poet['details'];
   poem: string | Poem;
   tags: string;
-  verse: Verse[];
+  verses: Verse[];
   reviewed: boolean;
 }
 
@@ -52,8 +52,8 @@ export interface Print {
   poem?: string | Poem;
   reviewed: boolean;
   tags?: string;
-  verse: Verse[];
-  qoute: string;
+  verses?: Verse[];
+  qoute?: string;
   first?: string;
   sec?: string;
 }
@@ -75,9 +75,9 @@ export interface ProductGroup {
 
 export interface Partner {
   _id: string;
-  fullname: string;
+  name: string;
   phone: string;
-  addresses: string;
+  address: string;
   password: string;
 }
 

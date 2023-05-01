@@ -1,7 +1,7 @@
 import { defineStore } from 'pinia';
 import axios from 'axios';
 // types
-import type { Order, Product, ProductGroup, Print } from './__types';
+import type { Order, Product, ProductGroup, Print } from './__types__';
 
 export const useOrderStore = defineStore('orders', {
   state: () => ({
@@ -39,8 +39,9 @@ export const useOrderStore = defineStore('orders', {
   actions: {
     async fetchOrders(name: string, phone: string) {
       try {
-        const req = await axios.get(
-          `${import.meta.env.VITE_API_URL}/order/${name}/${phone}`
+        const req = await axios.post(
+          `${import.meta.env.VITE_API_URL}/orders/guest`,
+          { name, phone }
         );
         this.orders = req.data;
       } catch (error) {
@@ -51,7 +52,7 @@ export const useOrderStore = defineStore('orders', {
     async fetchPartnerOrders(partner: string) {
       try {
         const req = await axios.get(
-          `${import.meta.env.VITE_API_URL}/order/${partner}`
+          `${import.meta.env.VITE_API_URL}/orders/${partner}`
         );
         this.orders = req.data;
       } catch (error) {
@@ -60,7 +61,7 @@ export const useOrderStore = defineStore('orders', {
     },
     newOrder(order: Order) {
       try {
-        let apiOrder = `${import.meta.env.VITE_API_URL}/order/store`;
+        let apiOrder = `${import.meta.env.VITE_API_URL}/order`;
         axios.post(apiOrder, order);
       } catch (error) {
         alert(error);

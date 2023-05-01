@@ -21,7 +21,7 @@
 <script lang="ts" setup>
 import { useRoute } from 'vue-router';
 // types
-import type { Prose } from '@/stores/__types';
+import type { Prose } from '@/stores/__types__';
 
 const route = useRoute();
 

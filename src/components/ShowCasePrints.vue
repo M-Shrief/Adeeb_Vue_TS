@@ -27,7 +27,7 @@ import { computed } from 'vue';
 // stores
 import { usePrintsStore } from "@/stores/prints";
 // types
-import type { Print } from '@/stores/__types';
+import type { Print } from '@/stores/__types__';
 
 const printsStore = usePrintsStore();
 const getPrints = computed(() => {

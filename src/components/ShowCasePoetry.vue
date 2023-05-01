@@ -25,7 +25,7 @@
 <script lang="ts" setup>
 import { useRoute } from 'vue-router';
 // types
-import type { ChosenVerse } from '@/stores/__types';
+import type { ChosenVerse } from '@/stores/__types__';
 
 const route = useRoute();
 

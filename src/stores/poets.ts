@@ -1,6 +1,6 @@
 import { defineStore } from 'pinia';
 import axios from 'axios';
-import type { Poet } from './__types';
+import type { Poet } from './__types__';
 
 export const usePoetStore = defineStore('poets', {
   state: () => {

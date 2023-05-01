@@ -12,7 +12,7 @@
 
 <script lang="ts" setup>
 // types
-import type { Poet } from '@/stores/__types';
+import type { Poet } from '@/stores/__types__';
 defineProps({
   poets: {
     type: Array<Poet['details']>,

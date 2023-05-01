@@ -1,5 +1,5 @@
 import { defineStore } from 'pinia';
-import type { Print } from './__types';
+import type { Print } from './__types__';
 
 export const usePrintsStore = defineStore('prints', {
   state: () => {

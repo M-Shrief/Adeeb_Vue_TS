@@ -30,7 +30,7 @@ import { useChosenVerseStore } from '@/stores/chosenVerses';
 import { useProseStore } from '@/stores/proses';
 import { usePrintsStore } from '@/stores/prints';
 // Types
-import type { Print } from '@/stores/__types';
+import type { Print } from '@/stores/__types__';
 // components
 import ShowCasePoems from '@/components/ShowCasePoems.vue';
 import ShowCasePoets from '@/components/ShowCasePoets.vue';

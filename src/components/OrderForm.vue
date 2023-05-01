@@ -3,7 +3,7 @@
     <div id="confirmation">
       <div id="customer-details" v-if="partner">
         <div class="container">
-          <p>الاسم: {{ partner.fullname }}</p>
+          <p>الاسم: {{ partner.name }}</p>
         </div>
         <div class="container">
           <p>الهاتف: {{ partner.phone }}</p>
@@ -11,9 +11,9 @@
         <div class="container">
           <label for="address">العنوان: </label>
           <select name="address" id="address">
-            <option v-if="typeof partner.addresses == 'string'"
-              :value="partner.addresses">{{ partner.addresses }}</option>
-            <option v-else v-for="address in partner.addresses" :value="address"
+            <option v-if="typeof partner.address == 'string'"
+              :value="partner.address">{{ partner.address }}</option>
+            <option v-else v-for="address in partner.address" :value="address"
               :key="address">
               {{ address }}
             </option>
@@ -44,9 +44,9 @@
           :style="{ color: product.fontColor, background: product.backgroundColor }"
           @dblclick="deleteProduct(products as Product[], product)">
           <p>{{ product.fontType }}</p>
-          <p v-if="product.print.verse"> {{ product.print.verse[0].first
+          <p v-if="product.print.verses"> {{ product.print.verses[0].first
           }}...</p>
-          <p v-else="product.print.qoute">
+          <p v-else-if="product.print.qoute">
             {{ product.print.qoute.slice(0, 30) }}...</p>
         </div>
         <div v-for="productGroup, index in productGroups" :key="index">
@@ -60,8 +60,8 @@
               class="group-print"
               :style="{ color: productGroup.fontColor, background: productGroup.backgroundColor }"
               @dblclick="deleteFromProductGroup(productGroup, print)">
-              <p v-if="print.verse"> {{ print.verse[0].first }}...</p>
-              <p v-else="print.qoute"> {{ print.qoute.slice(0, 30) }}...</p>
+              <p v-if="print.verses"> {{ print.verses[0].first }}...</p>
+              <p v-else-if="print.qoute"> {{ print.qoute.slice(0, 30) }}...</p>
             </div>
           </div>
         </div>
@@ -124,7 +124,7 @@ const partner = computed(() => {
 async function confirmOrder() {
   let name, phone, address, order;
   if (partner.value) {
-    name = partner.value.fullname
+    name = partner.value.name
     phone = partner.value.phone
     address = (document.getElementById("address") as HTMLInputElement).value;
 

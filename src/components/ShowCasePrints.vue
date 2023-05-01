@@ -3,7 +3,7 @@
     <!-- Assigning poetry(2verses) || poetry(1verse) or prose -->
     <div @click="$emit('print', print)">
       <!-- if selected from ShowCasePoetry -->
-      <div v-if="print.verse" v-for="verse in print.verse" :key="verse._id"
+      <div v-if="print.verses" v-for="verse in print.verses" :key="verse._id"
         class="verse">
         <p>{{ verse.first }}</p>
         <p dir="ltr">{{ verse.sec }}</p>

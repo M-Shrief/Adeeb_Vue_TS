@@ -4,8 +4,8 @@
     <div :class="grid">
       <div v-for="chosenVerse in chosenVerses" :key="chosenVerse._id"
         class="poetry-item">
-        <div v-for="verse in chosenVerse.verse" :key="verse._id"
-          :class="chosenVerse.verse.length == 1 ? 'one-verse' : 'two-verse'">
+        <div v-for="verse in chosenVerse.verses" :key="verse._id"
+          :class="chosenVerse.verses.length == 1 ? 'one-verse' : 'two-verse'">
           <p class="first">{{ verse.first }}</p>
           <p class="sec" dir="ltr">{{ verse.sec }}</p>
         </div>

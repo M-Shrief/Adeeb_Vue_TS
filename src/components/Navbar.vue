@@ -11,7 +11,7 @@
       <router-link :to="'/about'" class="nav-item"
         active-class="active">قصتنا</router-link>
 
-      <span v-if="partner" class="partner-name">{{ partner.fullname }}</span>
+      <span v-if="partner" class="partner-name">{{ partner.name }}</span>
       <span v-if="partner" class="nav-item" @click="logout">تسجيل
         الخروج</span>
       <router-link to="/partners" class="nav-item" active-class="active" v-else>كن
@@ -36,7 +36,7 @@ const partner = computed(() => {
 
 const orderStore = useOrderStore();
 async function logout() {
-  await parnterStore.logout()
+  parnterStore.logout()
   orderStore.reset()
   router.push('/');
 }

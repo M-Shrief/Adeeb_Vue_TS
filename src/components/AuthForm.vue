@@ -3,12 +3,12 @@
     <h3>{{ isRegistered ? "تسجيل الدخول" : "تسجيل حساب جديد" }} </h3>
     <form method="POST" @submit.prevent="() => onSubmit()">
       <div v-if="!isRegistered" class="input-cont">
-        <label for="fullname">الاسم: </label>
-        <input type="text" name="fullname" id="fullname" required>
+        <label for="name">الاسم: </label>
+        <input type="text" name="name" id="name" required>
       </div>
       <div v-if="!isRegistered" class="input-cont">
-        <label for="addresses">العنوان: </label>
-        <input type="text" name="addresses" id="addresses" required>
+        <label for="address">العنوان: </label>
+        <input type="text" name="address" id="address" required>
       </div>
       <div class="input-cont">
         <label for="phone">رقم الهاتف: </label>
@@ -46,17 +46,17 @@ async function onSubmit() {
       password: (document.getElementById('password') as HTMLInputElement).value,
     } as Partner;
     await partnerStore.login(partner)
-      .then(() => router.push('/partners/history'))
+      .then(() => router.push('/'))
       .catch(err => alert('Invalid information'));
   } else {
     partner = {
-      fullname: (document.getElementById('fullname') as HTMLInputElement).value,
-      addresses: (document.getElementById('addresses') as HTMLInputElement).value,
+      name: (document.getElementById('name') as HTMLInputElement).value,
+      address: (document.getElementById('address') as HTMLInputElement).value,
       phone: (document.getElementById('phone') as HTMLInputElement).value,
       password: (document.getElementById('password') as HTMLInputElement).value,
     } as Partner;
     await partnerStore.signup(partner)
-      .then(() => router.push('/partners/history'))
+      .then(() => router.push('/'))
       .catch(err => alert('Invalid information'));
   }
 }

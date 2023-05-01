@@ -6,10 +6,14 @@ import type { ChosenVerse } from './__types';
 export const useChosenVerseStore = defineStore('chosenVerses', {
   state: () => ({
     chosenVerses: [] as ChosenVerse[],
+    randomChosenVerses: [] as ChosenVerse[],
   }),
   getters: {
     getChosenVerses(state): ChosenVerse[] {
       return state.chosenVerses;
+    },
+    getRandomChosenVerses(state): ChosenVerse[] {
+      return state.randomChosenVerses;
     },
   },
   actions: {
@@ -27,9 +31,9 @@ export const useChosenVerseStore = defineStore('chosenVerses', {
     async fetchRandomChosenVerses(num: number) {
       try {
         const req = await axios.get(
-          `${import.meta.env.VITE_API_URL}/chosenverses_random/${num}`
+          `${import.meta.env.VITE_API_URL}/chosenverses/random?num=${num}`
         );
-        this.chosenVerses = req.data;
+        this.randomChosenVerses = req.data;
       } catch (error) {
         alert(error);
         console.log(error);

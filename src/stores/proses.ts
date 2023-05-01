@@ -6,10 +6,14 @@ import type { Prose } from './__types';
 export const useProseStore = defineStore('proses', {
   state: () => ({
     proses: [] as Prose[],
+    randomProses: [] as Prose[],
   }),
   getters: {
     getProses(state): Prose[] {
       return state.proses;
+    },
+    getRandomProses(state): Prose[] {
+      return state.randomProses;
     },
   },
   actions: {
@@ -22,12 +26,13 @@ export const useProseStore = defineStore('proses', {
         console.log(error);
       }
     },
+
     async fetchRandomProses(num: number) {
       try {
         const req = await axios.get(
-          `${import.meta.env.VITE_API_URL}/proses_random/${num}`
+          `${import.meta.env.VITE_API_URL}/proses/random?num=${num}`
         );
-        this.proses = req.data;
+        this.randomProses = req.data;
       } catch (error) {
         alert(error);
         console.log(error);

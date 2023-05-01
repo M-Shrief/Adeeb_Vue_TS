@@ -1,6 +1,17 @@
-# All in TypeScript, "Adeeb أديب" VueTS with Node/Express API
+# All in TypeScript, front-end for "Adeeb أديب" developed with Vuejs, Pinia and vue-router.
 
-All in TypeScript project
-for["Adeeb آديب"](https://github.com/M-Shrief/M-Shrief/blob/main/Overview-%2015th%20Jan.mp4 'check a preview here to download')
-using VueJS, Pinia and vue-router, connecting with a Node/Express REST API
-leveraging axios requests.
+**Overview, and file structure**:
+
+- _./assets_ file for our base.css and mixins.scss
+
+- _./components_ file for our contained and reusable logic across the app.
+
+- _./pages_ seperated pages to seperated logic groups from each other, and map
+  each logic group to specific route.
+
+- _./router_ file to contain our routing.
+
+- _./stores_ file for to manage our app state, logic and api requests, while
+  leveraging its reactivity.
+
+- _App.vue & main.ts_ files to bootstrap our SPA.

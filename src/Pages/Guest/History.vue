@@ -40,9 +40,8 @@
           class="product"
           :style="{ color: product.fontColor, background: product.backgroundColor }">
           <p>نوع الخط: {{ product.fontType }}</p>
-          <p v-if="product.print.verse"> {{ (product as
-            Product).print.verse[0].first
-          }}...</p>
+          <p v-if="product.print.verses">{{ product.print.verses[0].first }}...
+          </p>
           <p v-else-if="product.print.qoute">
             {{ product.print.qoute.slice(0, 30) }}...</p>
         </div>
@@ -57,7 +56,7 @@ import { computed } from 'vue';
 // Stores
 import { useOrderStore } from "@/stores/orders";
 // Types
-import type { Product } from '@/stores/__types';
+import type { Product } from '@/stores/__types__';
 
 const orderStore = useOrderStore();
 const getOrders = computed(() => {

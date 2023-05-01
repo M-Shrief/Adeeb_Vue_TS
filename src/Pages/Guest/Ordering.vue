@@ -4,10 +4,10 @@
       <section id="preview">
         <h3>اختر من الاشعار للطباعة</h3>
         <PrintCustomization :colors="colors"
-          @fontColor="(color) => fontColor = color"
-          @backgroundColor="(color) => backgroundColor = color" />
-        <div v-if="preview.verse" v-for="verse in preview.verse" :key="verse._id"
-          class="verse" id="print"
+          @fontColor="(color: string) => fontColor = color"
+          @backgroundColor="(color: string) => backgroundColor = color" />
+        <div v-if="preview.verses" v-for="verse in preview.verses"
+          :key="verse._id" class="verse" id="print"
           :style="{ color: fontColor, background: backgroundColor }">
           <p>{{ verse.first }}</p>
           <p dir="ltr">{{ verse.sec }}</p>
@@ -33,7 +33,7 @@
         </div>
         <div v-if="randomPrint">
           <div @click="preview = randomPrint">
-            <div v-if="randomPrint.verse" v-for="verse in randomPrint.verse"
+            <div v-if="randomPrint.verses" v-for="verse in randomPrint.verses"
               :key="verse._id" class="verse">
               <p>{{ verse.first }}</p>
               <p dir="ltr">{{ verse.sec }}</p>
@@ -44,7 +44,7 @@
           </div>
         </div>
       </div>
-      <ShowCasePrints @print="(print) => preview = print" />
+      <ShowCasePrints @print="(print: Print) => preview = print" />
     </section>
   </main>
 </template>
@@ -60,7 +60,7 @@ import PrintCustomization from '@/components/PrintCustomization.vue';
 import OrderForm from "@/components/OrderForm.vue";
 import ShowCasePrints from '@/components/ShowCasePrints.vue';
 // Types
-import type { Print } from '@/stores/__types'
+import type { Print } from '@/stores/__types__'
 
 let preview = ref({} as Print);
 let randomPrint = ref();
@@ -77,7 +77,7 @@ const getProducts = computed(() => {
 
 // colors = [fontColor, backgroundColor]
 function addProduct(productPrint: Print, colors: string[]) {
-  if (productPrint.verse || productPrint.qoute) {
+  if (productPrint.verses || productPrint.qoute) {
     orderStore.addProduct(productPrint, colors)
   }
 }
@@ -86,13 +86,13 @@ function addProduct(productPrint: Print, colors: string[]) {
 const chosenVerseStore = useChosenVerseStore();
 function getRandomPoetry(num: number) {
   chosenVerseStore.fetchRandomChosenVerses(num);
-  randomPrint.value = chosenVerseStore.getChosenVerses[0];
+  randomPrint.value = chosenVerseStore.getRandomChosenVerses[0];
 }
 
 const proseStore = useProseStore();
 function getRandomProse(num: number) {
   proseStore.fetchRandomProses(num);
-  randomPrint.value = proseStore.getProses[0];
+  randomPrint.value = proseStore.getRandomProses[0];
 }
 </script>
 

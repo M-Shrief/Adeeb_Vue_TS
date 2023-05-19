@@ -1,8 +1,9 @@
 import { defineStore } from 'pinia';
-import axios from 'axios';
+import axios, { AxiosError } from 'axios';
 // types
 import type { Partner } from './__types__';
-
+// Composables
+import { useHttpError } from '../composables/error';
 export const usePartnerStore = defineStore('partners', {
   state: () => ({
     partner: null as Partner | null,
@@ -26,6 +27,10 @@ export const usePartnerStore = defineStore('partners', {
           'Bearer ' + req.data.accessToken;
         this.partner = req.data.partner;
       } catch (error) {
+        if (error instanceof AxiosError) {
+          useHttpError(error.response?.data.message);
+          return;
+        }
         alert(error);
       }
     },
@@ -38,6 +43,10 @@ export const usePartnerStore = defineStore('partners', {
         axios.defaults.headers.common['Authorization'] =
           'Bearer ' + req.data.accessToken;
       } catch (error) {
+        if (error instanceof AxiosError) {
+          useHttpError(error.response?.data.message);
+          return;
+        }
         alert(error);
       }
     },

@@ -1,7 +1,9 @@
 import { defineStore } from 'pinia';
-import axios from 'axios';
+import axios, { AxiosError } from 'axios';
 // types
 import type { Prose } from './__types__';
+// Composables
+import { useHttpError } from '../composables/error';
 
 export const useProseStore = defineStore('proses', {
   state: () => ({
@@ -22,8 +24,11 @@ export const useProseStore = defineStore('proses', {
         const req = await axios.get(`${import.meta.env.VITE_API_URL}/proses`);
         this.proses = req.data;
       } catch (error) {
+        if (error instanceof AxiosError) {
+          useHttpError(error.response?.data.message);
+          return;
+        }
         alert(error);
-        console.log(error);
       }
     },
 
@@ -34,8 +39,11 @@ export const useProseStore = defineStore('proses', {
         );
         this.randomProses = req.data;
       } catch (error) {
+        if (error instanceof AxiosError) {
+          useHttpError(error.response?.data.message);
+          return;
+        }
         alert(error);
-        console.log(error);
       }
     },
   },

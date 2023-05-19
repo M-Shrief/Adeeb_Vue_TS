@@ -44,7 +44,8 @@ const getPoems = computed(() => {
 watch(
   () => route.params.id,
   (newPoemId) => {
-    poemStore.fetchPoemAndSuggestedPoems(route.params.id);
+    if (route.name === 'poem')
+      poemStore.fetchPoemAndSuggestedPoems(route.params.id);
   }
 );
 

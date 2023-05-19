@@ -1,8 +1,9 @@
 import { defineStore } from 'pinia';
-import axios from 'axios';
+import axios, { AxiosError } from 'axios';
 // types
 import type { ChosenVerse } from './__types__';
-
+// Composables
+import { useHttpError } from '../composables/error';
 export const useChosenVerseStore = defineStore('chosenVerses', {
   state: () => ({
     chosenVerses: [] as ChosenVerse[],
@@ -24,8 +25,11 @@ export const useChosenVerseStore = defineStore('chosenVerses', {
         );
         this.chosenVerses = req.data;
       } catch (error) {
+        if (error instanceof AxiosError) {
+          useHttpError(error.response?.data.message);
+          return;
+        }
         alert(error);
-        console.log(error);
       }
     },
     async fetchRandomChosenVerses(num: number) {
@@ -35,8 +39,11 @@ export const useChosenVerseStore = defineStore('chosenVerses', {
         );
         this.randomChosenVerses = req.data;
       } catch (error) {
+        if (error instanceof AxiosError) {
+          useHttpError(error.response?.data.message);
+          return;
+        }
         alert(error);
-        console.log(error);
       }
     },
   },

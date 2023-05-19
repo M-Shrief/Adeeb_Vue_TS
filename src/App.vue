@@ -2,11 +2,13 @@
 // components
 import Navbar from './components/Navbar.vue';
 import Footer from './components/Footer.vue';
+import ErrorPopUp from './components/NotificationsCenter/ErrorPopUp.vue';
 </script>
 
 <template>
   <header>
     <Navbar />
+    <ErrorPopUp />
   </header>
   <router-view v-slot="{ Component }">
     <transition name="fade" appear>
@@ -19,4 +21,8 @@ import Footer from './components/Footer.vue';
 <style lang="scss" scoped>
 @import './assets/mixins.scss';
 @include fade-transition;
+
+header {
+  position: relative;
+}
 </style>

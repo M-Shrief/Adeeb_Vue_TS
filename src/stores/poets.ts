@@ -1,7 +1,9 @@
 import { defineStore } from 'pinia';
-import axios from 'axios';
+import axios, { AxiosError } from 'axios';
+// Types
 import type { Poet } from './__types__';
-
+// Composables
+import { useHttpError } from '../composables/error';
 export const usePoetStore = defineStore('poets', {
   state: () => {
     return {
@@ -23,8 +25,11 @@ export const usePoetStore = defineStore('poets', {
         const req = await axios.get(`${import.meta.env.VITE_API_URL}/poets`);
         this.poets = req.data;
       } catch (error) {
+        if (error instanceof AxiosError) {
+          useHttpError(error.response?.data.message);
+          return;
+        }
         alert(error);
-        console.log(error);
       }
     },
     async fetchPoet(id: any) {
@@ -33,8 +38,11 @@ export const usePoetStore = defineStore('poets', {
         const req = await axios.get(apiUrl);
         this.poet = req.data;
       } catch (error) {
+        if (error instanceof AxiosError) {
+          useHttpError(error.response?.data.message);
+          return;
+        }
         alert(error);
-        console.log(error);
       }
     },
   },

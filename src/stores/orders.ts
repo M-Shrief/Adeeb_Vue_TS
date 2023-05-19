@@ -1,8 +1,9 @@
 import { defineStore } from 'pinia';
-import axios from 'axios';
+import axios, { AxiosError } from 'axios';
 // types
 import type { Order, Product, ProductGroup, Print } from './__types__';
-
+// Composables
+import { useHttpError } from '../composables/error';
 export const useOrderStore = defineStore('orders', {
   state: () => ({
     orders: [] as Order[],
@@ -45,8 +46,11 @@ export const useOrderStore = defineStore('orders', {
         );
         this.orders = req.data;
       } catch (error) {
+        if (error instanceof AxiosError) {
+          useHttpError(error.response?.data.message);
+          return;
+        }
         alert(error);
-        console.log(error);
       }
     },
     async fetchPartnerOrders(partner: string) {
@@ -56,6 +60,10 @@ export const useOrderStore = defineStore('orders', {
         );
         this.orders = req.data;
       } catch (error) {
+        if (error instanceof AxiosError) {
+          useHttpError(error.response?.data.message);
+          return;
+        }
         alert(error);
       }
     },
@@ -64,6 +72,10 @@ export const useOrderStore = defineStore('orders', {
         let apiOrder = `${import.meta.env.VITE_API_URL}/order`;
         axios.post(apiOrder, order);
       } catch (error) {
+        if (error instanceof AxiosError) {
+          useHttpError(error.response?.data.message);
+          return;
+        }
         alert(error);
       }
     },

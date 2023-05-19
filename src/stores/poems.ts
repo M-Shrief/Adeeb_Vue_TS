@@ -3,7 +3,7 @@ import axios, { AxiosError } from 'axios';
 // types
 import type { Poem } from './__types__';
 // Composables
-import { useHttpError } from '../composables/error';
+import { useAxiosError } from '../composables/error';
 
 export const usePoemStore = defineStore('poems', {
   state: () => {
@@ -29,7 +29,7 @@ export const usePoemStore = defineStore('poems', {
         this.poems = req.data;
       } catch (error) {
         if (error instanceof AxiosError) {
-          useHttpError(error.response?.data.message);
+          useAxiosError(error);
           return;
         }
         alert(error);
@@ -48,7 +48,7 @@ export const usePoemStore = defineStore('poems', {
         this.poems = reqPoemsIntros.data;
       } catch (error) {
         if (error instanceof AxiosError) {
-          useHttpError(error.response?.data.message);
+          useAxiosError(error);
           return;
         }
         alert(error);
@@ -64,7 +64,7 @@ export const usePoemStore = defineStore('poems', {
         this.fetchOtherPoems(id);
       } catch (error) {
         if (error instanceof AxiosError) {
-          useHttpError(error.response?.data.message);
+          useAxiosError(error);
           return;
         }
         alert(error);

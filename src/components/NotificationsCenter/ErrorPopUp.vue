@@ -1,6 +1,6 @@
 <template>
   <div v-if="error" class="popup popup-error">
-    <p>{{ error }}</p>
+    <p>{{ error.message }}</p>
   </div>
 </template>
 <script lang="ts" setup>

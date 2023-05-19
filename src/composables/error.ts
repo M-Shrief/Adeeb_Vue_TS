@@ -12,23 +12,19 @@
  * making sure that the app doesn't crash
  * charactaristics: red on the bottom Left
  * */
-import { ref, watch } from 'vue';
-import { useRouter, useRoute } from 'vue-router';
+import { ref } from 'vue';
 import type { AxiosError } from 'axios';
-const router = useRouter();
-const route = useRoute();
 
-interface Error {
-  message: string | null;
-}
+export let error = ref();
 
-export let error = ref<Error | null>();
+export const useAxiosError = async (httpError: AxiosError) => {
+  if (httpError.response?.data) {
+    error.value = httpError.response.data;
+  } else if (httpError.message) {
+    error.value = httpError;
+  }
 
-export const useHttpError = async (err: AxiosError) => {
-  error.value = err;
-
-  await setTimeout(() => {
+  setTimeout(() => {
     error.value = null;
   }, 3000);
-  router.go(-1);
 };

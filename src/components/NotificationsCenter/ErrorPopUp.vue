@@ -5,23 +5,6 @@
 </template>
 <script lang="ts" setup>
 import { error } from '../../composables/error'
-import { watch } from 'vue';
-defineProps({
-  isNewError: {
-    type: Boolean,
-    required: false
-  }
-})
-
-// watch(
-//   () => error.value,
-//   (newError) => {
-//     setTimeout(() => {
-//       newError = { message: null };
-//     }, 3000);
-//   }
-// );
-
 </script>
 
 <style lang="scss">

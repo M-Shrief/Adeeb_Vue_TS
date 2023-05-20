@@ -4,6 +4,7 @@ import axios, { AxiosError } from 'axios';
 import type { Order, Product, ProductGroup, Print } from './__types__';
 // Composables
 import { useAxiosError } from '../composables/error';
+import { useSuccessNotification } from '../composables/success';
 export const useOrderStore = defineStore('orders', {
   state: () => ({
     orders: [] as Order[],
@@ -67,10 +68,11 @@ export const useOrderStore = defineStore('orders', {
         alert(error);
       }
     },
-    newOrder(order: Order) {
+    async newOrder(order: Order) {
       try {
         let apiOrder = `${import.meta.env.VITE_API_URL}/order`;
-        axios.post(apiOrder, order);
+        await axios.post(apiOrder, order);
+        useSuccessNotification('Operation was made successfully');
       } catch (error) {
         if (error instanceof AxiosError) {
           useAxiosError(error);

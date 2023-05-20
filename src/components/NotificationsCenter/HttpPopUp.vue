@@ -1,16 +1,29 @@
 <template>
-  <div v-if="error" class="popup popup-error">
-    <p>{{ error.message }}</p>
+  <div class="flex-center">
+    <div v-if="error" class="popup popup-error">
+      <p>{{ error.message }}</p>
+    </div>
+    <div v-if="success" class="popup popup-success">
+      <p>{{ success.message }}</p>
+    </div>
   </div>
 </template>
 <script lang="ts" setup>
 import { error } from '../../composables/error'
+import { success } from '../../composables/success'
 </script>
 
 <style lang="scss">
 $red: #970707;
 $white: #ececec;
-// $green: #28965a;
+$green: #28965a;
+
+.flex-center {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 
 .popup {
   position: absolute;
@@ -18,7 +31,7 @@ $white: #ececec;
   padding: 0.2rem;
   margin: 0;
   top: 3rem;
-  left: 45%;
+  margin: 0 auto;
   text-align: center;
   overflow: hidden;
   border-left: 0.3rem solid $red;
@@ -36,11 +49,11 @@ $white: #ececec;
   color: $red;
 }
 
-// .popup-success {
-//   border-left: 0.3rem solid $green;
-//   border-bottom: 0.3rem solid $green;
-//   color: $green;
-// }
+.popup-success {
+  border-left: 0.3rem solid $green;
+  border-bottom: 0.3rem solid $green;
+  color: $green;
+}
 
 @keyframes slideDown {
 

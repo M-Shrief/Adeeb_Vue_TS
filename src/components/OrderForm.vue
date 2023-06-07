@@ -1,5 +1,5 @@
 <template>
-  <form @submit.prevent="confirmOrder" dir="rtl">
+  <Form @submit="confirmOrder" dir="rtl">
     <div id="confirmation">
       <div id="customer-details" v-if="partner">
         <div class="container">
@@ -23,20 +23,30 @@
       <div id="customer-details" v-else>
         <div class="container">
           <label for="name">الاسم: </label>
-          <input type="text" id="name" name="name" required minlength="5"
-            maxlength="20" />
+          <!-- <input type="text" id="name" name="name" required minlength="5"
+            maxlength="20" /> -->
+          <Field name="name" id="name" :rules="nameRules" />
+          <ErrorMessage name="name" class="error" />
         </div>
         <div class="container">
           <label for="phone">الهاتف: </label>
-          <input type="text" id="phone" name="phone" required minlength="8"
-            maxlength="18" />
+          <!-- <input type="text" id="phone" name="phone" required minlength="8"
+            maxlength="18" /> -->
+          <Field name="phone" id="phone" :rules="nameRules" />
+          <ErrorMessage name="phone" class="error" />
         </div>
         <div class="container">
           <label for="address">العنوان: </label>
-          <input type="text" id="address" name="address" required minlength="8"
-            maxlength="70" />
+          <!-- <input type="text" id="address" name="address" required minlength="8"
+            maxlength="70" /> -->
+          <Field name="address" id="address" :rules="nameRules" />
+          <ErrorMessage name="address" class="error" />
+
         </div>
       </div>
+      <div class="errors">
+      </div>
+
 
       <div id="products">
         <div v-for="product in products" class="product-details"
@@ -68,12 +78,15 @@
       </div>
     </div>
     <button type="submit">تأكيد الطلب</button>
-  </form>
+  </Form>
 </template>
 
 <script lang="ts" setup>
 import { computed } from '@vue/reactivity';
 import { useRouter } from 'vue-router';
+// Validation
+import { Form, Field, ErrorMessage } from 'vee-validate';
+import { nameRules, phoneRules, addressRules } from '../yup.schema'
 // stores
 import { useOrderStore } from '@/stores/orders';
 import { usePartnerStore } from '@/stores/partners';
@@ -121,7 +134,7 @@ const partner = computed(() => {
   return partnerStore.getPartner;
 });
 
-async function confirmOrder() {
+async function confirmOrder(values: any) {
   let name, phone, address, order;
   if (partner.value) {
     name = partner.value.name
@@ -139,19 +152,14 @@ async function confirmOrder() {
     orderStore.reset()
     router.push('/partners/history');
   } else {
-    name = (document.getElementById("name") as HTMLInputElement).value;
-    phone = (document.getElementById("phone") as HTMLInputElement).value;
-    address = (document.getElementById("address") as HTMLInputElement).value;
-
     order = {
-      name,
-      phone,
-      address,
+      ...values,
       products: props.products
     } as Order;
-    await orderStore.newOrder(order)
-    orderStore.reset()
-    router.push('/history');
+    console.log(order)
+    // await orderStore.newOrder(order)
+    // orderStore.reset()
+    // router.push('/history');
   }
 };
 </script>
@@ -171,9 +179,9 @@ form {
   #customer-details {
     color: $mainColor;
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     justify-content: space-around;
-    align-items: center;
+    // align-items: center;
 
     .container {
       font-size: 1.1rem;
@@ -192,6 +200,11 @@ form {
       select {
         background-color: $mainColor;
         border: 1px solid $secondaryColor;
+      }
+
+      .error {
+        color: #c80815;
+        margin-right: 1rem;
       }
     }
 
@@ -213,6 +226,7 @@ form {
       }
     }
   }
+
 
   #products {
     font-weight: 550;

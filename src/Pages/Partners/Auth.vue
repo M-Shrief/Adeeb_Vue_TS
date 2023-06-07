@@ -4,6 +4,7 @@
 
     <!-- show if the user will authenticate, hide if the user won't -->
     <AuthForm />
+    <!-- <AuthValidate /> -->
     <aside>
       <!-- need something simple like: islamic arts, a transition for list-items and on. -->
       <h3>سجل الان للاستفادة من جميع الخدمات المُقدمة من المتنبي</h3>
@@ -25,6 +26,7 @@ import { onBeforeMount } from 'vue';
 import { useRouter } from 'vue-router';
 // Components
 import AuthForm from '@/components/AuthForm.vue';
+import AuthValidate from '@/components/AuthValidate.vue';
 // stores
 import { usePartnerStore } from '@/stores/partners';
 

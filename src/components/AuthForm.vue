@@ -1,61 +1,67 @@
 <template>
   <section id="auth-form">
     <h3>{{ isRegistered ? "تسجيل الدخول" : "تسجيل حساب جديد" }} </h3>
-    <form method="POST" @submit.prevent="() => onSubmit()">
+    <Form @submit="onSubmit">
       <div v-if="!isRegistered" class="input-cont">
         <label for="name">الاسم: </label>
-        <input type="text" name="name" id="name" required>
+        <Field name="name" id="name" :rules="name" />
+        <ErrorMessage name="name" class="error" />
       </div>
       <div v-if="!isRegistered" class="input-cont">
         <label for="address">العنوان: </label>
-        <input type="text" name="address" id="address" required>
+        <Field name="address" id="address" :rules="address" />
+        <ErrorMessage name="address" class="error" />
       </div>
       <div class="input-cont">
         <label for="phone">رقم الهاتف: </label>
-        <input type="text" name="phone" id="phone" required>
+        <Field name="phone" id="phone" :rules="phone" />
+        <ErrorMessage name="phone" class="error" />
       </div>
       <div class="input-cont">
         <label for="password">كلمة السر: </label>
-        <input type="password" name="password" id="password" required>
+        <Field type="password" name="password" id="password" :rules="password" />
+        <ErrorMessage name="password" class="error" />
       </div>
       <button type="submit">التأكيد</button>
-    </form>
+    </Form>
     <button id="toggle" @click="isRegistered = !isRegistered">
-      {{ isRegistered ? "تسجيل حساب جديد" : "تسجيل الدخول" }}</button>
+      {{ !isRegistered ? "تسجيل الدخول" : "تسجيل حساب جديد" }}
+    </button>
   </section>
 </template>
 
 <script lang="ts" setup>
 import { ref } from 'vue'
 import { useRouter } from 'vue-router';
+// Validation
+import { Form, Field, ErrorMessage } from 'vee-validate';
+import { string } from 'yup';
 // stores
 import { usePartnerStore } from '@/stores/partners';
 // types
 import type { Partner } from '@/stores/__types__';
+// Composables
+import { useAxiosError } from '../composables/error';
 
-const isRegistered = ref(true);
 
 const router = useRouter();
 const partnerStore = usePartnerStore();
 
-async function onSubmit() {
-  let partner;
+const isRegistered = ref(true);
+
+const name = string().required().min(2).max(50).trim();
+const address = string().required().min(8).max(100).trim();
+const phone = string().required().min(6).max(50).trim();
+const password = string().required().min(8).max(50).trim();
+
+
+async function onSubmit(values: any) {
   if (isRegistered.value) {
-    partner = {
-      phone: (document.getElementById('phone') as HTMLInputElement).value,
-      password: (document.getElementById('password') as HTMLInputElement).value,
-    } as Partner;
-    await partnerStore.login(partner)
+    await partnerStore.login(values)
       .then(() => router.push('/'))
-      .catch(err => alert('Invalid information'));
+      .catch(error => useAxiosError(error));
   } else {
-    partner = {
-      name: (document.getElementById('name') as HTMLInputElement).value,
-      address: (document.getElementById('address') as HTMLInputElement).value,
-      phone: (document.getElementById('phone') as HTMLInputElement).value,
-      password: (document.getElementById('password') as HTMLInputElement).value,
-    } as Partner;
-    await partnerStore.signup(partner)
+    await partnerStore.signup(values)
       .then(() => router.push('/'))
       .catch(err => alert('Invalid information'));
   }
@@ -94,6 +100,11 @@ $mainColor: #1f2124;
       border-radius: 8px;
 
     }
+  }
+
+  .error {
+    color: #c80815;
+    margin-right: 1rem;
   }
 
   button {

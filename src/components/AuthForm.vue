@@ -4,22 +4,23 @@
     <Form @submit="onSubmit">
       <div v-if="!isRegistered" class="input-cont">
         <label for="name">الاسم: </label>
-        <Field name="name" id="name" :rules="name" />
+        <Field name="name" id="name" :rules="nameRules" />
         <ErrorMessage name="name" class="error" />
       </div>
       <div v-if="!isRegistered" class="input-cont">
         <label for="address">العنوان: </label>
-        <Field name="address" id="address" :rules="address" />
+        <Field name="address" id="address" :rules="addressRules" />
         <ErrorMessage name="address" class="error" />
       </div>
       <div class="input-cont">
         <label for="phone">رقم الهاتف: </label>
-        <Field name="phone" id="phone" :rules="phone" />
+        <Field name="phone" id="phone" :rules="phoneRules" />
         <ErrorMessage name="phone" class="error" />
       </div>
       <div class="input-cont">
         <label for="password">كلمة السر: </label>
-        <Field type="password" name="password" id="password" :rules="password" />
+        <Field type="password" name="password" id="password"
+          :rules="passwordRules" />
         <ErrorMessage name="password" class="error" />
       </div>
       <button type="submit">التأكيد</button>
@@ -35,25 +36,17 @@ import { ref } from 'vue'
 import { useRouter } from 'vue-router';
 // Validation
 import { Form, Field, ErrorMessage } from 'vee-validate';
-import { string } from 'yup';
+import { nameRules, phoneRules, addressRules, passwordRules } from '../forms.schema'
 // stores
 import { usePartnerStore } from '@/stores/partners';
-// types
-import type { Partner } from '@/stores/__types__';
 // Composables
-import { useAxiosError } from '../composables/error';
+import { useAxiosError } from '@/composables/error';
 
 
 const router = useRouter();
 const partnerStore = usePartnerStore();
 
 const isRegistered = ref(true);
-
-const name = string().required().min(2).max(50).trim();
-const address = string().required().min(8).max(100).trim();
-const phone = string().required().min(6).max(50).trim();
-const password = string().required().min(8).max(50).trim();
-
 
 async function onSubmit(values: any) {
   if (isRegistered.value) {

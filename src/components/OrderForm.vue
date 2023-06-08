@@ -23,25 +23,18 @@
       <div id="customer-details" v-else>
         <div class="container">
           <label for="name">الاسم: </label>
-          <!-- <input type="text" id="name" name="name" required minlength="5"
-            maxlength="20" /> -->
           <Field name="name" id="name" :rules="nameRules" />
           <ErrorMessage name="name" class="error" />
         </div>
         <div class="container">
           <label for="phone">الهاتف: </label>
-          <!-- <input type="text" id="phone" name="phone" required minlength="8"
-            maxlength="18" /> -->
-          <Field name="phone" id="phone" :rules="nameRules" />
+          <Field name="phone" id="phone" :rules="phoneRules" />
           <ErrorMessage name="phone" class="error" />
         </div>
         <div class="container">
           <label for="address">العنوان: </label>
-          <!-- <input type="text" id="address" name="address" required minlength="8"
-            maxlength="70" /> -->
-          <Field name="address" id="address" :rules="nameRules" />
+          <Field name="address" id="address" :rules="addressRules" />
           <ErrorMessage name="address" class="error" />
-
         </div>
       </div>
       <div class="errors">
@@ -86,7 +79,7 @@ import { computed } from '@vue/reactivity';
 import { useRouter } from 'vue-router';
 // Validation
 import { Form, Field, ErrorMessage } from 'vee-validate';
-import { nameRules, phoneRules, addressRules } from '../yup.schema'
+import { nameRules, phoneRules, addressRules } from '../forms.schema'
 // stores
 import { useOrderStore } from '@/stores/orders';
 import { usePartnerStore } from '@/stores/partners';
@@ -135,11 +128,11 @@ const partner = computed(() => {
 });
 
 async function confirmOrder(values: any) {
-  let name, phone, address, order;
+  let order: Order;
   if (partner.value) {
-    name = partner.value.name
-    phone = partner.value.phone
-    address = (document.getElementById("address") as HTMLInputElement).value;
+    const name = partner.value.name
+    const phone = partner.value.phone
+    const address = (document.getElementById("address") as HTMLInputElement).value;
 
     order = {
       partner: partner.value._id,
@@ -147,7 +140,7 @@ async function confirmOrder(values: any) {
       phone,
       address,
       products: props.productGroups
-    } as Order;
+    };
     await orderStore.newOrder(order)
     orderStore.reset()
     router.push('/partners/history');
@@ -155,11 +148,10 @@ async function confirmOrder(values: any) {
     order = {
       ...values,
       products: props.products
-    } as Order;
-    console.log(order)
-    // await orderStore.newOrder(order)
-    // orderStore.reset()
-    // router.push('/history');
+    };
+    await orderStore.newOrder(order)
+    orderStore.reset()
+    router.push('/history');
   }
 };
 </script>

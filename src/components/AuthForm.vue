@@ -32,7 +32,7 @@
 </template>
 
 <script lang="ts" setup>
-import { ref } from 'vue'
+import { computed, ref } from 'vue'
 import { useRouter } from 'vue-router';
 // Validation
 import { Form, Field, ErrorMessage } from 'vee-validate';
@@ -41,25 +41,31 @@ import { nameRules, phoneRules, addressRules, passwordRules } from '../forms.sch
 import { usePartnerStore } from '@/stores/partners';
 // Composables
 import { useAxiosError } from '@/composables/error';
+const isRegistered = ref(true);
 
 
 const router = useRouter();
 const partnerStore = usePartnerStore();
 
-const isRegistered = ref(true);
 
+const partner = computed(() => {
+  return partnerStore.getPartner;
+})
 async function onSubmit(values: any) {
   if (isRegistered.value) {
     await partnerStore.login(values)
-      .then(() => router.push('/'))
+      .then(() => {
+        if (partner.value) router.push('/');
+      })
       .catch(error => useAxiosError(error));
   } else {
     await partnerStore.signup(values)
-      .then(() => router.push('/'))
+      .then(() => {
+        if (partner.value) router.push('/');
+      })
       .catch(err => alert('Invalid information'));
   }
 }
-
 </script>
 
 <style lang="scss" scoped>

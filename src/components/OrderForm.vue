@@ -173,7 +173,6 @@ form {
     display: flex;
     flex-direction: column;
     justify-content: space-around;
-    // align-items: center;
 
     .container {
       font-size: 1.1rem;

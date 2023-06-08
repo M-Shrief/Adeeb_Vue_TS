@@ -86,7 +86,7 @@ import { computed } from '@vue/reactivity';
 import { useRouter } from 'vue-router';
 // Validation
 import { Form, Field, ErrorMessage } from 'vee-validate';
-import { nameRules, phoneRules, addressRules } from '../yup.schema'
+import { nameRules, phoneRules, addressRules } from '../forms.schema'
 // stores
 import { useOrderStore } from '@/stores/orders';
 import { usePartnerStore } from '@/stores/partners';

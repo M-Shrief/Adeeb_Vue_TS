@@ -47,7 +47,7 @@ export interface Prose {
 }
 
 export interface Print {
-  _id: string;
+  _id?: string;
   peot?: string | Poet['details'];
   poem?: string | Poem;
   reviewed: boolean;

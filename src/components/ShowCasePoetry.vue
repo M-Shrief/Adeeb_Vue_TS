@@ -14,7 +14,9 @@
           ? 'القصيدة الكاملة'
           : chosenVerse.poet.name + ' - القصيدة الكاملة'
         }}</router-link>
-        <button @click="$emit('print', chosenVerse)" class="print-button">
+        <button
+          @click="$emit('print', { _id: chosenVerse._id, verses: chosenVerse.verses })"
+          class="print-button">
           اضف للطباعة
         </button>
       </div>
@@ -47,6 +49,9 @@ defineEmits(['print']);
 
 $mainColor: #2c3e50;
 $secondaryColor: #fbe6c2;
+
+$mainColor: #fbe6c2;
+$secondaryColor: #181823;
 
 .title {
   text-align: center;

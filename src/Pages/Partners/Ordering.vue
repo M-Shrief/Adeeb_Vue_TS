@@ -28,10 +28,6 @@
           <p>{{ verse.first }}</p>
           <p dir="ltr">{{ verse.sec }}</p>
         </div>
-        <div v-else-if="print.first" class="verse">
-          <p>{{ print.first }}</p>
-          <p dir="ltr">{{ print.sec }}</p>
-        </div>
         <div v-else-if="print.qoute" class="qoute">
           <p>{{ print.qoute }}</p>
         </div>
@@ -91,9 +87,7 @@ const proseStore = useProseStore();
 
 async function preparePoetry() {
   const num = (document.getElementById('poetry') as HTMLInputElement).valueAsNumber;
-  await chosenVerseStore.fetchRandomChosenVerses(num).then(() => {
-    prepPrints(chosenVerseStore.getRandomChosenVerses);
-  });
+  await chosenVerseStore.fetchRandomChosenVerses(num).then(() => prepPrints(chosenVerseStore.getRandomChosenVerses as Print[]));
 }
 async function prepareProse() {
   const num = (document.getElementById('prose') as HTMLInputElement).valueAsNumber;

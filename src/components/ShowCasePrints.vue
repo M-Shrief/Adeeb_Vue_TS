@@ -8,11 +8,6 @@
         <p>{{ verse.first }}</p>
         <p dir="ltr">{{ verse.sec }}</p>
       </div>
-      <!-- if selected from  ShowCasePoem -->
-      <div v-else-if="print.first" class="verse">
-        <p>{{ print.first }}</p>
-        <p dir="ltr">{{ print.sec }}</p>
-      </div>
       <!-- if selected from  ShowCaseProse -->
       <div v-else-if="print.qoute" class="qoute">
         <p>{{ print.qoute }}</p>

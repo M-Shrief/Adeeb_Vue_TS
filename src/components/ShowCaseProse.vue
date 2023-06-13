@@ -9,7 +9,8 @@
             :to="'/poet/' + prose.poet._id" class="details">{{
               prose.poet.name
             }}</router-link>
-          <button @click="$emit('print', prose)" class="print-button">
+          <button @click="$emit('print', { _id: prose._id, qoute: prose.qoute })"
+            class="print-button">
             اضف للطباعة
           </button>
         </div>

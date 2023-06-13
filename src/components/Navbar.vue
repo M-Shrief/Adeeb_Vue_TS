@@ -16,6 +16,18 @@
         الخروج</span>
       <router-link to="/partners" class="nav-item" active-class="active" v-else>كن
         شريكاً</router-link>
+
+      <!-- <div class="dropdown">
+        <span class="partner-name">{{ partner?.name }}</span>
+        <img class="partner-img" src="../../public/icons8-account-24.png"
+          alt="Account">
+        <div class="dropdown-content">
+          <router-link to="" @click="logout"
+            active-class="active">الخروج</router-link>
+          <router-link to="" @click="logout"
+            active-class="active">الاعدادات</router-link>
+        </div>
+      </div> -->
     </div>
   </nav>
 </template>
@@ -111,6 +123,44 @@ async function logout() {
       padding: 0.1rem 0.2rem;
       margin: 0.1rem;
     }
+
   }
+
+  .partner-img {
+    background-color: $mainColor;
+    margin: 0 0.5rem;
+  }
+}
+
+
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  left: 0.5rem;
+  background-color: #2c3e50;
+  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+  z-index: 1;
+}
+
+.dropdown-content a {
+  color: black;
+  padding: 0.5rem;
+  border-bottom: 1px solid #fff;
+  text-decoration: none;
+  display: block;
+}
+
+.dropdown-content a:hover {
+  background-color: #f1f1f1;
+}
+
+.dropdown:hover .dropdown-content {
+  display: flex;
+  flex-direction: column;
 }
 </style>

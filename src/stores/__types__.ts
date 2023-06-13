@@ -48,14 +48,9 @@ export interface Prose {
 
 export interface Print {
   _id?: string;
-  peot?: string | Poet['details'];
-  poem?: string | Poem;
-  reviewed: boolean;
-  tags?: string;
+  poem?: string;
   verses?: Verse[];
   qoute?: string;
-  first?: string;
-  sec?: string;
 }
 
 export interface Product {
@@ -90,6 +85,6 @@ export interface Order {
   address: string;
   reviewed?: boolean;
   completed?: boolean;
-  createdAt?: string;
+  createdAt: string;
   updatedAt?: string;
 }

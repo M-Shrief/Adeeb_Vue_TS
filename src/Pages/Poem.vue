@@ -11,7 +11,7 @@
         </ShowCasePoems>
       </section>
       <ShowCasePoem :verses="getPoem.verses"
-        @print="(poemVerse: Verse) => addPrint({ poem: getPoem._id, verses: [poemVerse] } as Print)" />
+        @print="(poemVerse: Verse) => addPrint({ poem: getPoem._id, verses: [{ ...poemVerse }] })" />
     </div>
     <SelectedPrints />
   </main>

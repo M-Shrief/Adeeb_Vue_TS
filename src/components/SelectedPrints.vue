@@ -7,7 +7,6 @@
         @dblclick="removePrint(print)">
         <!-- poetry -->
         <p v-if="print.verses">{{ print.verses[0].first }}..</p>
-        <p v-else-if="print.first">{{ print.first }}..</p>
         <!-- prose -->
         <p v-else-if="print.qoute">{{ print.qoute.slice(0, 15) }}..</p>
       </li>

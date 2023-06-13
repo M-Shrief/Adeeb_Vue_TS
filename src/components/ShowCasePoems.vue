@@ -35,8 +35,8 @@ const props = defineProps({
 <style lang="scss" scoped>
 @import '@/assets/mixins.scss';
 
-$mainColor: #f6b352;
-$secondaryColor: #1f2124;
+$mainColor: #fbe6c2;
+$secondaryColor: #181823;
 
 #poems {
   background-color: $secondaryColor;
@@ -45,7 +45,7 @@ $secondaryColor: #1f2124;
   margin: 0 1rem;
 
   .poem {
-    color: $mainColor;
+    color: rgba($color: $mainColor, $alpha: .8);
     text-decoration: none;
     font-size: 1.1rem;
 

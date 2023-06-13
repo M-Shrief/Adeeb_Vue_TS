@@ -42,13 +42,13 @@ defineEmits(['print']);
 <style lang="scss" scoped>
 @import '@/assets/mixins.scss';
 
-$mainColor: #f6b352;
-$secondaryColor: #1f2124;
+$mainColor: #fbe6c2;
+$secondaryColor: #181823;
 
 .title {
   text-align: center;
   background-color: $secondaryColor;
-  color: $mainColor;
+  color: rgba($color: $mainColor, $alpha: .8);
   padding: 0.3rem;
   margin: 1rem 0.3rem 0;
   box-shadow: 0 5px 10px rgba(0, 0, 0, 0.4);
@@ -89,7 +89,7 @@ $secondaryColor: #1f2124;
   margin: 0.3rem;
   border-radius: 1.5rem;
   background: $secondaryColor;
-  color: $mainColor;
+  color: rgba($color: $mainColor, $alpha: .8);
 
   @include mQ($breakpoint-md) {
     padding: 0.2rem;

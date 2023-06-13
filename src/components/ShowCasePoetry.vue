@@ -50,9 +50,6 @@ defineEmits(['print']);
 $mainColor: #2c3e50;
 $secondaryColor: #fbe6c2;
 
-$mainColor: #fbe6c2;
-$secondaryColor: #181823;
-
 .title {
   text-align: center;
   background-color: $secondaryColor;

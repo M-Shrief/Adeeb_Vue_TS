@@ -40,7 +40,7 @@ function removePrint(print: Print) {
 @import '@/assets/mixins.scss';
 
 $mainColor: #fbe6c2;
-$secondaryColor: #2c3e50;
+$secondaryColor: #181D23;
 
 #selected-prints {
   position: fixed;

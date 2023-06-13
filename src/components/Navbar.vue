@@ -17,17 +17,7 @@
       <router-link to="/partners" class="nav-item" active-class="active" v-else>كن
         شريكاً</router-link>
 
-      <!-- <div class="dropdown">
-        <span class="partner-name">{{ partner?.name }}</span>
-        <img class="partner-img" src="../../public/icons8-account-24.png"
-          alt="Account">
-        <div class="dropdown-content">
-          <router-link to="" @click="logout"
-            active-class="active">الخروج</router-link>
-          <router-link to="" @click="logout"
-            active-class="active">الاعدادات</router-link>
-        </div>
-      </div> -->
+
     </div>
   </nav>
 </template>

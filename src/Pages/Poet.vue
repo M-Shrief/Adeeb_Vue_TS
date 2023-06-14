@@ -79,8 +79,8 @@ function addPrint(print: Print) {
 }
 
 .poems-title {
-  background-color: #f6b352;
-  color: #1f2124;
+  background-color: #fbe6c2;
+  color: #181823;
   text-align: center;
   padding: 0.3rem;
   border-radius: 1.5rem;

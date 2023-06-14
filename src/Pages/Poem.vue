@@ -10,8 +10,9 @@
           <h2>قصائد اخري</h2>
         </ShowCasePoems>
       </section>
+      <!-- make print the same interface like chosenVerses -->
       <ShowCasePoem :verses="getPoem.verses"
-        @print="(poemVerse: Verse) => addPrint({ poem: getPoem._id, verses: [{ ...poemVerse }] })" />
+        @print="(poemVerse: Verse) => addPrint({ poem: getPoem._id, verses: [poemVerse] })" />
     </div>
     <SelectedPrints />
   </main>
@@ -75,7 +76,7 @@ function addPrint(print: Print) {
   }
 
   h2 {
-    color: #f6b352;
+    color: #fbe6c2;
     text-align: center;
 
     @include mQ($breakpoint-lg) {

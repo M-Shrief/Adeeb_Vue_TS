@@ -1,7 +1,7 @@
 <template>
   <section id="chosen-verses">
     <h2 class="title">مختارات شعرية</h2>
-    <div :class="grid">
+    <div :class="routeName == 'main' ? 'grid-main' : 'grid-poet'">
       <div v-for="chosenVerse in chosenVerses" :key="chosenVerse._id"
         class="poetry-item">
         <div v-for="verse in chosenVerse.verses" :key="verse._id"
@@ -10,7 +10,7 @@
           <p class="sec" dir="ltr">{{ verse.sec }}</p>
         </div>
         <router-link :to="'/poem/' + chosenVerse.poem" class="details">{{
-          route.name == 'poet'
+          routeName == 'poet'
           ? 'القصيدة الكاملة'
           : chosenVerse.poet.name + ' - القصيدة الكاملة'
         }}</router-link>
@@ -25,18 +25,15 @@
 </template>
 
 <script lang="ts" setup>
-import { useRoute } from 'vue-router';
 // types
 import type { ChosenVerse } from '@/stores/__types__';
-
-const route = useRoute();
 
 defineProps({
   chosenVerses: {
     type: Array<ChosenVerse>,
     required: true,
   },
-  grid: {
+  routeName: {
     type: String,
     required: false,
   },
@@ -46,9 +43,10 @@ defineEmits(['print']);
 
 <style lang="scss" scoped>
 @import '@/assets/mixins.scss';
+// @import 'open-props/normalize';
 
-$mainColor: #2c3e50;
-$secondaryColor: #fbe6c2;
+$mainColor: var(--text1-dark);
+$secondaryColor: var(--surface2-dark);
 
 .title {
   text-align: center;
@@ -59,6 +57,8 @@ $secondaryColor: #fbe6c2;
   box-shadow: 0 5px 10px rgba(0, 0, 0, 0.4);
   border: 1px solid $mainColor;
   border-radius: 1.5rem;
+  font-size: 1.5rem;
+  font-weight: 600;
 
   @include mQ($breakpoint-lg) {
     padding: 0.3rem;
@@ -104,7 +104,7 @@ $secondaryColor: #fbe6c2;
   padding: 0.3rem;
   padding-bottom: 1.5rem;
   margin: 0.5rem;
-  border: 1px solid $mainColor;
+  // border: 1px solid $mainColor;
   background: $secondaryColor;
   color: $mainColor;
 
@@ -151,10 +151,10 @@ $secondaryColor: #fbe6c2;
     }
   }
 
-  .one-verse {
-    font-size: 1.1rem;
+  .verse {
+    font-size: 1rem;
     font-weight: 600;
-    margin-top: 3rem;
+    margin: 1rem 0;
 
     .first {
       margin-right: 0.4rem;
@@ -165,45 +165,76 @@ $secondaryColor: #fbe6c2;
     }
 
     @include mQ($breakpoint-lg) {
-      font-size: 0.95rem;
+      font-size: 0.9rem;
       margin-top: 1.2rem;
     }
 
     @include mQ($breakpoint-md) {
-      font-size: 0.9rem;
+      font-size: 0.8rem;
       margin-top: 1rem;
     }
 
     @include mQ($breakpoint-sm) {
-      font-size: 0.8rem;
+      font-size: 0.7rem;
       margin-top: 0.5rem;
     }
   }
 
-  .two-verse {
-    font-size: 1rem;
-    font-weight: 600;
 
-    .first {
-      margin-right: 0.4rem;
-    }
+  // .one-verse {
+  //   font-size: 1.1rem;
+  //   font-weight: 600;
+  //   margin-top: 1rem;
 
-    .sec {
-      margin-left: 0.4rem;
-    }
+  //   .first {
+  //     margin-right: 0.4rem;
+  //   }
 
-    @include mQ($breakpoint-lg) {
-      font-size: 0.95rem;
-    }
+  //   .sec {
+  //     margin-left: 0.4rem;
+  //   }
 
-    @include mQ($breakpoint-md) {
-      font-size: 0.8rem;
-    }
+  //   @include mQ($breakpoint-lg) {
+  //     font-size: 0.95rem;
+  //     margin-top: 1.2rem;
+  //   }
 
-    @include mQ($breakpoint-sm) {
-      font-size: 0.8rem;
-    }
-  }
+  //   @include mQ($breakpoint-md) {
+  //     font-size: 0.9rem;
+  //     margin-top: 1rem;
+  //   }
+
+  //   @include mQ($breakpoint-sm) {
+  //     font-size: 0.8rem;
+  //     margin-top: 0.5rem;
+  //   }
+  // }
+
+  // .two-verse {
+  //   font-size: 1rem;
+  //   font-weight: 600;
+  //   margin-bottom: 1rem;
+
+  //   .first {
+  //     margin-right: 0.4rem;
+  //   }
+
+  //   .sec {
+  //     margin-left: 0.4rem;
+  //   }
+
+  //   @include mQ($breakpoint-lg) {
+  //     font-size: 0.95rem;
+  //   }
+
+  //   @include mQ($breakpoint-md) {
+  //     font-size: 0.8rem;
+  //   }
+
+  //   @include mQ($breakpoint-sm) {
+  //     font-size: 0.8rem;
+  //   }
+  // }
 
   .print-button {
     @include add-print-btn;

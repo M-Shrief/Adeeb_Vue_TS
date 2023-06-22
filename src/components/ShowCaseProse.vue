@@ -1,11 +1,11 @@
 <template>
   <section id="proses">
     <h2 class="title">مختارات نثرية</h2>
-    <div :class="grid">
+    <div :class="routeName == 'poet' ? 'grid-poet' : ''">
       <div v-for="prose in proses" :key="prose._id" class="prose-item">
         <p class="qoute">{{ prose.qoute }}</p>
         <div class="justify">
-          <router-link v-if="!(route.name === 'poet')"
+          <router-link v-if="!(routeName === 'poet')"
             :to="'/poet/' + prose.poet._id" class="details">{{
               prose.poet.name
             }}</router-link>
@@ -20,35 +20,36 @@
 </template>
 
 <script lang="ts" setup>
-import { useRoute } from 'vue-router';
 // types
 import type { Prose } from '@/stores/__types__';
-
-const route = useRoute();
 
 defineProps({
   proses: {
     type: Array<Prose>,
     required: true,
   },
-  grid: {
+  routeName: {
     type: String,
-    required: false,
-  },
+    required: false
+  }
 });
 defineEmits(['print']);
 </script>
 
 <style lang="scss" scoped>
 @import '@/assets/mixins.scss';
+@import '@/assets/openProps.css';
 
-$mainColor: #fbe6c2;
-$secondaryColor: #181823;
+$mainColor: var(--text1-dark);
+$secondaryColor: var(--surface3-dark);
+// $mainColor: #fbe6c2;
+// $secondaryColor: #181823;
 
 .title {
   text-align: center;
   background-color: $secondaryColor;
-  color: rgba($color: $mainColor, $alpha: .8);
+  // color: rgba($color: $mainColor, $alpha: .8);
+  color: $mainColor;
   padding: 0.3rem;
   margin: 1rem 0.3rem 0;
   box-shadow: 0 5px 10px rgba(0, 0, 0, 0.4);
@@ -89,7 +90,8 @@ $secondaryColor: #181823;
   margin: 0.3rem;
   border-radius: 1.5rem;
   background: $secondaryColor;
-  color: rgba($color: $mainColor, $alpha: .8);
+  // color: rgba($color: $mainColor, $alpha: 1);
+  color: $mainColor;
 
   @include mQ($breakpoint-md) {
     padding: 0.2rem;

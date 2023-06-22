@@ -8,7 +8,9 @@
     <div :class="grid">
       <router-link v-for="poem in props.poems" :key="poem._id"
         :to="`/poem/${poem._id}`" class="poem" replace>
+        <!-- for Main & Poem pages -->
         <p v-if="poem.poet">{{ poem.intro }} - {{ poem.poet.name }}</p>
+        <!-- for Poet's Page -->
         <p v-else>{{ poem.intro }}..</p>
       </router-link>
     </div>
@@ -35,17 +37,22 @@ const props = defineProps({
 <style lang="scss" scoped>
 @import '@/assets/mixins.scss';
 
-$mainColor: #fbe6c2;
-$secondaryColor: #181823;
+// $mainColor: #fbe6c2;
+// $secondaryColor: #181823;
+
+$mainColor: var(--text1-dark);
+$secondaryColor: var(--surface3-dark);
+
 
 #poems {
-  background-color: $secondaryColor;
   padding: 0.3rem;
   border-radius: 2rem;
   margin: 0 1rem;
+  background-color: $secondaryColor;
 
   .poem {
-    color: rgba($color: $mainColor, $alpha: .8);
+    // color: rgba($color: $mainColor, $alpha: .8);
+    color: $mainColor;
     text-decoration: none;
     font-size: 1.1rem;
 

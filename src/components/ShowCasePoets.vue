@@ -1,7 +1,7 @@
 <template>
   <section id="poets">
     <slot />
-    <div :class="grid">
+    <div class="grid">
       <router-link v-for="poet in poets" :key="poet._id" :to="`/poet/${poet._id}`"
         class="poet" replace>
         <p>{{ poet.name }}</p>
@@ -18,11 +18,6 @@ defineProps({
     type: Array<Poet['details']>,
     required: true,
   },
-
-  grid: {
-    type: String,
-    required: false,
-  },
 });
 </script>
 
@@ -31,6 +26,9 @@ defineProps({
 
 $mainColor: #2c3e50;
 $secondaryColor: #fbe6c2;
+
+// $mainColor: var(--text1-dark);
+// $secondaryColor: var(--surface2-dark);
 
 #poets {
   background-color: $secondaryColor;

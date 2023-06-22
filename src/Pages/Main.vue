@@ -8,14 +8,14 @@
         <h2 class="poems-title">القصائد</h2>
       </ShowCasePoems>
 
-      <ShowCasePoets :poets="getPoets" :grid="'grid'">
+      <ShowCasePoets :poets="getPoets">
         <h2 class="poets-title">الشعراء</h2>
       </ShowCasePoets>
 
-      <ShowCasePoetry :chosenVerses="getChosenVerses" :grid="'grid-main'"
+      <ShowCasePoetry :chosenVerses="getChosenVerses" :routeName="'main'"
         @print="(print: Print) => addPrint(print)" />
 
-      <ShowCaseProse :proses="getProses"
+      <ShowCaseProse :proses="getProses" :routeName="'main'"
         @print="(print: Print) => addPrint(print)" />
     </div>
     <SelectedPrints />
@@ -23,6 +23,7 @@
 </template>
 <script lang="ts" setup>
 import { onMounted, computed } from 'vue';
+// import { useRoute } from 'vue-router'
 // stores
 import { usePoemStore } from '@/stores/poems';
 import { usePoetStore } from '@/stores/poets';
@@ -103,13 +104,17 @@ p {
 }
 
 .poems-title {
-  background-color: #fbe6c2;
-  color: #181823;
+  // background-color: #fbe6c2;
+  // color: #181823;
+  background-color: var(--text1-dark);
+  color: var(--surface3-dark);
 }
 
 .poets-title {
-  background-color: #2c3e50;
-  color: #fbe6c2;
+  // background-color: #2c3e50;
+  // color: #fbe6c2;
+  background-color: var(--text1-dark);
+  color: var(--surface2-dark);
 }
 
 @include mQ($breakpoint-lg) {

@@ -11,10 +11,10 @@
       </div>
 
       <!-- Add Pagination for poetry and proses -->
-      <ShowCasePoetry :chosen-verses="getPoet.authoredChosenVerses" dir="rtl"
-        :grid="'grid-poet'" @print="(print: Print) => addPrint(print)" />
+      <ShowCasePoetry :chosen-verses="getPoet.authoredChosenVerses"
+        :route-name="'poet'" @print="(print: Print) => addPrint(print)" />
 
-      <ShowCaseProse :proses="getPoet.authoredProses" :grid="'grid-poet'"
+      <ShowCaseProse :proses="getPoet.authoredProses" :route-name="'poet'"
         @print="(print: Print) => addPrint(print)" />
     </div>
     <SelectedPrints />

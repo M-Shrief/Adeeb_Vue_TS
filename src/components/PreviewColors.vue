@@ -4,7 +4,7 @@
       <slot />
     </p>
     <button v-for="color in colors" :key="color" :style="{ background: color }"
-      class="color" @click="$emit('toColor', color)" />
+      class="color" @click="$emit('color', color)" />
   </div>
 </template>
 
@@ -13,7 +13,7 @@ defineProps({
   colors: Array<string>,
 });
 
-defineEmits(['toColor']);
+defineEmits(['color']);
 </script>
 
 <style lang="scss" scoped>

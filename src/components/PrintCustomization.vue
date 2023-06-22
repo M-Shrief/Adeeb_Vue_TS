@@ -9,10 +9,10 @@
       </select>
     </div>
     <PreviewColors :colors="colors"
-      @to-color="(color: string) => $emit('fontColor', color)">الخط:
+      @color="(color: string) => $emit('fontColor', color)">الخط:
     </PreviewColors>
     <PreviewColors :colors="colors"
-      @to-color="(color: string) => $emit('backgroundColor', color)">الخلفية:
+      @color="(color: string) => $emit('backgroundColor', color)">الخلفية:
     </PreviewColors>
   </div>
 </template>

@@ -1,7 +1,7 @@
 import ShowCasePoem from './ShowCasePoem.vue';
 
-describe('<ShowCasePoem />', () => {
-  it('renders', () => {
+describe('Renders poem properly', () => {
+  it('it render the verse properly and emit an event for print the verse when clicked', () => {
     // see: https://on.cypress.io/mounting-vue
     const onPrintSpy = cy.spy().as('onPrintSpy');
     cy.mount(ShowCasePoem, {

@@ -1,7 +1,7 @@
 import ShowCasePoems from './ShowCasePoems.vue';
 
-describe('<ShowCasePoems />', () => {
-  it('renders', () => {
+describe("render a group of poems' intros", () => {
+  it('two samples of poems intros, one with poetInfo and the other without it', () => {
     // see: https://on.cypress.io/mounting-vue
     cy.mount(ShowCasePoems, {
       props: {
@@ -31,6 +31,12 @@ describe('<ShowCasePoems />', () => {
     cy.get('.poem p').should(
       'contain',
       'حُكمُ المَنِيَّةِ في البَرِيَّةِ جاري..'
+    );
+
+    cy.get('.poem', { multiple: true }).should(
+      'have.attr',
+      'to',
+      '/poem/6371eb6690c2ad965846c221'
     );
   });
 });

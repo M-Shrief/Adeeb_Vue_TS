@@ -1,7 +1,7 @@
 import PreviewColors from './PreviewColors.vue';
 
-describe('<PreviewColors />', () => {
-  it('renders', () => {
+describe('Renders colors', () => {
+  it('render a black color', () => {
     // see: https://on.cypress.io/mounting-vue
     const onColorSpy = cy.spy().as('onColorSpy');
     cy.mount(PreviewColors, {
@@ -12,7 +12,7 @@ describe('<PreviewColors />', () => {
     });
 
     cy.get('div>.color').click();
-    cy.get('@onColorSpy').should('have.been.calledWith', '#000');
     cy.get('@onColorSpy').should('be.calledOnce');
+    cy.get('@onColorSpy').should('have.been.calledWith', '#000');
   });
 });

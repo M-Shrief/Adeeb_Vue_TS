@@ -1,10 +1,10 @@
 <template>
   <div id="selected-prints" dir="rtl">
-    <p><router-link :to="partner ? '/partners/ordering' : '/ordering'"
+    <p><router-link :to="isPartner ? '/partners/ordering' : '/ordering'"
         class="title">للطباعة</router-link> </p>
     <ul class="prints">
-      <li class="prints-item" v-for="print in getPrints" :key="print._id"
-        @dblclick="removePrint(print)">
+      <li class="prints-item" v-for="print in (prints as Print[])"
+        :key="print._id" @dblclick="$emit('remove', print)">
         <!-- poetry -->
         <p v-if="print.verses">{{ print.verses[0].first }}..</p>
         <!-- prose -->
@@ -15,32 +15,29 @@
 </template>
 
 <script lang="ts" setup>
-import { computed } from 'vue';
-// stores
-import { usePrintsStore } from '@/stores/prints';
-import { usePartnerStore } from '@/stores/partners';
 // types
 import type { Print } from '@/stores/__types__';
 
-const partnerStore = usePartnerStore();
-const partner = computed(() => {
-  return partnerStore.getPartner;
+defineProps({
+  prints: {
+    types: [] as Print[],
+    required: true
+  },
+  isPartner: {
+    type: Boolean,
+    required: true
+  }
 })
 
-const printsStore = usePrintsStore();
-const getPrints = computed(() => {
-  return printsStore.getPrints;
-});
-function removePrint(print: Print) {
-  return printsStore.removePrint(print);
-}
 </script>
 
 <style lang="scss" scoped>
 @import '@/assets/mixins.scss';
 
-$mainColor: #fbe6c2;
-$secondaryColor: #181D23;
+// $mainColor: #fbe6c2;
+// $secondaryColor: #181D23;
+$mainColor: var(--text1-dark);
+$secondaryColor: var(--surface4-dark);
 
 #selected-prints {
   position: fixed;
@@ -67,7 +64,8 @@ $secondaryColor: #181D23;
   .title {
     margin-left: 0.3rem;
     font-weight: 600;
-    color: rgba($color: $mainColor, $alpha: 0.8);
+    // color: rgba($color: $mainColor, $alpha: 0.8);
+    color: $mainColor;
     text-decoration: none;
 
     &:hover {
@@ -98,7 +96,8 @@ $secondaryColor: #181D23;
     .prints-item {
       padding: 0.2rem;
       margin-left: 0.3rem;
-      background: rgba($color: $mainColor, $alpha: 0.8);
+      // background: rgba($color: $mainColor, $alpha: 0.8);
+      background: $mainColor;
       color: $secondaryColor;
       cursor: pointer;
 

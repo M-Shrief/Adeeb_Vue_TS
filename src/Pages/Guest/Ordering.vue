@@ -44,7 +44,8 @@
           </div>
         </div>
       </div>
-      <ShowCasePrints @print="(print: Print) => preview = print" />
+      <ShowCasePrints :prints="getPrints" @remove="(print) => removePrint(print)"
+        @print="(print: Print) => preview = print" />
     </section>
   </main>
 </template>
@@ -52,6 +53,7 @@
 <script lang="ts" setup>
 import { ref, computed } from 'vue';
 // stores
+import { usePrintsStore } from "@/stores/prints";
 import { useChosenVerseStore } from "@/stores/chosenVerses";
 import { useProseStore } from "@/stores/proses";
 import { useOrderStore } from '@/stores/orders';
@@ -60,10 +62,18 @@ import PrintCustomization from '@/components/PrintCustomization.vue';
 import OrderForm from "@/components/OrderForm.vue";
 import ShowCasePrints from '@/components/ShowCasePrints.vue';
 // Types
-import type { Print } from '@/stores/__types__'
+import type { Print } from '@/stores/__types__';
 
 let preview = ref({} as Print);
 let randomPrint = ref();
+
+const printsStore = usePrintsStore();
+const getPrints = computed(() => {
+  return printsStore.getPrints;
+})
+function removePrint(print: Print) {
+  return printsStore.removePrint(print);
+}
 
 const orderStore = useOrderStore();
 

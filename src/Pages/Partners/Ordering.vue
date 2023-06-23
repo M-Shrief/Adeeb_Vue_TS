@@ -21,6 +21,7 @@
     </PrintCustomization>
 
     <div class="preview-prints">
+      <!-- use src/components/ShowCasePrint instead, only need addition is to make styles conditional-->
       <div v-for="print in getPrints" :key="print._id" class="print-item"
         :style="{ color: fontColor, background: backgroundColor, border: `1px solid ${fontColor}` }">
         <div v-if="print.verses" v-for="verse in print.verses" :key="verse._id"

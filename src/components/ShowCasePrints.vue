@@ -1,5 +1,5 @@
 <template>
-  <div v-for="print in getPrints" :key="print._id" class="print-item">
+  <div v-for="print in prints" :key="print._id" class="print-item">
     <!-- Assigning poetry(2verses) || poetry(1verse) or prose -->
     <div @click="$emit('print', print)">
       <!-- if selected from ShowCasePoetry -->
@@ -13,25 +13,24 @@
         <p>{{ print.qoute }}</p>
       </div>
     </div>
-    <button @click="removePrint(print)">X</button>
+    <!-- <button @click="removePrint(print)">X</button> -->
+    <button @click="$emit('remove', print)">X</button>
   </div>
 </template>
 
 <script lang="ts" setup>
-import { computed } from 'vue';
-// stores
-import { usePrintsStore } from "@/stores/prints";
 // types
 import type { Print } from '@/stores/__types__';
 
-const printsStore = usePrintsStore();
-const getPrints = computed(() => {
-  return printsStore.getPrints;
+defineProps({
+  prints: {
+    type: Array<Print>,
+    required: true
+  },
 })
-function removePrint(print: Print) {
-  return printsStore.removePrint(print);
-}
-defineEmits(['print'])
+
+
+defineEmits(['print', 'remove'])
 </script>
 
 <style lang="scss" scoped>

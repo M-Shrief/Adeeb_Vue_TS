@@ -47,7 +47,7 @@ export interface Prose {
 }
 
 export interface Print {
-  _id?: string;
+  _id: string;
   poem?: string;
   verses?: Verse[];
   qoute?: string;
@@ -85,6 +85,6 @@ export interface Order {
   address: string;
   reviewed?: boolean;
   completed?: boolean;
-  createdAt: string;
+  createdAt?: string;
   updatedAt?: string;
 }

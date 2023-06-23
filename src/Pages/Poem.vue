@@ -12,18 +12,20 @@
       </section>
       <!-- make print the same interface like chosenVerses -->
       <ShowCasePoem :verses="getPoem.verses"
-        @print="(poemVerse: Verse) => addPrint({ poem: getPoem._id, verses: [poemVerse] })" />
+        @print="(poemVerse: Verse) => addPrint({ poem: getPoem._id, ...poemVerse })" />
     </div>
-    <SelectedPrints />
+    <SelectedPrints :prints="getPrints" @remove="(print) => removePrint(print)"
+      :is-partner="isPartner" />
   </main>
 </template>
 
 <script lang="ts" setup>
-import { onBeforeMount, computed, watch } from 'vue';
+import { onBeforeMount, computed, watch, inject } from 'vue';
 import { useRoute } from 'vue-router';
 // stores
 import { usePoemStore } from '@/stores/poems';
 import { usePrintsStore } from '@/stores/prints';
+import { usePartnerStore } from '@/stores/partners';
 // components
 import ShowCasePoems from '@/components/ShowCasePoems.vue';
 import ShowCasePoem from '@/components/ShowCasePoem.vue';
@@ -54,10 +56,24 @@ onBeforeMount(() => {
   poemStore.fetchPoemAndSuggestedPoems(route.params.id);
 });
 
+// Should use Provide/Inject
 const printsStore = usePrintsStore();
+const getPrints = computed(() => {
+  return printsStore.getPrints;
+});
+
 function addPrint(print: Print) {
   return printsStore.addPrint(print);
 }
+
+function removePrint(print: Print) {
+  return printsStore.removePrint(print);
+}
+
+const partnerStore = usePartnerStore();
+const isPartner = computed(() => {
+  return partnerStore.getPartner ? true : false;
+})
 </script>
 
 

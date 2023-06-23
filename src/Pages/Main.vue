@@ -18,11 +18,12 @@
       <ShowCaseProse :proses="getProses" :routeName="'main'"
         @print="(print: Print) => addPrint(print)" />
     </div>
-    <SelectedPrints />
+    <SelectedPrints :prints="getPrints" @remove="(print) => removePrint(print)"
+      :is-partner="isPartner" />
   </main>
 </template>
 <script lang="ts" setup>
-import { onMounted, computed } from 'vue';
+import { onMounted, computed, inject } from 'vue';
 // import { useRoute } from 'vue-router'
 // stores
 import { usePoemStore } from '@/stores/poems';
@@ -30,6 +31,7 @@ import { usePoetStore } from '@/stores/poets';
 import { useChosenVerseStore } from '@/stores/chosenVerses';
 import { useProseStore } from '@/stores/proses';
 import { usePrintsStore } from '@/stores/prints';
+import { usePartnerStore } from '@/stores/partners';
 // Types
 import type { Print } from '@/stores/__types__';
 // components
@@ -65,11 +67,25 @@ onMounted(() => {
   if (!getChosenVerses.value.length) chosenVersesStore.fetchChosenVerses();
   if (!getProses.value.length) proseStore.fetchProses();
 });
+// Should use Provide/Inject
+const printsStore = usePrintsStore();
+const getPrints = computed(() => {
+  return printsStore.getPrints;
+});
 
-const printStore = usePrintsStore();
 function addPrint(print: Print) {
-  return printStore.addPrint(print);
+  return printsStore.addPrint(print);
 }
+
+function removePrint(print: Print) {
+  return printsStore.removePrint(print);
+}
+
+const partnerStore = usePartnerStore();
+const isPartner = computed(() => {
+  return partnerStore.getPartner ? true : false;
+})
+// const isPartner = inject('isPartner') as boolean
 </script>
 
 <style lang="scss" scoped>

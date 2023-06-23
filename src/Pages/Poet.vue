@@ -17,7 +17,8 @@
       <ShowCaseProse :proses="getPoet.authoredProses" :route-name="'poet'"
         @print="(print: Print) => addPrint(print)" />
     </div>
-    <SelectedPrints />
+    <SelectedPrints :prints="getPrints" @remove="(print) => removePrint(print)"
+      :is-partner="isPartner" />
   </main>
 </template>
 
@@ -27,6 +28,7 @@ import { useRoute } from 'vue-router';
 // stores
 import { usePoetStore } from "@/stores/poets";
 import { usePrintsStore } from "@/stores/prints";
+import { usePartnerStore } from '@/stores/partners';
 // types
 import type { Print } from '@/stores/__types__';
 // components
@@ -45,10 +47,25 @@ onMounted(() => {
   poetStore.fetchPoet(route.params.id);
 })
 
+// Should use Provide/Inject
 const printsStore = usePrintsStore();
+const getPrints = computed(() => {
+  return printsStore.getPrints;
+});
+
 function addPrint(print: Print) {
-  return printsStore.addPrint(print)
+  return printsStore.addPrint(print);
 }
+
+function removePrint(print: Print) {
+  return printsStore.removePrint(print);
+}
+
+const partnerStore = usePartnerStore();
+const isPartner = computed(() => {
+  return partnerStore.getPartner ? true : false;
+})
+
 </script>
 
 <style lang="scss" scoped>

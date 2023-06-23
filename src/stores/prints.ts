@@ -17,7 +17,13 @@ export const usePrintsStore = defineStore('prints', {
   },
   actions: {
     addPrint(print: Print) {
-      if (!this.getPrints.includes(print)) {
+      const printsIds = this.prints.map(
+        (printItem) =>
+          // printItem._id ? printItem._id : printItem.verses[0]._id
+          printItem._id
+      );
+      // const printId = print._id ? print._id : print.verses[0]._id;
+      if (!printsIds.includes(print._id)) {
         this.prints.push(print);
       }
     },

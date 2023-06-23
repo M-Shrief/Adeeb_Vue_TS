@@ -24,11 +24,11 @@ defineProps({
 <style lang="scss" scoped>
 @import '@/assets/mixins.scss';
 
-$mainColor: #2c3e50;
-$secondaryColor: #fbe6c2;
+// $mainColor: #2c3e50;
+// $secondaryColor: #fbe6c2;
 
-// $mainColor: var(--text1-dark);
-// $secondaryColor: var(--surface2-dark);
+$mainColor: var(--text1-dark);
+$secondaryColor: var(--surface2-dark);
 
 #poets {
   background-color: $secondaryColor;

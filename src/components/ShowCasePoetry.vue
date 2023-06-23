@@ -27,7 +27,6 @@
 <script lang="ts" setup>
 // types
 import type { ChosenVerse } from '@/stores/__types__';
-
 defineProps({
   chosenVerses: {
     type: Array<ChosenVerse>,

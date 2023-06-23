@@ -1,7 +1,7 @@
 <template>
   <section v-if="verses" dir="rtl" id="poem">
     <div v-for="verse in verses" :key="verse._id" class="verse"
-      @dblclick="$emit('print', verse)">
+      @dblclick="$emit('print', { _id: verse._id, verses: [{ first: verse.first, sec: verse.sec }] })">
       <p class="first">{{ verse.first }}</p>
       <p class="sec" dir="ltr">{{ verse.sec }}</p>
     </div>

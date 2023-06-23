@@ -9,6 +9,7 @@ describe('Renders poem properly', () => {
         onPrint: onPrintSpy,
         verses: [
           {
+            _id: '11212441',
             first: 'وَجَدتُ وَعدَكَ زوراً في مُزَوَّرَةٍ',
             sec: 'وَصَفتَ مُبتَدِئً بِالحِذقِ طاهيها',
           },
@@ -28,8 +29,13 @@ describe('Renders poem properly', () => {
     cy.get('.verse').dblclick();
     cy.get('@onPrintSpy').should('be.calledOnce');
     cy.get('@onPrintSpy').should('have.been.calledWith', {
-      first: 'وَجَدتُ وَعدَكَ زوراً في مُزَوَّرَةٍ',
-      sec: 'وَصَفتَ مُبتَدِئً بِالحِذقِ طاهيها',
+      _id: '11212441',
+      verses: [
+        {
+          first: 'وَجَدتُ وَعدَكَ زوراً في مُزَوَّرَةٍ',
+          sec: 'وَصَفتَ مُبتَدِئً بِالحِذقِ طاهيها',
+        },
+      ],
     });
   });
 });

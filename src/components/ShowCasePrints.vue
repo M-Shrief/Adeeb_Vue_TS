@@ -1,5 +1,6 @@
 <template>
-  <div v-for="print in prints" :key="print._id" class="print-item">
+  <div v-for="print in prints" :key="print._id" class="print-item"
+    :style="{ color: fontColor, background: backgroundColor, border: `1px solid ${fontColor}` }">
     <!-- Assigning poetry(2verses) || poetry(1verse) or prose -->
     <div @click="$emit('print', print)">
       <!-- if selected from ShowCasePoetry -->
@@ -14,20 +15,29 @@
       </div>
     </div>
     <!-- <button @click="removePrint(print)">X</button> -->
-    <button @click="$emit('remove', print)">X</button>
+    <button :style="{ color: backgroundColor, background: fontColor }"
+      @click="$emit('remove', print)">X</button>
   </div>
 </template>
 
 <script lang="ts" setup>
+import { ref, type ComputedRef } from 'vue';
 // types
 import type { Print } from '@/stores/__types__';
 
-defineProps({
+const props = defineProps({
   prints: {
     type: Array<Print>,
     required: true
   },
+  colors: {
+    type: Array<ComputedRef<string>>,
+    required: false
+  }
 })
+
+let fontColor = ref<ComputedRef<string> | string>(props.colors ? props.colors[0] : '#f6b352');
+let backgroundColor = ref<ComputedRef<string> | string>(props.colors ? props.colors[1] : '#1f2124');
 
 
 defineEmits(['print', 'remove'])
@@ -36,14 +46,8 @@ defineEmits(['print', 'remove'])
 <style lang="scss" scoped>
 @import '@/assets/mixins.scss';
 
-$mainColor: #f6b352;
-$secondaryColor: #1f2124;
-
 .print-item {
   position: relative;
-  color: $mainColor;
-  background-color: $secondaryColor;
-  border: 1px solid $mainColor;
   list-style: none;
   border-radius: 5px;
   padding: 0.5rem;
@@ -51,7 +55,8 @@ $secondaryColor: #1f2124;
 
   .verse,
   .qoute {
-    font-size: 0.8rem;
+    font-size: 1rem;
+    font-weight: 400;
   }
 
   .qoute {
@@ -81,8 +86,6 @@ $secondaryColor: #1f2124;
     position: absolute;
     left: 0.2rem;
     top: 0.2rem;
-    background: $mainColor ;
-    color: $secondaryColor;
     padding: 0.4rem;
     border: none;
     border-radius: 0.7rem;

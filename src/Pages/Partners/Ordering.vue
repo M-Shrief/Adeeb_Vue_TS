@@ -22,19 +22,9 @@
 
     <div class="preview-prints">
       <!-- use src/components/ShowCasePrint instead, only need addition is to make styles conditional-->
-      <div v-for="print in getPrints" :key="print._id" class="print-item"
-        :style="{ color: fontColor, background: backgroundColor, border: `1px solid ${fontColor}` }">
-        <div v-if="print.verses" v-for="verse in print.verses" :key="verse._id"
-          class="verse">
-          <p>{{ verse.first }}</p>
-          <p dir="ltr">{{ verse.sec }}</p>
-        </div>
-        <div v-else-if="print.qoute" class="qoute">
-          <p>{{ print.qoute }}</p>
-        </div>
-        <button :style="{ color: backgroundColor, background: fontColor }"
-          @click="removePrint(print)">X</button>
-      </div>
+      <ShowCasePrints :prints="getPrints"
+        :colors="[computed(() => fontColor as string), computed(() => backgroundColor as string)]"
+        @remove="(print) => removePrint(print)" />
     </div>
     <button @click="addProductGroup(getPrints, [fontColor, backgroundColor])">
       اضافة الطلبات</button>
@@ -46,6 +36,7 @@
 import { computed, ref } from 'vue'
 // components
 import PrintCustomization from '@/components/PrintCustomization.vue';
+import ShowCasePrints from '@/components/ShowCasePrints.vue';
 import OrderForm from '@/components/OrderForm.vue';
 // stores
 import { useChosenVerseStore } from "@/stores/chosenVerses";

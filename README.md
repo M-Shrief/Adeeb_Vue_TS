@@ -4,7 +4,8 @@
 
 - _./assets_ file for our base.css and mixins.scss
 
-- _./components_ file for our contained and reusable logic across the app.
+- _./components_ file for our reusable components across the app, and a
+  component test for each one of them with cypress.
 
 - _./pages_ separated pages to separate logic groups from each other, and map
   each logic group to specific route.
@@ -15,3 +16,9 @@
   leveraging its reactivity.
 
 - _App.vue & main.ts_ files to bootstrap our SPA. g
+
+### Currently Working on
+
+- Making better component tests and follow best practices.
+- Handling authentication cookies and tokens better.
+- using OpenProps for styling, and adding Dark/light modes.

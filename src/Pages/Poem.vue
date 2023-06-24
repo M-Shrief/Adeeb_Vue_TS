@@ -20,7 +20,7 @@
 </template>
 
 <script lang="ts" setup>
-import { onBeforeMount, computed, watch, inject } from 'vue';
+import { onBeforeMount, computed, watch } from 'vue';
 import { useRoute } from 'vue-router';
 // stores
 import { usePoemStore } from '@/stores/poems';

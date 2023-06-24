@@ -61,19 +61,22 @@ aside {
 }
 
 .direct-Order {
+  $mainColor: var(--text1);
+  $secondaryColor: var(--surface2);
   position: relative;
   right: 45%;
   text-decoration: none;
   padding: 0.3rem 0.5rem;
   margin: 0.4rem;
-  color: rgba($color: #FBE6C2, $alpha: 0.8);
-  background-color: #1f2124;
+  background-color: $mainColor;
+  color: $secondaryColor;
+  opacity: 85%;
   font-size: 1.2rem;
   text-decoration: none;
   border-radius: 1rem;
 
   &:hover {
-    color: #FBE6C2;
+    opacity: 100%;
   }
 
   @include mQ($breakpoint-sm) {

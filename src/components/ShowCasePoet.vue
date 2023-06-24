@@ -19,8 +19,8 @@ defineProps({
 <style lang="scss" scoped>
 @import '@/assets/mixins.scss';
 
-$mainColor: #004e64;
-$secondaryColor: #FBE6C2;
+$mainColor: var(--text1);
+$secondaryColor: var(--surface3);
 
 .poet {
   position: relative;
@@ -28,7 +28,6 @@ $secondaryColor: #FBE6C2;
   font-weight: 500;
   background: $secondaryColor;
   box-shadow: 0 5px 10px rgba($color: $mainColor, $alpha: .4);
-  border: 1px solid $mainColor;
   border-radius: 1rem;
   padding: 0.8rem;
   margin: 0.7rem 0.3rem;

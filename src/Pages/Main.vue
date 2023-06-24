@@ -23,8 +23,7 @@
   </main>
 </template>
 <script lang="ts" setup>
-import { onMounted, computed, inject } from 'vue';
-// import { useRoute } from 'vue-router'
+import { onMounted, computed } from 'vue';
 // stores
 import { usePoemStore } from '@/stores/poems';
 import { usePoetStore } from '@/stores/poets';
@@ -120,17 +119,13 @@ p {
 }
 
 .poems-title {
-  // background-color: #fbe6c2;
-  // color: #181823;
-  background-color: var(--text1-dark);
-  color: var(--surface3-dark);
+  background-color: var(--text1);
+  color: var(--surface3);
 }
 
 .poets-title {
-  // background-color: #2c3e50;
-  // color: #fbe6c2;
-  background-color: var(--text1-dark);
-  color: var(--surface2-dark);
+  background-color: var(--text1);
+  color: var(--surface2);
 }
 
 @include mQ($breakpoint-lg) {

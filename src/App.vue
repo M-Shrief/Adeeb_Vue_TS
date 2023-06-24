@@ -19,7 +19,7 @@ const HttpPopUp = defineAsyncComponent(() => import('./components/NotificationsC
   <footer>
     <p>
       Copyright &copy; 2022 |
-      <a href="#" title="Github profile" class="profile">M. Shrief</a>
+      <a href="#" title="Github profile" id="profile">M. Shrief</a>
     </p>
   </footer>
 </template>
@@ -34,8 +34,8 @@ footer {
   font-size: 1.2rem;
   font-weight: 700;
 
-  .profile {
-    color: #004e64;
+  #profile {
+    color: #f6b352;
     text-decoration: none;
   }
 

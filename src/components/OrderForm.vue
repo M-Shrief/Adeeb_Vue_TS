@@ -159,8 +159,8 @@ async function confirmOrder(values: any) {
 <style lang="scss" scoped>
 @import '@/assets/mixins.scss';
 
-$mainColor: #e0f2e9;
-$secondaryColor: #1f2124;
+$mainColor: var(--text1);
+$secondaryColor: var(--surface2);
 
 form {
   background-color: $secondaryColor;
@@ -180,15 +180,18 @@ form {
       margin-right: 0.2rem;
       margin-top: 0.4rem;
 
-      input[type='text'] {
-        background: rgba($color: $mainColor, $alpha: 1);
+      #name,
+      #phone,
+      #address {
+        background: $mainColor;
         box-shadow: 0 5px 5px rgba(0, 0, 0, 0.5);
         border: none;
         border-radius: 1rem;
 
       }
 
-      select {
+      #address {
+        color: $secondaryColor;
         background-color: $mainColor;
         border: 1px solid $secondaryColor;
       }
@@ -203,7 +206,9 @@ form {
       padding: 0.1rem;
       margin-top: 0.1rem;
 
-      input[type='text'] {
+      #name,
+      #phone,
+      #address {
         font-size: 0.8rem;
       }
     }
@@ -212,7 +217,9 @@ form {
       padding: 0.3rem;
       margin-top: 0.3rem;
 
-      input[type='text'] {
+      #name,
+      #phone,
+      #address {
         font-size: 0.7rem;
       }
     }
@@ -235,7 +242,7 @@ form {
       padding: 0.2rem;
       margin: 0.3rem .5rem;
       border-radius: 1.5rem;
-      border: 1px solid #fff;
+      border: 1px solid $mainColor;
 
       p {
         margin: 0 0.6rem;

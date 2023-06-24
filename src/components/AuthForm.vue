@@ -69,17 +69,17 @@ async function onSubmit(values: any) {
 </script>
 
 <style lang="scss" scoped>
-$secondaryColor: #D5DBB3;
-$mainColor: #1f2124;
+$mainColor: var(--text1);
+$secondaryColor: var(--surface2);
 
 #auth-form {
   position: relative;
   height: 40vh;
   margin: 1rem;
   padding: 1.5rem;
-  background-color: $mainColor;
+  background-color: $secondaryColor;
   border-radius: 1rem;
-  color: $secondaryColor;
+  color: $mainColor;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.33);
   transition: all 0.3s ease;
 
@@ -93,7 +93,8 @@ $mainColor: #1f2124;
     margin: 0.3rem;
 
     input {
-      background: $secondaryColor;
+      color: $secondaryColor;
+      background: $mainColor;
       box-shadow: 0 5px 5px rgba(0, 0, 0, 0.5);
       border: none;
       border-radius: 8px;
@@ -107,8 +108,8 @@ $mainColor: #1f2124;
   }
 
   button {
-    background-color: $secondaryColor;
-    color: $mainColor;
+    background-color: $mainColor;
+    color: $secondaryColor;
     border: none;
     border-radius: 1rem;
     padding: 0.5rem;

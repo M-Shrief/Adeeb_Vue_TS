@@ -96,8 +96,8 @@ const isPartner = computed(() => {
 }
 
 .poems-title {
-  background-color: #fbe6c2;
-  color: #181823;
+  background-color: var(--surface2);
+  color: var(--text1);
   text-align: center;
   padding: 0.3rem;
   border-radius: 1.5rem;

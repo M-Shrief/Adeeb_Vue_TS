@@ -38,17 +38,13 @@ defineEmits(['print']);
 
 <style lang="scss" scoped>
 @import '@/assets/mixins.scss';
-@import '@/assets/openProps.css';
 
-$mainColor: var(--text1-dark);
-$secondaryColor: var(--surface3-dark);
-// $mainColor: #fbe6c2;
-// $secondaryColor: #181823;
+$mainColor: var(--text1);
+$secondaryColor: var(--surface3);
 
 .title {
   text-align: center;
   background-color: $secondaryColor;
-  // color: rgba($color: $mainColor, $alpha: .8);
   color: $mainColor;
   padding: 0.3rem;
   margin: 1rem 0.3rem 0;
@@ -90,7 +86,6 @@ $secondaryColor: var(--surface3-dark);
   margin: 0.3rem;
   border-radius: 1.5rem;
   background: $secondaryColor;
-  // color: rgba($color: $mainColor, $alpha: 1);
   color: $mainColor;
 
   @include mQ($breakpoint-md) {

@@ -36,8 +36,8 @@ const props = defineProps({
   }
 })
 
-let fontColor = ref<ComputedRef<string> | string>(props.colors ? props.colors[0] : '#f6b352');
-let backgroundColor = ref<ComputedRef<string> | string>(props.colors ? props.colors[1] : '#1f2124');
+let fontColor = ref<ComputedRef<string> | string>(props.colors ? props.colors[0] : 'auto');
+let backgroundColor = ref<ComputedRef<string> | string>(props.colors ? props.colors[1] : 'auto');
 
 
 defineEmits(['print', 'remove'])
@@ -46,7 +46,12 @@ defineEmits(['print', 'remove'])
 <style lang="scss" scoped>
 @import '@/assets/mixins.scss';
 
+$mainColor: var(--text1);
+$secondaryColor: var(--surface2);
+
 .print-item {
+  color: $mainColor;
+  border: 1px solid $mainColor;
   position: relative;
   list-style: none;
   border-radius: 5px;
@@ -83,6 +88,8 @@ defineEmits(['print', 'remove'])
   }
 
   button {
+    color: $secondaryColor;
+    background-color: $mainColor;
     position: absolute;
     left: 0.2rem;
     top: 0.2rem;

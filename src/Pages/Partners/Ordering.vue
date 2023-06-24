@@ -13,7 +13,6 @@
         <input type="number" name="prose" id="prose" value="5" min="1" max="10">
       </div>
       <button type="submit" @click="prepareProse">إعداد</button>
-
     </div>
     <PrintCustomization :colors="colors"
       @fontColor="(color: string) => fontColor = color"
@@ -93,8 +92,8 @@ async function prepareProse() {
 @import '@/assets/mixins.scss';
 
 #prep-order {
-  $mainColor: #fff;
-  $secondaryColor: #1f2124;
+  $mainColor: var(--text1);
+  $secondaryColor: var(--surface2);
   ////////////
   display: flex;
   flex-direction: column;
@@ -140,10 +139,10 @@ async function prepareProse() {
     align-items: center;
 
     input {
-      outline: 1px solid #e0f2e9;
+      outline: 1px solid $mainColor;
       border: none;
-      background: #e0f2e9;
-      color: #1f2124;
+      background: $mainColor;
+      color: $secondaryColor;
       border-radius: 0.2rem;
     }
   }

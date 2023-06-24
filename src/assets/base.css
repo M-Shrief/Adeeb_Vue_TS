@@ -1,6 +1,28 @@
+* {
+  /* brand foundation */
+  --brand-hue: 200;
+  --brand-saturation: 100%;
+  --brand-lightness: 50%;
+
+  /* dark */
+  --brand-dark: hsl(
+    var(--brand-hue) calc(var(--brand-saturation) / 2)
+      calc(var(--brand-lightness) / 1.5)
+  );
+  --text1: hsl(var(--brand-hue) 15% 85%);
+  --text2: hsl(var(--brand-hue) 5% 65%);
+  --surface1: hsl(var(--brand-hue) 10% 10%);
+  --surface2: hsl(var(--brand-hue) 10% 15%);
+  --surface3: hsl(var(--brand-hue) 5% 20%);
+  --surface4: hsl(var(--brand-hue) 5% 25%);
+  --surface-shadow: var(--brand-hue) 50% 3%;
+  --shadow-strength: 0.8;
+}
+
 body {
   padding: 0;
   margin: 0;
   box-sizing: border-box;
-  background: #f9f5f6;
+  background: var(--surface1);
+  color: var(--text1);
 }

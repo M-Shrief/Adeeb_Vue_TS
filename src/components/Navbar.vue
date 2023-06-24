@@ -34,7 +34,7 @@
 
 <script lang="ts" setup>
 import { useRouter } from 'vue-router';
-import { computed } from '@vue/reactivity';
+import { computed, inject } from 'vue';
 // stores
 import { useOrderStore } from '@/stores/orders';
 import { usePartnerStore } from '@/stores/partners';
@@ -52,7 +52,6 @@ async function logout() {
   orderStore.reset()
   router.push('/');
 }
-
 </script>
 
 <style lang="scss" scoped>
@@ -72,13 +71,9 @@ async function logout() {
     font-weight: 700;
     padding: 0.2rem 0.4rem;
     margin: 0.4rem;
-//  will-change: filter;
-//  transition: filter 300ms;
 
     &:hover {
       color: #f6b352;
-  //      filter: drop-shadow(1rem 0 2em rgba($color: #f6b352, $alpha: 0.667));
-
     }
 
     @include mQ($breakpoint-sm) {

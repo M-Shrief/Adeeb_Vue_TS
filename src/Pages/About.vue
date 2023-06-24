@@ -36,5 +36,6 @@
 #about {
   text-align: center;
   margin: 1rem;
+  color: var(--text1);
 }
 </style>

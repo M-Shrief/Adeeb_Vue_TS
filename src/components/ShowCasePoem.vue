@@ -23,14 +23,13 @@ defineEmits(['print']);
 <style lang="scss" scoped>
 @import '@/assets/mixins.scss';
 
-$mainColor: #2c3e50;
-$secondaryColor: #FBE6C2;
+$mainColor: var(--text1);
+$secondaryColor: var(--surface2);
 
 #poem {
   position: relative;
   color: $mainColor;
   background: $secondaryColor;
-  box-shadow: 0 5px 10px rgba($color: $mainColor, $alpha: .4);
   border-radius: 1.5rem;
   padding: 0.7rem;
   margin: 0 0.7rem;

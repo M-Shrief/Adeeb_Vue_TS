@@ -42,10 +42,9 @@ defineEmits(['print']);
 
 <style lang="scss" scoped>
 @import '@/assets/mixins.scss';
-// @import 'open-props/normalize';
 
-$mainColor: var(--text1-dark);
-$secondaryColor: var(--surface2-dark);
+$mainColor: var(--text1);
+$secondaryColor: var(--surface2);
 
 .title {
   text-align: center;
@@ -54,7 +53,6 @@ $secondaryColor: var(--surface2-dark);
   padding: 0.3rem;
   margin: 1rem 0.3rem 0;
   box-shadow: 0 5px 10px rgba(0, 0, 0, 0.4);
-  border: 1px solid $mainColor;
   border-radius: 1.5rem;
   font-size: 1.5rem;
   font-weight: 600;
@@ -150,10 +148,10 @@ $secondaryColor: var(--surface2-dark);
     }
   }
 
-  .verse {
-    font-size: 1rem;
+  .one-verse {
+    font-size: 1.1rem;
     font-weight: 600;
-    margin: 1rem 0;
+    margin-top: 1rem;
 
     .first {
       margin-right: 0.4rem;
@@ -164,76 +162,46 @@ $secondaryColor: var(--surface2-dark);
     }
 
     @include mQ($breakpoint-lg) {
-      font-size: 0.9rem;
+      font-size: 0.95rem;
       margin-top: 1.2rem;
     }
 
     @include mQ($breakpoint-md) {
-      font-size: 0.8rem;
+      font-size: 0.9rem;
       margin-top: 1rem;
     }
 
     @include mQ($breakpoint-sm) {
-      font-size: 0.7rem;
+      font-size: 0.8rem;
       margin-top: 0.5rem;
     }
   }
 
+  .two-verse {
+    font-size: 1rem;
+    font-weight: 600;
+    margin-bottom: 1rem;
 
-  // .one-verse {
-  //   font-size: 1.1rem;
-  //   font-weight: 600;
-  //   margin-top: 1rem;
+    .first {
+      margin-right: 0.4rem;
+    }
 
-  //   .first {
-  //     margin-right: 0.4rem;
-  //   }
+    .sec {
+      margin-left: 0.4rem;
+    }
 
-  //   .sec {
-  //     margin-left: 0.4rem;
-  //   }
+    @include mQ($breakpoint-lg) {
+      font-size: 0.95rem;
+    }
 
-  //   @include mQ($breakpoint-lg) {
-  //     font-size: 0.95rem;
-  //     margin-top: 1.2rem;
-  //   }
+    @include mQ($breakpoint-md) {
+      font-size: 0.8rem;
+    }
 
-  //   @include mQ($breakpoint-md) {
-  //     font-size: 0.9rem;
-  //     margin-top: 1rem;
-  //   }
-
-  //   @include mQ($breakpoint-sm) {
-  //     font-size: 0.8rem;
-  //     margin-top: 0.5rem;
-  //   }
-  // }
-
-  // .two-verse {
-  //   font-size: 1rem;
-  //   font-weight: 600;
-  //   margin-bottom: 1rem;
-
-  //   .first {
-  //     margin-right: 0.4rem;
-  //   }
-
-  //   .sec {
-  //     margin-left: 0.4rem;
-  //   }
-
-  //   @include mQ($breakpoint-lg) {
-  //     font-size: 0.95rem;
-  //   }
-
-  //   @include mQ($breakpoint-md) {
-  //     font-size: 0.8rem;
-  //   }
-
-  //   @include mQ($breakpoint-sm) {
-  //     font-size: 0.8rem;
-  //   }
-  // }
+    @include mQ($breakpoint-sm) {
+      font-size: 0.8rem;
+    }
+  }
 
   .print-button {
     @include add-print-btn;

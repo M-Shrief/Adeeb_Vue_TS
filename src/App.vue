@@ -44,7 +44,7 @@ async function logout() {
 const isPartner = computed(() => {
   return parnterStore.getPartner ? true : false;
 })
-provide('isPartner', isPartner);
+provide('isPartner', readonly(isPartner));
 </script>
 
 

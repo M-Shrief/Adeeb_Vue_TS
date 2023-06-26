@@ -20,12 +20,11 @@
 </template>
 
 <script lang="ts" setup>
-import { onBeforeMount, computed, watch } from 'vue';
+import { onBeforeMount, computed, watch, inject } from 'vue';
 import { useRoute } from 'vue-router';
 // stores
 import { usePoemStore } from '@/stores/poems';
 import { usePrintsStore } from '@/stores/prints';
-import { usePartnerStore } from '@/stores/partners';
 // components
 import ShowCasePoems from '@/components/ShowCasePoems.vue';
 import ShowCasePoem from '@/components/ShowCasePoem.vue';
@@ -70,10 +69,7 @@ function removePrint(print: Print) {
   return printsStore.removePrint(print);
 }
 
-const partnerStore = usePartnerStore();
-const isPartner = computed(() => {
-  return partnerStore.getPartner ? true : false;
-})
+const isPartner = inject('isPartner') as boolean;
 </script>
 
 

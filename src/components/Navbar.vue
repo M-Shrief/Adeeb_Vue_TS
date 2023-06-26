@@ -22,12 +22,16 @@
 </template>
 
 <script lang="ts" setup>
-import { inject } from 'vue';
+import type { PropType } from 'vue';
 // Types
 import type { Partner } from '@/stores/__types__'
 
-const partner = inject('partner') as Partner
-
+defineProps({
+  partner: {
+    type: Object as PropType<Partner | null>,
+    required: true,
+  }
+})
 defineEmits(['logout']);
 </script>
 

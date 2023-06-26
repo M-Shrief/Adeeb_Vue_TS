@@ -120,7 +120,6 @@ function deleteFromProductGroup(productGroup: ProductGroup, print: Print) {
   }
 }
 
-// check this https://stackoverflow.com/questions/12989741/the-property-value-does-not-exist-on-value-of-type-htmlelement
 const orderStore = useOrderStore();
 const partnerStore = usePartnerStore();
 const partner = computed(() => {

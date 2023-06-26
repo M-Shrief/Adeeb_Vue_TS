@@ -92,7 +92,7 @@ const isPartner = computed(() => {
   }
 
   h2 {
-    color: #fbe6c2;
+    color: var(--text1);
     text-align: center;
 
     @include mQ($breakpoint-lg) {

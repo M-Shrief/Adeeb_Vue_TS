@@ -12,46 +12,23 @@
         active-class="active">قصتنا</router-link>
 
       <span v-if="partner" class="partner-name">{{ partner.name }}</span>
-      <span v-if="partner" class="nav-item" @click="logout">تسجيل
+      <span v-if="partner" class="nav-item" @click="$emit('logout')">تسجيل
         الخروج</span>
       <router-link to="/partners" class="nav-item" active-class="active" v-else>كن
         شريكاً</router-link>
 
-      <!-- <div class="dropdown">
-        <span class="partner-name">{{ partner?.name }}</span>
-        <img class="partner-img" src="../../public/icons8-account-24.png"
-          alt="Account">
-        <div class="dropdown-content">
-          <router-link to="" @click="logout"
-            active-class="active">الخروج</router-link>
-          <router-link to="" @click="logout"
-            active-class="active">الاعدادات</router-link>
-        </div>
-      </div> -->
     </div>
   </nav>
 </template>
 
 <script lang="ts" setup>
-import { useRouter } from 'vue-router';
-import { computed, inject } from 'vue';
-// stores
-import { useOrderStore } from '@/stores/orders';
-import { usePartnerStore } from '@/stores/partners';
+import { inject } from 'vue';
+// Types
+import type { Partner } from '@/stores/__types__'
 
-const router = useRouter();
+const partner = inject('partner') as Partner
 
-const parnterStore = usePartnerStore();
-const partner = computed(() => {
-  return parnterStore.getPartner
-})
-
-const orderStore = useOrderStore();
-async function logout() {
-  parnterStore.logout()
-  orderStore.reset()
-  router.push('/');
-}
+defineEmits(['logout']);
 </script>
 
 <style lang="scss" scoped>

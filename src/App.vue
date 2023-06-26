@@ -1,14 +1,6 @@
-<script setup lang="ts">
-import { defineAsyncComponent } from 'vue'
-// components
-import Navbar from './components/Navbar.vue';
-// import Footer from './components/Footer.vue';
-const HttpPopUp = defineAsyncComponent(() => import('./components/NotificationsCenter/HttpPopUp.vue'))
-</script>
-
 <template>
   <header>
-    <Navbar />
+    <Navbar @logout="logout" />
     <HttpPopUp />
   </header>
   <router-view v-slot="{ Component }">
@@ -23,6 +15,32 @@ const HttpPopUp = defineAsyncComponent(() => import('./components/NotificationsC
     </p>
   </footer>
 </template>
+
+<script setup lang="ts">
+import { defineAsyncComponent, computed, provide } from 'vue';
+import { useRouter } from 'vue-router';
+// Stores
+import { usePartnerStore } from '@/stores/partners';
+// components
+import Navbar from './components/Navbar.vue';
+// import Footer from './components/Footer.vue';
+const HttpPopUp = defineAsyncComponent(() => import('./components/NotificationsCenter/HttpPopUp.vue'))
+
+
+const router = useRouter();
+
+const parnterStore = usePartnerStore();
+const partner = computed(() => {
+  return parnterStore.getPartner
+})
+
+provide('partner', partner);
+async function logout() {
+  parnterStore.logout()
+  router.push('/');
+}
+</script>
+
 
 <style lang="scss" scoped>
 @import './assets/mixins.scss';

@@ -1,7 +1,7 @@
 import PrintCustomization from './PrintCustomization.vue';
 
-describe('<PrintCustomization />', () => {
-  it('renders', () => {
+describe('renders PrintCustomization', () => {
+  it('show 2 groups of 4 colors each for font & background', () => {
     // see: https://on.cypress.io/mounting-vue
     cy.mount(PrintCustomization, {
       props: {

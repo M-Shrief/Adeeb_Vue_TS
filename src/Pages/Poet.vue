@@ -91,8 +91,8 @@ const isPartner = inject('isPartner') as boolean;
 }
 
 .poems-title {
-  background-color: var(--surface2);
-  color: var(--text1);
+  background-color: var(--text1);
+  color: var(--surface3);
   text-align: center;
   padding: 0.3rem;
   border-radius: 1.5rem;

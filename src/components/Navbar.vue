@@ -16,7 +16,7 @@
         الخروج</span>
       <router-link to="/partners" class="nav-item" active-class="active" v-else>كن
         شريكاً</router-link>
-
+      <ThemeSwitch class="nav-item" />
     </div>
   </nav>
 </template>
@@ -25,6 +25,8 @@
 import type { PropType } from 'vue';
 // Types
 import type { Partner } from '@/stores/__types__'
+// Components
+import ThemeSwitch from './ThemeSwitch.vue';
 
 defineProps({
   partner: {
@@ -43,7 +45,6 @@ defineEmits(['logout']);
   flex-direction: row;
   background-color: #1f2124;
   justify-content: space-between;
-  align-items: center;
 
   #logo {
     color: rgba($color: #f6b352, $alpha: .8);
@@ -64,83 +65,52 @@ defineEmits(['logout']);
     }
   }
 
-  $mainColor: #FBE6C2;
+  .nav-row-group {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
 
-  .nav-item {
-    padding: 0.2rem 0.4rem;
-    margin: 0.4rem;
-    color: rgba($color: $mainColor, $alpha: 0.8);
-    font-size: 1.2rem;
-    text-decoration: none;
+    $mainColor: #FBE6C2;
 
-    &:hover {
-      color: $mainColor;
+    .nav-item {
+      padding: 0.2rem 0.4rem;
+      margin: 0.4rem;
+      color: rgba($color: $mainColor, $alpha: 0.8);
+      font-size: 1.2rem;
+      text-decoration: none;
+
+      &:hover {
+        color: $mainColor;
+      }
+
+      @include mQ($breakpoint-sm) {
+        font-size: 0.8rem;
+        padding: 0.1rem 0.2rem;
+        margin: 0.1rem;
+      }
+
+      &.active {
+        background-color: $mainColor;
+        color: #2c3e50;
+        border-radius: 1rem;
+      }
     }
 
-    @include mQ($breakpoint-sm) {
-      font-size: 0.8rem;
-      padding: 0.1rem 0.2rem;
-      margin: 0.1rem;
+    .partner-name {
+      background-color: $mainColor;
+      color: #2c3e50;
+      border-radius: 1rem;
+      padding: 0.2rem 0.4rem;
+      margin: 0.4rem;
+      font-size: 1rem;
+
+      @include mQ($breakpoint-sm) {
+        font-size: 0.8rem;
+        padding: 0.1rem 0.2rem;
+        margin: 0.1rem;
+      }
     }
   }
-
-  .nav-item.active {
-    background-color: $mainColor;
-    color: #2c3e50;
-    border-radius: 1rem;
-  }
-
-  .partner-name {
-    background-color: $mainColor;
-    color: #2c3e50;
-    border-radius: 1rem;
-    padding: 0.2rem 0.4rem;
-    margin: 0.4rem;
-    font-size: 1rem;
-
-    @include mQ($breakpoint-sm) {
-      font-size: 0.8rem;
-      padding: 0.1rem 0.2rem;
-      margin: 0.1rem;
-    }
-
-  }
-
-  .partner-img {
-    background-color: $mainColor;
-    margin: 0 0.5rem;
-  }
-}
-
-
-.dropdown {
-  position: relative;
-  display: inline-block;
-}
-
-.dropdown-content {
-  display: none;
-  position: absolute;
-  left: 0.5rem;
-  background-color: #2c3e50;
-  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
-  z-index: 1;
-}
-
-.dropdown-content a {
-  color: black;
-  padding: 0.5rem;
-  border-bottom: 1px solid #fff;
-  text-decoration: none;
-  display: block;
-}
-
-.dropdown-content a:hover {
-  background-color: #f1f1f1;
-}
-
-.dropdown:hover .dropdown-content {
-  display: flex;
-  flex-direction: column;
 }
 </style>

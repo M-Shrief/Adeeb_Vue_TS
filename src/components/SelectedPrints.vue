@@ -62,12 +62,12 @@ $secondaryColor: var(--surface4);
   .title {
     margin-left: 0.3rem;
     font-weight: 600;
-    // color: rgba($color: $mainColor, $alpha: 0.8);
     color: $mainColor;
+    opacity: 85%;
     text-decoration: none;
 
     &:hover {
-      color: $mainColor;
+      opacity: 100%;
     }
 
     @include mQ($breakpoint-lg) {

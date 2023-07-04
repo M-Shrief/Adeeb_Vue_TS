@@ -38,7 +38,7 @@ defineEmits(['color']);
   .color {
     padding: 0.5rem;
     margin: 0.3rem;
-    border: 1px solid #fff;
+    border: 1px solid var(--text1);
     border-radius: 1rem;
 
     &:hover {

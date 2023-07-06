@@ -101,7 +101,6 @@ $secondaryColor: var(--surface2);
   padding: 0.3rem;
   padding-bottom: 1.5rem;
   margin: 0.5rem;
-  // border: 1px solid $mainColor;
   background: $secondaryColor;
   color: $mainColor;
 

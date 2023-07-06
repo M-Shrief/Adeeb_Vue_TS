@@ -43,7 +43,7 @@ const getPoet = computed(() => {
 })
 const route = useRoute();
 onMounted(() => {
-  poetStore.fetchPoet(route.params.id);
+  poetStore.fetchPoet(route.params.id as string);
 })
 
 // Should use Provide/Inject

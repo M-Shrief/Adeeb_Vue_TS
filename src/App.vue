@@ -23,7 +23,6 @@ import { useRouter } from 'vue-router';
 import { usePartnerStore } from '@/stores/partners';
 // components
 import Navbar from './components/Navbar.vue';
-// import Footer from './components/Footer.vue';
 const HttpPopUp = defineAsyncComponent(() => import('./components/NotificationsCenter/HttpPopUp.vue'))
 
 
@@ -42,7 +41,7 @@ async function logout() {
 
 // For Main, Poem, Poet pages.
 const isPartner = computed(() => {
-  return parnterStore.getPartner ? true : false;
+  return parnterStore.isPartner;
 })
 provide('isPartner', readonly(isPartner));
 </script>

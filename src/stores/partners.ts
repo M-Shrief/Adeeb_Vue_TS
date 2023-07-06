@@ -17,6 +17,9 @@ export const usePartnerStore = defineStore('partners', {
     getPartner(state): Partner | null {
       return state.partner;
     },
+    isPartner(state): Partner | null {
+      return state.partner ? true : false;
+    },
   },
   actions: {
     async signup(partner: Partner) {

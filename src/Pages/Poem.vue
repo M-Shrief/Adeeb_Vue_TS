@@ -47,12 +47,12 @@ watch(
   () => route.params.id,
   (newPoemId) => {
     if (route.name === 'poem')
-      poemStore.fetchPoemAndSuggestedPoems(route.params.id);
+      poemStore.fetchPoemAndSuggestedPoems(route.params.id as string);
   }
 );
 
 onBeforeMount(() => {
-  poemStore.fetchPoemAndSuggestedPoems(route.params.id);
+  poemStore.fetchPoemAndSuggestedPoems(route.params.id as string);
 });
 
 // Should use Provide/Inject

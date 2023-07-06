@@ -1,50 +1,45 @@
+import {ref, computed} from 'vue';
 import { defineStore } from 'pinia';
 import axios, { AxiosError } from 'axios';
 // types
 import type { ChosenVerse } from './__types__';
 // Composables
 import { useAxiosError } from '../composables/error';
-export const useChosenVerseStore = defineStore('chosenVerses', {
-  state: () => ({
-    chosenVerses: [] as ChosenVerse[],
-    randomChosenVerses: [] as ChosenVerse[],
-  }),
-  getters: {
-    getChosenVerses(state): ChosenVerse[] {
-      return state.chosenVerses;
-    },
-    getRandomChosenVerses(state): ChosenVerse[] {
-      return state.randomChosenVerses;
-    },
-  },
-  actions: {
-    async fetchChosenVerses() {
-      try {
-        const req = await axios.get(
-          `${import.meta.env.VITE_API_URL}/chosenverses`
-        );
-        this.chosenVerses = req.data;
-      } catch (error) {
-        if (error instanceof AxiosError) {
-          useAxiosError(error);
-          return;
-        }
-        alert(error);
+
+export const useChosenVerseStore = defineStore('chosenVerses', () => {
+  const chosenVerses =  ref<ChosenVerse[]>([]);
+  const getChosenVerses = computed<ChosenVerse[]>(() => chosenVerses.value);
+  async function fetchChosenVerses() {
+    try {
+      const req = await axios.get(
+        `${import.meta.env.VITE_API_URL}/chosenverses`
+      );
+      chosenVerses.value = req.data;
+    } catch (error) {
+      if (error instanceof AxiosError) {
+        useAxiosError(error);
+        return;
       }
-    },
-    async fetchRandomChosenVerses(num: number) {
-      try {
-        const req = await axios.get(
-          `${import.meta.env.VITE_API_URL}/chosenverses/random?num=${num}`
-        );
-        this.randomChosenVerses = req.data;
-      } catch (error) {
-        if (error instanceof AxiosError) {
-          useAxiosError(error);
-          return;
-        }
-        alert(error);
+      alert(error);
+    }
+  };
+
+  const randomChosenVerses =ref<ChosenVerse[]>([]);
+  const getRandomChosenVerses = computed<ChosenVerse[]>(() => randomChosenVerses.value);
+  async function fetchRandomChosenVerses(num: number) {
+    try {
+      const req = await axios.get(
+        `${import.meta.env.VITE_API_URL}/chosenverses/random?num=${num}`
+      );
+      randomChosenVerses.value = req.data;
+    } catch (error) {
+      if (error instanceof AxiosError) {
+        useAxiosError(error);
+        return;
       }
-    },
-  },
+      alert(error);
+    }
+  };
+
+    return {getChosenVerses, fetchChosenVerses, getRandomChosenVerses, fetchRandomChosenVerses}
 });

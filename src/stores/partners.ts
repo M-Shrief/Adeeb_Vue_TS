@@ -17,7 +17,7 @@ export const usePartnerStore = defineStore('partners', {
     getPartner(state): Partner | null {
       return state.partner;
     },
-    isPartner(state): Partner | null {
+    isPartner(state): boolean {
       return state.partner ? true : false;
     },
   },

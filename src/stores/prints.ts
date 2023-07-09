@@ -7,9 +7,6 @@ export const usePrintsStore = defineStore('prints', {
       prints: [] as Print[],
     };
   },
-  persist: {
-    storage: sessionStorage,
-  },
   getters: {
     getPrints(state): Print[] {
       return state.prints;

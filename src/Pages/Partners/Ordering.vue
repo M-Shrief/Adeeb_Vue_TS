@@ -61,7 +61,7 @@ let fontColor = ref(colors[0]);
 let backgroundColor = ref(colors[1]);
 
 const productGroups = computed(() => {
-  return orderStore.productGroups;
+  return orderStore.getProductGroups;
 })
 
 function addProductGroup(prints: Print[], colors: string[]) {

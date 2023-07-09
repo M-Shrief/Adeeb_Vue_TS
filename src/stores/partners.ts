@@ -10,9 +10,6 @@ export const usePartnerStore = defineStore('partners', {
   state: () => ({
     partner: null as Partner | null,
   }),
-  persist: {
-    storage: sessionStorage,
-  },
   getters: {
     getPartner(state): Partner | null {
       return state.partner;

@@ -77,7 +77,7 @@ function removePrint(print: Print) {
 
 const orderStore = useOrderStore();
 
-const colors = orderStore.getColors;
+const colors = orderStore.colors;
 let fontColor = ref(colors[0]);
 let backgroundColor = ref(colors[1]);
 

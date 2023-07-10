@@ -22,9 +22,9 @@ export const usePrintsStore = defineStore('prints', () => {
       prints.value.push(print);
     }
   };
-  function prepPrints(prints: Print[]) {
+  function prepPrints(printsData: Print[]) {
     // it's normal in big orders to repeat the same print
-    prints.value = prints.value.concat(prints);
+    prints.value = prints.value.concat(printsData);
   };
   function removePrint(print: Print) {
     let printIndex = prints.value

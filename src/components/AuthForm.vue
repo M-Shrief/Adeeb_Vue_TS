@@ -4,22 +4,22 @@
     <Form @submit="onSubmit">
       <div v-if="!isRegistered" class="input-cont">
         <label for="name">الاسم: </label>
-        <Field name="name" id="name" :rules="nameRules" />
+        <Field name="name" id="name" autocomplete="name"  :rules="nameRules" />
         <ErrorMessage name="name" class="error" />
       </div>
       <div v-if="!isRegistered" class="input-cont">
         <label for="address">العنوان: </label>
-        <Field name="address" id="address" :rules="addressRules" />
+        <Field name="address" id="address" autocomplete="address" :rules="addressRules" />
         <ErrorMessage name="address" class="error" />
       </div>
       <div class="input-cont">
         <label for="phone">رقم الهاتف: </label>
-        <Field name="phone" id="phone" :rules="phoneRules" />
+        <Field name="phone" id="phone" autocomplete="phone"  :rules="phoneRules" />
         <ErrorMessage name="phone" class="error" />
       </div>
       <div class="input-cont">
         <label for="password">كلمة السر: </label>
-        <Field type="password" name="password" id="password"
+        <Field type="password" name="password" id="password" 
           :rules="passwordRules" />
         <ErrorMessage name="password" class="error" />
       </div>

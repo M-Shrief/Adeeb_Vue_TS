@@ -23,17 +23,17 @@
       <div id="customer-details" v-else>
         <div class="container">
           <label for="name">الاسم: </label>
-          <Field name="name" id="name" :rules="nameRules" />
+          <Field name="name" id="name" autocomplete="name"  :rules="nameRules" />
           <ErrorMessage name="name" class="error" />
         </div>
         <div class="container">
           <label for="phone">الهاتف: </label>
-          <Field name="phone" id="phone" :rules="phoneRules" />
+          <Field name="phone" id="phone" autocomplete="phone" :rules="phoneRules" />
           <ErrorMessage name="phone" class="error" />
         </div>
         <div class="container">
           <label for="address">العنوان: </label>
-          <Field name="address" id="address" :rules="addressRules" />
+          <Field name="address" id="address" autocomplete="address" :rules="addressRules" />
           <ErrorMessage name="address" class="error" />
         </div>
       </div>

@@ -1,33 +1,35 @@
+import {ref, computed} from 'vue';
 import { defineStore } from 'pinia';
 import axios, { AxiosError } from 'axios';
 // Stores
 import { useOrderStore } from './orders';
 // types
 import type { Partner } from './__types__';
+
 // Composables
 import { useAxiosError } from '../composables/error';
-export const usePartnerStore = defineStore('partners', {
-  state: () => ({
-    partner: null as Partner | null,
-  }),
-  getters: {
-    getPartner(state): Partner | null {
-      return state.partner;
-    },
-    isPartner(state): boolean {
-      return state.partner ? true : false;
-    },
-  },
-  actions: {
-    async signup(partner: Partner) {
+import { useSessionStorage } from '@vueuse/core';
+
+export const usePartnerStore = defineStore('partners', () => {
+    const partner =  ref(useSessionStorage< string | null>('partner', null as string | null));
+    const getPartner =  computed<Partner | null>(() => {
+      if(typeof partner?.value == 'string') return JSON.parse(partner.value);
+      return null
+    });
+    
+    const isPartner = computed<boolean>(() => {
+      return partner.value ? true : false;
+    }); 
+
+    async function signup(partnerData: Partner) {
       try {
         let api = `${import.meta.env.VITE_API_URL}/partner/signup`;
 
-        const req = await axios.post(api, partner);
+        const req = await axios.post(api, partnerData);
         axios.defaults.withCredentials = true;
         axios.defaults.headers.common['Authorization'] =
           'Bearer ' + req.data.accessToken;
-        this.partner = req.data.partner;
+        partner.value = req.data.partner;
       } catch (error) {
         if (error instanceof AxiosError) {
           useAxiosError(error);
@@ -35,12 +37,13 @@ export const usePartnerStore = defineStore('partners', {
         }
         alert(error);
       }
-    },
-    async login(partner: Partner) {
+    };
+    
+    async function login(partnerData: Partner) {
       try {
         let api = `${import.meta.env.VITE_API_URL}/partner/login`;
-        const req = await axios.post(api, partner);
-        this.partner = req.data.partner;
+        const req = await axios.post(api, partnerData);
+        partner.value = JSON.stringify(req.data.partner);
         axios.defaults.withCredentials = true;
         axios.defaults.headers.common['Authorization'] =
           'Bearer ' + req.data.accessToken;
@@ -51,13 +54,15 @@ export const usePartnerStore = defineStore('partners', {
         }
         alert(error);
       }
-    },
-    async logout() {
+    };
+    
+    async function logout() {
       const orderStore = useOrderStore();
       orderStore.reset();
       axios.defaults.headers.common['Authorization'] = undefined;
-      this.partner = null;
+      partner.value = null;
       axios.defaults.withCredentials = false;
-    },
-  },
+    };
+
+    return {getPartner, isPartner, signup, login, logout}
 });

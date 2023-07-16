@@ -32,6 +32,9 @@ export const usePrintsStore = defineStore('prints', () => {
       .indexOf(print._id);
     prints.value.splice(printIndex, 1);
   };
+  function emptyPrints(): void {
+    prints.value = []
+  }
 
-  return {getPrints, addPrint, prepPrints, removePrint}
+  return {getPrints, addPrint, prepPrints, removePrint, emptyPrints}
 });

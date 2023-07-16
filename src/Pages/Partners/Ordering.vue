@@ -69,7 +69,7 @@ function addProductGroup(prints: Print[], colors: string[]) {
     orderStore.addProductGroup(prints, colors);
   }
   // empty prints store
-  printStore.prints = []
+  printStore.emptyPrints();
 }
 
 

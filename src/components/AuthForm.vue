@@ -36,7 +36,7 @@ import { computed, ref } from 'vue'
 import { useRouter } from 'vue-router';
 // Validation
 import { Form, Field, ErrorMessage } from 'vee-validate';
-import { nameRules, phoneRules, addressRules, passwordRules } from '../forms.schema'
+import { nameRules, phoneRules, addressRules, passwordRules } from '../shared/forms.schema'
 // stores
 import { usePartnerStore } from '@/stores/partners';
 // Composables

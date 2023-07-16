@@ -5,16 +5,16 @@
       <div class="container">
         <ShowCasePoet :details="getPoet.details" />
 
-        <ShowCasePoems :poems="getPoet.authoredPoems">
+        <ShowCasePoems :poems="getPoet.poems">
           <h3 class="poems-title">قصائده</h3>
         </ShowCasePoems>
       </div>
 
       <!-- Add Pagination for poetry and proses -->
-      <ShowCasePoetry :chosen-verses="getPoet.authoredChosenVerses"
+      <ShowCasePoetry :chosen-verses="getPoet.chosenVerses"
         :route-name="'poet'" @print="(print: Print) => addPrint(print)" />
 
-      <ShowCaseProse :proses="getPoet.authoredProses" :route-name="'poet'"
+      <ShowCaseProse :proses="getPoet.proses" :route-name="'poet'"
         @print="(print: Print) => addPrint(print)" />
     </div>
     <SelectedPrints :prints="getPrints" @remove="(print) => removePrint(print)"

@@ -12,9 +12,9 @@ export interface Poet {
     bio: string;
     reviewed: boolean;
   };
-  authoredPoems: Poem[];
-  authoredChosenVerses: ChosenVerse[];
-  authoredProses: Prose[];
+  poems: Poem[];
+  chosenVerses: ChosenVerse[];
+  proses: Prose[];
 }
 
 export interface Poem {

@@ -13,7 +13,7 @@ import { useSessionStorage } from '@vueuse/core';
 export const usePartnerStore = defineStore('partners', () => {
     const partner =  ref(useSessionStorage< string | null>('partner', null as string | null));
     const getPartner =  computed<Partner | null>(() => {
-      if(typeof partner?.value == 'string') return JSON.parse(partner.value);
+      if(partner && typeof partner.value == 'string') return JSON.parse(partner.value);
       return null
     });
     
@@ -29,7 +29,7 @@ export const usePartnerStore = defineStore('partners', () => {
         axios.defaults.withCredentials = true;
         axios.defaults.headers.common['Authorization'] =
           'Bearer ' + req.data.accessToken;
-        partner.value = req.data.partner;
+        partner.value = JSON.stringify(req.data.partner);
       } catch (error) {
         if (error instanceof AxiosError) {
           useAxiosError(error);

@@ -1,6 +1,11 @@
 <template>
   <Form @submit="confirmOrder" dir="rtl">
     <div id="confirmation">
+      <!-- Remove address from partner info,
+        and make the customer to write it.
+        that is more flexible and remove the headache of managing them.
+        and it removes a sensitive data from our hands, and that's good.
+      -->
       <div id="customer-details" v-if="partner">
         <div class="container">
           <p>الاسم: {{ partner.name }}</p>
@@ -9,6 +14,9 @@
           <p>الهاتف: {{ partner.phone }}</p>
         </div>
         <div class="container">
+          <p>العنوان: {{ partner.address }}</p>
+        </div>
+        <!-- <div class="container">
           <label for="address">العنوان: </label>
           <select name="address" id="address">
             <option v-if="typeof partner.address == 'string'"
@@ -18,7 +26,7 @@
               {{ address }}
             </option>
           </select>
-        </div>
+        </div> -->
       </div>
       <div id="customer-details" v-else>
         <div class="container">
@@ -70,35 +78,23 @@
         </div>
       </div>
     </div>
-    <button type="submit">تأكيد الطلب</button>
+    <button id="submit" type="submit">تأكيد الطلب</button>
   </Form>
 </template>
 
 <script lang="ts" setup>
-import { computed } from '@vue/reactivity';
-import { useRouter } from 'vue-router';
 // Validation
 import { Form, Field, ErrorMessage } from 'vee-validate';
 import { nameRules, phoneRules, addressRules } from '../shared/forms.schema'
-// stores
-import { useOrderStore } from '@/stores/orders';
-import { usePartnerStore } from '@/stores/partners';
 // types
-import type { Product, Order, Print, ProductGroup, Partner } from '@/stores/__types__';
+import type { Product, Print, ProductGroup, Partner, Order } from '@/stores/__types__';
 
-const router = useRouter();
+const props = defineProps<{
+  products?:  Array<Product>,
+  partner?: Partner | null,
+  productGroups?: Array<ProductGroup>,
+}>();
 
-const props = defineProps({
-  products: {
-    type: Array<Product>,
-    required: false
-  },
-  productGroups: {
-    type: Array<ProductGroup>,
-    required: false,
-    default: []
-  },
-});
 
 function deleteProduct(products: Product[], product: Product) {
   let productIndex = products.map(product => product.print._id).indexOf(product.print._id);
@@ -112,7 +108,7 @@ function deletePrint(productGroup: ProductGroup, print: Print) {
 
 // ProductGroup
 function deleteFromProductGroup(productGroup: ProductGroup, print: Print) {
-  if (productGroup.prints.length == 1) {
+  if (props.productGroups && productGroup.prints.length == 1) {
     let productGroupIndex = props.productGroups.map(productGroup => productGroup.prints.length).indexOf(1);
     props.productGroups.splice(productGroupIndex, 1);
   } else {
@@ -120,37 +116,25 @@ function deleteFromProductGroup(productGroup: ProductGroup, print: Print) {
   }
 }
 
-const orderStore = useOrderStore();
-const partnerStore = usePartnerStore();
-const partner = computed(() => {
-  return partnerStore.getPartner;
-});
+const emits = defineEmits(['partnerOrder', 'guestOrder']);
 
 async function confirmOrder(values: any) {
   let order: Order;
-  if (partner.value) {
-    const name = partner.value.name
-    const phone = partner.value.phone
-    const address = (document.getElementById("address") as HTMLInputElement).value;
-
+  if (props.partner && props.productGroups) {
     order = {
-      partner: partner.value._id,
-      name,
-      phone,
-      address,
+      partner: props.partner._id,
+      name: props.partner.name,
+      phone: props.partner.phone,
+      address: props.partner.address,
       products: props.productGroups
     };
-    await orderStore.newOrder(order)
-    orderStore.reset()
-    router.push('/partners/history');
+    emits('partnerOrder', order);
   } else {
     order = {
       ...values,
       products: props.products
     };
-    await orderStore.newOrder(order)
-    orderStore.reset()
-    router.push('/history');
+    emits('guestOrder', order);
   }
 };
 </script>
@@ -186,7 +170,7 @@ form {
         box-shadow: 0 5px 5px rgba(0, 0, 0, 0.5);
         border: none;
         border-radius: 1rem;
-
+        color: $secondaryColor;
       }
 
       #address {

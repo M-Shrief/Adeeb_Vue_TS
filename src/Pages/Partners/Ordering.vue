@@ -28,11 +28,12 @@
     <button @click="addProductGroup(getPrints, [fontColor, backgroundColor])">
       اضافة الطلبات</button>
   </section>
-  <OrderForm :productGroups="productGroups" />
+  <OrderForm :productGroups="productGroups" :partner="partner" @partner-order="(order: Order) => confirmPartnerOrder(order)" />
 </template>
 
 <script lang="ts" setup>
 import { computed, ref } from 'vue'
+import { useRouter } from 'vue-router';
 // components
 import PrintCustomization from '@/components/PrintCustomization.vue';
 import ShowCasePrints from '@/components/ShowCasePrints.vue';
@@ -41,9 +42,11 @@ import OrderForm from '@/components/OrderForm.vue';
 import { useChosenVerseStore } from "@/stores/chosenVerses";
 import { useProseStore } from "@/stores/proses";
 import { usePrintsStore } from "@/stores/prints";
+import { usePartnerStore } from '@/stores/partners';
 import { useOrderStore } from "@/stores/orders";
 // types
-import type { Print } from '@/stores/__types__'
+import type { Order, Print } from '@/stores/__types__'
+
 const printStore = usePrintsStore();
 const getPrints = computed(() => {
   return printStore.getPrints;
@@ -56,6 +59,7 @@ function prepPrints(prints: Print[]) {
 }
 
 const orderStore = useOrderStore();
+
 const colors = orderStore.colors;
 let fontColor = ref(colors[0]);
 let backgroundColor = ref(colors[1]);
@@ -70,6 +74,19 @@ function addProductGroup(prints: Print[], colors: string[]) {
   }
   // empty prints store
   printStore.emptyPrints();
+}
+
+const router = useRouter(); 
+
+const partnerStore = usePartnerStore();
+const partner = computed(() => {
+  return partnerStore.getPartner;
+})
+
+const confirmPartnerOrder = async (order: Order) => {
+    await orderStore.newOrder(order)
+    orderStore.reset()
+    router.push('/partners/history');
 }
 
 

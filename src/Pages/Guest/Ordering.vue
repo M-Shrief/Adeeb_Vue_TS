@@ -21,7 +21,7 @@
         <div>
         </div>
       </section>
-      <OrderForm :products="getProducts" />
+      <OrderForm :products="getProducts" @guest-order="(order: Order) => confirmGuestOrder(order)"/>
     </div>
 
     <section id="prints">
@@ -52,6 +52,7 @@
 
 <script lang="ts" setup>
 import { ref, computed } from 'vue';
+import { useRouter } from 'vue-router';
 // stores
 import { usePrintsStore } from "@/stores/prints";
 import { useChosenVerseStore } from "@/stores/chosenVerses";
@@ -62,7 +63,7 @@ import PrintCustomization from '@/components/PrintCustomization.vue';
 import OrderForm from "@/components/OrderForm.vue";
 import ShowCasePrints from '@/components/ShowCasePrints.vue';
 // Types
-import type { Print } from '@/stores/__types__';
+import type { Order, Print } from '@/stores/__types__';
 
 let preview = ref({} as Print);
 let randomPrint = ref();
@@ -92,6 +93,13 @@ function addProduct(productPrint: Print, colors: string[]) {
   }
 }
 
+const router = useRouter();
+
+const confirmGuestOrder = async (order: Order) => {
+    await orderStore.newOrder(order)
+    orderStore.reset()
+    router.push('/history');
+}
 
 const chosenVerseStore = useChosenVerseStore();
 function getRandomPoetry(num: number) {

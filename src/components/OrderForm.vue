@@ -1,11 +1,6 @@
 <template>
   <Form @submit="confirmOrder" dir="rtl">
     <div id="confirmation">
-      <!-- Remove address from partner info,
-        and make the customer to write it.
-        that is more flexible and remove the headache of managing them.
-        and it removes a sensitive data from our hands, and that's good.
-      -->
       <div id="customer-details" v-if="partner">
         <div class="container">
           <p>الاسم: {{ partner.name }}</p>
@@ -14,19 +9,10 @@
           <p>الهاتف: {{ partner.phone }}</p>
         </div>
         <div class="container">
-          <p>العنوان: {{ partner.address }}</p>
-        </div>
-        <!-- <div class="container">
           <label for="address">العنوان: </label>
-          <select name="address" id="address">
-            <option v-if="typeof partner.address == 'string'"
-              :value="partner.address">{{ partner.address }}</option>
-            <option v-else v-for="address in partner.address" :value="address"
-              :key="address">
-              {{ address }}
-            </option>
-          </select>
-        </div> -->
+          <Field name="address" id="address" autocomplete="address"  :rules="addressRules" />
+          <ErrorMessage name="address" class="error" />
+        </div>
       </div>
       <div id="customer-details" v-else>
         <div class="container">
@@ -125,7 +111,8 @@ async function confirmOrder(values: any) {
       partner: props.partner._id,
       name: props.partner.name,
       phone: props.partner.phone,
-      address: props.partner.address,
+      // address: props.partner.address,
+      ...values,
       products: props.productGroups
     };
     emits('partnerOrder', order);

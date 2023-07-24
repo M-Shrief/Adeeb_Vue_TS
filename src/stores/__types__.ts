@@ -72,7 +72,7 @@ export interface Partner {
   _id: string;
   name: string;
   phone: string;
-  address: string;
+  // address: string;
   password: string;
 }
 

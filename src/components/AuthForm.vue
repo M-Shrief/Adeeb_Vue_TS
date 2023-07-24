@@ -100,7 +100,7 @@ $secondaryColor: var(--surface2);
     border-radius: 1rem;
     padding: 0.5rem;
     cursor: pointer;
-    font-weight: 600;
+    font-size: 1.2rem;
   }
 
 

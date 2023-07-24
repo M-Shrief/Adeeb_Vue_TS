@@ -1,6 +1,7 @@
 import {ref, computed} from 'vue';
 import { defineStore } from 'pinia';
-import axios, { AxiosError } from 'axios';
+import  { AxiosError } from 'axios';
+import {baseHttp, withAuthHttp} from '../shared/axios'
 // Stores
 import { useOrderStore } from './orders';
 // types
@@ -23,13 +24,9 @@ export const usePartnerStore = defineStore('partners', () => {
 
     async function signup(partnerData: Partner) {
       try {
-        let api = `${import.meta.env.VITE_API_URL}/partner/signup`;
-
-        const req = await axios.post(api, partnerData);
-        axios.defaults.withCredentials = true;
-        axios.defaults.headers.common['Authorization'] =
-          'Bearer ' + req.data.accessToken;
+        const req = await baseHttp.post(`/partner/signup`, partnerData);
         partner.value = JSON.stringify(req.data.partner);
+        sessionStorage.setItem("accessToken", req.data.accessToken);
       } catch (error) {
         if (error instanceof AxiosError) {
           useAxiosError(error);
@@ -41,12 +38,9 @@ export const usePartnerStore = defineStore('partners', () => {
     
     async function login(partnerData: Partner) {
       try {
-        let api = `${import.meta.env.VITE_API_URL}/partner/login`;
-        const req = await axios.post(api, partnerData);
+        const req = await baseHttp.post(`/partner/login`, partnerData);
         partner.value = JSON.stringify(req.data.partner);
-        axios.defaults.withCredentials = true;
-        axios.defaults.headers.common['Authorization'] =
-          'Bearer ' + req.data.accessToken;
+        sessionStorage.setItem("accessToken", req.data.accessToken);
       } catch (error) {
         if (error instanceof AxiosError) {
           useAxiosError(error);
@@ -59,9 +53,8 @@ export const usePartnerStore = defineStore('partners', () => {
     async function logout() {
       const orderStore = useOrderStore();
       orderStore.reset();
-      axios.defaults.headers.common['Authorization'] = undefined;
+      sessionStorage.removeItem("accessToken");
       partner.value = null;
-      axios.defaults.withCredentials = false;
     };
 
     return {getPartner, isPartner, signup, login, logout}

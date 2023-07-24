@@ -102,6 +102,7 @@ form {
 
     input[type='text'] {
       background: $mainColor;
+      color: $secondaryColor;
       box-shadow: 0 5px 5px rgba(0, 0, 0, 0.5);
       border: none;
       border-radius: 8px;

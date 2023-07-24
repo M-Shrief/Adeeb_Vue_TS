@@ -1,6 +1,7 @@
 import {ref, computed} from 'vue';
 import { defineStore } from 'pinia';
-import axios, { AxiosError } from 'axios';
+import  { AxiosError } from 'axios';
+import {baseHttp, withAuthHttp} from '../shared/axios'
 // types
 import type { Order, Product, ProductGroup, Print } from './__types__';
 // Composables
@@ -16,8 +17,8 @@ export const useOrderStore = defineStore('orders',
     });
     async function fetchOrders(name: string, phone: string) {
       try {
-        const req = await axios.post(
-          `${import.meta.env.VITE_API_URL}/orders/guest`,
+        const req = await baseHttp.post(
+          `/orders/guest`,
           { name, phone }
         );
         orders.value = req.data;
@@ -31,8 +32,8 @@ export const useOrderStore = defineStore('orders',
     };
     async function fetchPartnerOrders(partner: string) {
       try {
-        const req = await axios.get(
-          `${import.meta.env.VITE_API_URL}/orders/${partner}`
+        const req = await withAuthHttp.get(
+          `/orders/${partner}`
         );
         orders.value = req.data;
       } catch (error) {
@@ -45,8 +46,8 @@ export const useOrderStore = defineStore('orders',
     };
     async function newOrder(order: Order) {
       try {
-        let apiOrder = `${import.meta.env.VITE_API_URL}/order`;
-        await axios.post(apiOrder, order);
+        let apiOrder = `/order`;
+        await baseHttp.post(apiOrder, order);
         useSuccessNotification('Operation was made successfully');
       } catch (error) {
         if (error instanceof AxiosError) {

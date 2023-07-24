@@ -78,7 +78,7 @@
         </div>
       </div>
     </div>
-    <button id="submit" type="submit">تأكيد الطلب</button>
+    <button type="submit">تأكيد الطلب</button>
   </Form>
 </template>
 

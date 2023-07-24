@@ -48,7 +48,7 @@ describe('Confirming Customer order successfully', () => {
     cy.get('#phone').type('01322445566');
     cy.get('#address').type('10th street nowhere');
 
-    cy.get('#submit').click();
+    cy.get('button[type=submit]').click()
     cy.get('@onGuestOrderSpy').should('be.calledOnce');
     cy.get('@onGuestOrderSpy').should('have.been.calledWith',
       {
@@ -153,7 +153,7 @@ describe('Confirming Customer order successfully', () => {
     })
 
     
-    cy.get('#submit').click();
+    cy.get('button[type=submit]').click()
     cy.get('@onPartnerOrderSpy').should('be.calledOnce');
     cy.get('@onPartnerOrderSpy').should('have.been.calledWith', 
     {

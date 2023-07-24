@@ -23,7 +23,7 @@
           :rules="passwordRules" />
         <ErrorMessage name="password" class="error" />
       </div>
-      <button id="submit" type="submit">التأكيد</button>
+      <button type="submit">التأكيد</button>
     </Form>
     <button id="toggle" @click="isRegistered = !isRegistered">
       {{ !isRegistered ? "تسجيل الدخول" : "تسجيل حساب جديد" }}

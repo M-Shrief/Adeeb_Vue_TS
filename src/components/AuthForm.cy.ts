@@ -17,7 +17,7 @@ describe('Authenticate partner successfully', () => {
     cy.get('#password').type('P@ssword1');
 
     // Submiting
-    cy.get('#submit').click()
+    cy.get('button[type=submit]').click()
     cy.get('@onLoginSpy').should('be.calledOnce');
     cy.get('@onLoginSpy').should('have.been.calledWith', {phone: '01235554567', password: 'P@ssword1'});
   })
@@ -40,7 +40,7 @@ describe('Authenticate partner successfully', () => {
     cy.get('#password').type('P@ssword1');
 
 
-    cy.get('#submit').click({force: true})
+    cy.get('button[type=submit]').click()
     cy.get('@onSignupSpy').should('be.calledOnce');
     cy.get('@onSignupSpy').should('have.been.calledWith',
       {

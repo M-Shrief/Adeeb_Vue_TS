@@ -1,6 +1,7 @@
 import {ref, computed} from 'vue';
 import { defineStore } from 'pinia';
-import axios, { AxiosError } from 'axios';
+import { AxiosError } from 'axios';
+import {baseHttp} from '../shared/axios'
 // Types
 import type { Poet } from './__types__';
 // Composables
@@ -11,7 +12,7 @@ export const usePoetStore = defineStore('poets', () => {
  const getPoets = computed<Poet['details'][]>(() => poets.value)
  async function fetchPoets() {
   try {
-    const req = await axios.get(`${import.meta.env.VITE_API_URL}/poets`);
+    const req = await baseHttp.get(`/poets`);
     poets.value = req.data;
   } catch (error) {
     if (error instanceof AxiosError) {
@@ -26,8 +27,7 @@ export const usePoetStore = defineStore('poets', () => {
  const getPoet = computed<Poet | null>(() => poet.value)
  async function fetchPoet(id: string) {
   try {
-    const apiUrl = `${import.meta.env.VITE_API_URL}/poet/${id}`;
-    const req = await axios.get(apiUrl);
+    const req = await baseHttp.get(`/poet/${id}`);
     poet.value = req.data;
   } catch (error) {
     if (error instanceof AxiosError) {

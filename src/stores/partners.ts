@@ -1,7 +1,7 @@
 import {ref, computed} from 'vue';
 import { defineStore } from 'pinia';
 import  { AxiosError } from 'axios';
-import {baseHttp, withAuthHttp} from '../shared/axios'
+import {baseHttp} from '../shared/axios'
 // Stores
 import { useOrderStore } from './orders';
 // types

@@ -2,7 +2,7 @@
   <h3>يَسعد المتنبي بتقديم الخدمات للشركات والتجار والعملاء المميزين.</h3>
   <section id="register">
 
-    <AuthForm />
+    <AuthForm @login="onLogin" @signup="onSignup"/>
     <aside>
       <!-- need something simple like: islamic arts, a transition for list-items and on. -->
       <h3>سجل الان للاستفادة من جميع الخدمات المُقدمة من المتنبي</h3>
@@ -20,18 +20,42 @@
 </template>
 
 <script lang="ts" setup>
-import { onBeforeMount } from 'vue';
+import { onBeforeMount, computed } from 'vue';
 import { useRouter } from 'vue-router';
 // Components
 import AuthForm from '@/components/AuthForm.vue';
 // stores
 import { usePartnerStore } from '@/stores/partners';
+// Composables
+import { useAxiosError } from '@/composables/error';
 
 const router = useRouter();
+
+
 const partnerStore = usePartnerStore();
+const partner = computed(() => {
+  return partnerStore.getPartner;
+})
+
+
+async function onLogin(values: any) {
+    await partnerStore.login(values)
+      .then(() => {
+        if (partner.value) router.push('/');
+      })
+      .catch(error => useAxiosError(error));
+}
+
+async function onSignup(values: any) {
+    await partnerStore.signup(values)
+      .then(() => {
+        if (partner.value) router.push('/');
+      })
+      .catch(err => alert('Invalid information'));
+}
 
 onBeforeMount(() => {
-  if (partnerStore.getPartner) {
+  if (partner.value) {
     router.push('/partners/ordering')
   }
 })

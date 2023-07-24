@@ -1,7 +1,7 @@
 <template>
-  <section id="auth-form">
+  <section id="authentication">
     <h3>{{ isRegistered ? "تسجيل الدخول" : "تسجيل حساب جديد" }} </h3>
-    <Form @submit="onSubmit">
+    <Form @submit="onSubmit" id="auth-form">
       <div v-if="!isRegistered" class="input-cont">
         <label for="name">الاسم: </label>
         <Field name="name" id="name" autocomplete="name"  :rules="nameRules" />
@@ -23,7 +23,7 @@
           :rules="passwordRules" />
         <ErrorMessage name="password" class="error" />
       </div>
-      <button type="submit">التأكيد</button>
+      <button id="submit" type="submit">التأكيد</button>
     </Form>
     <button id="toggle" @click="isRegistered = !isRegistered">
       {{ !isRegistered ? "تسجيل الدخول" : "تسجيل حساب جديد" }}
@@ -32,38 +32,19 @@
 </template>
 
 <script lang="ts" setup>
-import { computed, ref } from 'vue'
-import { useRouter } from 'vue-router';
+import { ref } from 'vue'
 // Validation
 import { Form, Field, ErrorMessage } from 'vee-validate';
 import { nameRules, phoneRules, addressRules, passwordRules } from '../shared/forms.schema'
-// stores
-import { usePartnerStore } from '@/stores/partners';
-// Composables
-import { useAxiosError } from '@/composables/error';
+
 const isRegistered = ref(true);
 
-
-const router = useRouter();
-const partnerStore = usePartnerStore();
-
-
-const partner = computed(() => {
-  return partnerStore.getPartner;
-})
+const emits = defineEmits(['login', 'signup'])
 async function onSubmit(values: any) {
   if (isRegistered.value) {
-    await partnerStore.login(values)
-      .then(() => {
-        if (partner.value) router.push('/');
-      })
-      .catch(error => useAxiosError(error));
+    emits('login', values)
   } else {
-    await partnerStore.signup(values)
-      .then(() => {
-        if (partner.value) router.push('/');
-      })
-      .catch(err => alert('Invalid information'));
+    emits('signup', values)
   }
 }
 </script>
@@ -72,11 +53,13 @@ async function onSubmit(values: any) {
 $mainColor: var(--text1);
 $secondaryColor: var(--surface2);
 
-#auth-form {
+#authentication {
+  display: flex;
+  flex-direction: column;
   position: relative;
   height: 40vh;
   margin: 1rem;
-  padding: 1.5rem;
+  padding: 4rem;
   background-color: $secondaryColor;
   border-radius: 1rem;
   color: $mainColor;
@@ -87,18 +70,21 @@ $secondaryColor: var(--surface2);
     text-align: center;
   }
 
+  #auth-form {
+    display: flex;
+    flex-direction: column;
+  }
   .input-cont {
     display: block;
     padding: 0.2rem;
     margin: 0.3rem;
-
     input {
       color: $secondaryColor;
       background: $mainColor;
       box-shadow: 0 5px 5px rgba(0, 0, 0, 0.5);
       border: none;
       border-radius: 8px;
-
+      min-width: 30%;
     }
   }
 
@@ -117,15 +103,15 @@ $secondaryColor: var(--surface2);
     font-weight: 600;
   }
 
+
   button[type='submit'] {
-    position: relative;
-    right: 45%;
+    place-self: center;
   }
 
   #toggle {
     position: absolute;
-    left: 0.3rem;
-    bottom: 0.5rem;
+    left: 1rem;
+    bottom: 1rem;
   }
 }
 </style>

@@ -1,6 +1,7 @@
 import {ref, computed} from 'vue';
 import { defineStore } from 'pinia';
-import axios, { AxiosError } from 'axios';
+import { AxiosError } from 'axios';
+import {baseHttp} from '../shared/axios'
 // types
 import type { Poem } from './__types__';
 // Composables
@@ -13,8 +14,8 @@ export const usePoemStore = defineStore('poems', () => {
 
   async function fetchPoems() {
     try {
-      const req = await axios.get(
-        `${import.meta.env.VITE_API_URL}/poems_intros`
+      const req = await baseHttp.get(
+        `/poems_intros`
       );
       poems.value = req.data;
     } catch (error) {
@@ -30,8 +31,7 @@ export const usePoemStore = defineStore('poems', () => {
   const getPoem = computed<Poem>(() => poem.value);
   async function fetchOtherPoems(id: string) {
     try {
-      let apiPoemsIntros = `${import.meta.env.VITE_API_URL}/poems_intros`;
-      let reqPoemsIntros = await axios.get(apiPoemsIntros);
+      let reqPoemsIntros = await baseHttp.get(`/poems_intros`);
 
       let poemIndex = reqPoemsIntros.data
         .map((poem: Poem) => poem._id)
@@ -49,8 +49,7 @@ export const usePoemStore = defineStore('poems', () => {
     
   async function fetchPoemAndSuggestedPoems(id: string) {
     try {
-      let apiPoem = `${import.meta.env.VITE_API_URL}/poem/${id}`;
-      let reqPoem = await axios.get(apiPoem);
+      let reqPoem = await baseHttp.get(`/poem/${id}`);
       poem.value = reqPoem.data;
 
       fetchOtherPoems(id);

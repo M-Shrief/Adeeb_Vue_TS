@@ -1,6 +1,7 @@
 import {ref, computed} from 'vue';
 import { defineStore } from 'pinia';
-import axios, { AxiosError } from 'axios';
+import { AxiosError } from 'axios';
+import {baseHttp} from '../shared/axios'
 // types
 import type { ChosenVerse } from './__types__';
 // Composables
@@ -11,9 +12,7 @@ export const useChosenVerseStore = defineStore('chosenVerses', () => {
   const getChosenVerses = computed<ChosenVerse[]>(() => chosenVerses.value);
   async function fetchChosenVerses() {
     try {
-      const req = await axios.get(
-        `${import.meta.env.VITE_API_URL}/chosenverses`
-      );
+      const req = await baseHttp.get(`/chosenverses`);
       chosenVerses.value = req.data;
     } catch (error) {
       if (error instanceof AxiosError) {
@@ -28,9 +27,7 @@ export const useChosenVerseStore = defineStore('chosenVerses', () => {
   const getRandomChosenVerses = computed<ChosenVerse[]>(() => randomChosenVerses.value);
   async function fetchRandomChosenVerses(num: number) {
     try {
-      const req = await axios.get(
-        `${import.meta.env.VITE_API_URL}/chosenverses/random?num=${num}`
-      );
+      const req = await baseHttp.get(`/chosenverses/random?num=${num}`);
       randomChosenVerses.value = req.data;
     } catch (error) {
       if (error instanceof AxiosError) {

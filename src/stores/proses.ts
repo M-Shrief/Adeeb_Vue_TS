@@ -1,6 +1,7 @@
 import {ref, computed} from 'vue';
 import { defineStore } from 'pinia';
-import axios, { AxiosError } from 'axios';
+import { AxiosError } from 'axios';
+import {baseHttp} from '../shared/axios'
 // types
 import type { Prose } from './__types__';
 // Composables
@@ -11,7 +12,7 @@ export const useProseStore = defineStore('proses', () => {
   const getProses = computed<Prose[]>(() => proses.value);
   async function fetchProses() {
     try {
-      const req = await axios.get(`${import.meta.env.VITE_API_URL}/proses`);
+      const req = await baseHttp.get(`/proses`);
       proses.value = req.data;
     } catch (error) {
       if (error instanceof AxiosError) {
@@ -26,9 +27,7 @@ export const useProseStore = defineStore('proses', () => {
   const getRandomProses = computed<Prose[]>(() => randomProses.value);
   async function fetchRandomProses(num: number) {
     try {
-      const req = await axios.get(
-        `${import.meta.env.VITE_API_URL}/proses/random?num=${num}`
-      );
+      const req = await baseHttp.get(`/proses/random?num=${num}`);
       randomProses.value = req.data;
     } catch (error) {
       if (error instanceof AxiosError) {

@@ -16,9 +16,3 @@
   leveraging its reactivity.
 
 - _App.vue & main.ts_ files to bootstrap our SPA. g
-
-### Currently Working on
-
-- Making better component tests and follow best practices.
-- Handling authentication cookies and tokens better.
-- using OpenProps for styling, and adding Dark/light modes.

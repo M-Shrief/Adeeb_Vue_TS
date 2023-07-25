@@ -1,4 +1,5 @@
 import { createRouter, createWebHistory } from 'vue-router';
+import type {RouteLocationNormalized, NavigationGuardNext } from 'vue-router'
 const Main = () => import('@/Pages/Main.vue');
 const Poet = () => import('@/Pages/Poet.vue');
 const Poem = () => import('@/Pages/Poem.vue');
@@ -11,6 +12,12 @@ const Index = () => import('@/Pages/Partners/Index.vue');
 const Auth = () => import('@/Pages/Partners/Auth.vue');
 const Partner_Ordering = () => import('@/Pages/Partners/Ordering.vue');
 const Partner_History = () => import('@/Pages/Partners/History.vue');
+
+function guard(to: RouteLocationNormalized, from: RouteLocationNormalized, next: NavigationGuardNext) {
+  const isAuthenticated = sessionStorage.getItem('accessToken') ? true : false;
+  if (!isAuthenticated)  next('/partners/')  // back to Auth Pages
+  else next()  // allow to enter route
+}
 
 const routes = [
   {
@@ -66,6 +73,7 @@ const routes = [
       {
         path: 'history',
         name: 'Partner_History',
+        beforeEnter: guard,
         component: Partner_History,
       },
     ],

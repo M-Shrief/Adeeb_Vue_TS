@@ -15,5 +15,3 @@ export const withAuthHttp = axios.create({
     }
 })
 
-
-const partnerHttp = axios.create({})

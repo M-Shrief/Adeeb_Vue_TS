@@ -139,11 +139,11 @@ $secondaryColor: var(--surface2);
     }
 
     @include mQ($breakpoint-md) {
-      font-size: 0.7rem;
+      font-size: 0.5rem;
     }
 
     @include mQ($breakpoint-sm) {
-      font-size: 0.6rem;
+      font-size: 0.4rem;
     }
   }
 

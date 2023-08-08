@@ -100,7 +100,6 @@ describe('Confirming Customer order successfully', () => {
           _id: '24124152251521512',
           name: 'component testing',
           phone: '01322445566',
-          address: '10th street nowhere',
         },
         productGroups: [
           {
@@ -152,7 +151,7 @@ describe('Confirming Customer order successfully', () => {
       }
     })
 
-    
+    cy.get('#address').type('10th street nowhere');
     cy.get('button[type=submit]').click()
     cy.get('@onPartnerOrderSpy').should('be.calledOnce');
     cy.get('@onPartnerOrderSpy').should('have.been.calledWith', 

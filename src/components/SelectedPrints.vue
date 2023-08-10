@@ -18,16 +18,10 @@
 // types
 import type { Print } from '@/stores/__types__';
 
-defineProps({
-  prints: {
-    type: Array<Print>,
-    required: true
-  },
-  isPartner: {
-    type: Boolean,
-    required: true
-  }
-})
+defineProps<{
+  prints: Print[],
+  isPartner: boolean
+}>()
 
 </script>
 

@@ -27,16 +27,12 @@
 <script lang="ts" setup>
 // types
 import type { ChosenVerse } from '@/stores/__types__';
-defineProps({
-  chosenVerses: {
-    type: Array<ChosenVerse>,
-    required: true,
-  },
-  routeName: {
-    type: String,
-    required: false,
-  },
-});
+
+defineProps<{
+  chosenVerses: ChosenVerse[],
+  routeName?: string
+}>()
+
 defineEmits(['print']);
 </script>
 

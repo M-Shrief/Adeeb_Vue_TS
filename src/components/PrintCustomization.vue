@@ -21,12 +21,10 @@
 // components
 import PreviewColors from "@/components/PreviewColors.vue";
 
-defineProps({
-  colors: {
-    type: Array<string>,
-    required: true
-  }
-})
+defineProps<{
+  colors: string[]
+}>()
+
 defineEmits(['fontColor', 'backgroundColor']);
 </script>
 

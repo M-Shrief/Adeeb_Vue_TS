@@ -9,9 +9,9 @@
 </template>
 
 <script lang="ts" setup>
-defineProps({
-  colors: Array<string>,
-});
+defineProps<{
+  colors: string[]
+}>();
 
 defineEmits(['color']);
 </script>

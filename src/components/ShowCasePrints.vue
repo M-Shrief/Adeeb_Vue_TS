@@ -25,16 +25,10 @@ import { ref, type ComputedRef } from 'vue';
 // types
 import type { Print } from '@/stores/__types__';
 
-const props = defineProps({
-  prints: {
-    type: Array<Print>,
-    required: true
-  },
-  colors: {
-    type: Array<ComputedRef<string>>,
-    required: false
-  }
-})
+const props = defineProps<{
+  prints: Print[],
+  colors?: ComputedRef<string>[]
+}>()
 
 let fontColor = ref<ComputedRef<string> | string>(props.colors ? props.colors[0] : 'auto');
 let backgroundColor = ref<ComputedRef<string> | string>(props.colors ? props.colors[1] : 'auto');

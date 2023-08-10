@@ -6,14 +6,11 @@
 </template>
 
 <script lang="ts" setup>
-// import { Poet } from '@/stores/__types';
+import type { Poet } from '@/stores/__types__';
 
-defineProps({
-  details: {
-    type: Object,
-    required: true
-  }
-})
+defineProps<{
+  details: Poet['details']
+}>()
 </script>
 
 <style lang="scss" scoped>

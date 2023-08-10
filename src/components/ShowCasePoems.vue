@@ -21,17 +21,12 @@
 // types
 import type { Poem } from '@/stores/__types__';
 
-const props = defineProps({
-  poems: {
-    type: Array<Poem>,
-    required: true,
-  },
+const props = defineProps<{
+  poems: Poem[],
   // not put in {poet, poem} pages
-  grid: {
-    type: String,
-    required: false,
-  },
-});
+  grid?: string,
+}>()
+
 </script>
 
 <style lang="scss" scoped>

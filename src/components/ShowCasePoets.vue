@@ -13,12 +13,10 @@
 <script lang="ts" setup>
 // types
 import type { Poet } from '@/stores/__types__';
-defineProps({
-  poets: {
-    type: Array<Poet['details']>,
-    required: true,
-  },
-});
+
+defineProps<{
+  poets: Poet['details'][]
+}>()
 </script>
 
 <style lang="scss" scoped>

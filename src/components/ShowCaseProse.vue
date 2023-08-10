@@ -23,16 +23,11 @@
 // types
 import type { Prose } from '@/stores/__types__';
 
-defineProps({
-  proses: {
-    type: Array<Prose>,
-    required: true,
-  },
-  routeName: {
-    type: String,
-    required: false
-  }
-});
+defineProps<{
+  proses: Prose[],
+  routeName?: string
+}>()
+
 defineEmits(['print']);
 </script>
 

@@ -11,12 +11,10 @@
 <script lang="ts" setup>
 import type { Verse } from '@/stores/__types__';
 
-defineProps({
-  verses: {
-    type: Array<Verse>,
-    required: true
-  }
-});
+defineProps<{
+  verses: Verse[]
+}>()
+
 defineEmits(['print']);
 </script>
 

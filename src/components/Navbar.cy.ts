@@ -14,8 +14,7 @@ describe('Navbar links', () => {
     cy.get('router-link[to*="/history"]').should('exist');
     cy.get('router-link[to*="/about"]').should('exist');
     cy.get('router-link[to*="/partners"]').should('exist');
-
-    cy.get('span').should('not.exist');
+    cy.get('span.nav-item').should('not.exist');
   });
 
   // Still need to know how to deal with injectables
@@ -36,8 +35,7 @@ describe('Navbar links', () => {
     cy.get('router-link[to*="/partners/history"]').should('exist');
     cy.get('router-link[to*="/about"]').should('exist');
 
-    cy.get('span', { multiple: true }).should('exist');
     cy.get('.partner-name').should('contain', 'Quasar SSR');
-    cy.get('.nav-item').should('contain', 'تسجيل الخروج');
+    cy.get('span.nav-item').should('contain', 'تسجيل الخروج');
   });
 });

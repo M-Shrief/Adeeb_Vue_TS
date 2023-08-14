@@ -12,12 +12,7 @@ export const usePrintsStore = defineStore('prints', () => {
     return prints.value;
   });
   function addPrint(print: Print) {
-    const printsIds = prints.value.map(
-      (printItem) =>
-        // printItem._id ? printItem._id : printItem.verses[0]._id
-        printItem._id
-    );
-    // const printId = print._id ? print._id : print.verses[0]._id;
+    const printsIds = prints.value.map((printItem) => printItem._id);
     if (!printsIds.includes(print._id)) {
       prints.value.push(print);
     }

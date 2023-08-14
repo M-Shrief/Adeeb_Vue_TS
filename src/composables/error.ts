@@ -15,16 +15,16 @@
 import { ref } from 'vue';
 import type { AxiosError } from 'axios';
 
-export let error = ref();
+export let httpError = ref();
 
-export const useAxiosError = async (httpError: AxiosError) => {
-  if (httpError.response?.data) {
-    error.value = httpError.response.data;
-  } else if (httpError.message) {
-    error.value = httpError;
+export const useAxiosError = async (axiosError: AxiosError) => {
+  if (axiosError.response?.data) {
+    httpError.value = axiosError.response.data;
+  } else if (axiosError.message) {
+    httpError.value = axiosError;
   }
 
   setTimeout(() => {
-    error.value = null;
+    httpError.value = null;
   }, 3000);
 };

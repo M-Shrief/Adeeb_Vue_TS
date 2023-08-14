@@ -1,7 +1,7 @@
 <template>
   <div class="flex-center">
-    <div v-if="error" class="popup popup-error">
-      <p>{{ error.message }}</p>
+    <div v-if="httpError" class="popup popup-error">
+      <p>{{ httpError.message }}</p>
     </div>
     <div v-if="success" class="popup popup-success">
       <p>{{ success.message }}</p>
@@ -9,7 +9,7 @@
   </div>
 </template>
 <script lang="ts" setup>
-import { error } from '../../composables/error'
+import { httpError } from '../../composables/error'
 import { success } from '../../composables/success'
 </script>
 

@@ -84,8 +84,6 @@ window
 </script>
 
 <style lang="scss" scoped>
-@import "../../node_modules/open-props/easings.min.css";
-
 button {
   background-color: transparent;
   border: none;

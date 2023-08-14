@@ -23,7 +23,7 @@
       <!-- use src/components/ShowCasePrint instead, only need addition is to make styles conditional-->
       <ShowCasePrints :prints="getPrints"
         :colors="[computed(() => fontColor as string), computed(() => backgroundColor as string)]"
-        @remove="(print) => removePrint(print)" />
+        @remove="(print: Print) => removePrint(print)" />
     </div>
     <button @click="addProductGroup(getPrints, [fontColor, backgroundColor])">
       اضافة الطلبات</button>

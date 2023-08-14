@@ -2,20 +2,19 @@
   <main dir="rtl">
     <h2>ادخل بيانات الطلب لمتابعته</h2>
 
-    <form @submit.prevent="fetchOrder">
+    <Form @submit="onSubmit" >
       <div class="container">
-        <label for="name">الاسم: </label>
-        <input type="text" id="name" name="name" required minlength="5"
-          maxlength="20" />
-      </div>
-      <div class="container">
-        <label for="phone">الهاتف: </label>
-        <input type="text" id="phone" name="phone" required minlength="8"
-          maxlength="18" />
-      </div>
-
+          <label for="name">الاسم: </label>
+          <Field name="name" id="name" autocomplete="name"  :rules="nameRules" />
+          <ErrorMessage name="name" class="error" />
+        </div>
+        <div class="container">
+          <label for="phone">الهاتف: </label>
+          <Field name="phone" id="phone" autocomplete="phone" :rules="phoneRules" />
+          <ErrorMessage name="phone" class="error" />
+        </div>
       <button type="submit">تأكـيد</button>
-    </form>
+      </Form>
 
     <div v-for="order in getOrders" :key="order._id" class="order">
       <div class="order-details">
@@ -53,6 +52,9 @@
 
 <script lang="ts" setup>
 import { computed } from 'vue';
+// Validation
+import { Form, Field, ErrorMessage } from 'vee-validate';
+import { nameRules, phoneRules, addressRules } from '../../shared/forms.schema'
 // Stores
 import { useOrderStore } from "@/stores/orders";
 // Types
@@ -64,9 +66,8 @@ const getOrders = computed(() => {
 });
 
 
-function fetchOrder() {
-  let name = (document.getElementById("name") as HTMLInputElement).value;
-  let phone = (document.getElementById("phone") as HTMLInputElement).value;
+async function onSubmit(values: any) {
+  const {name, phone} = values
   orderStore.fetchOrders(name, phone);
 }
 
@@ -100,13 +101,18 @@ form {
     margin-right: 0.2rem;
     margin-top: 0.4rem;
 
-    input[type='text'] {
+    #name,
+    #phone{
       background: $mainColor;
       color: $secondaryColor;
       box-shadow: 0 5px 5px rgba(0, 0, 0, 0.5);
       border: none;
       border-radius: 8px;
     }
+    .error {
+        color: #c80815;
+        margin-right: 1rem;
+      }
   }
 
   button {

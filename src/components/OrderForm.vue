@@ -1,5 +1,5 @@
 <template>
-  <Form @submit="confirmOrder" dir="rtl">
+  <Form @submit="onSubmit" dir="rtl">
     <div id="confirmation">
       <div id="customer-details" v-if="partner">
         <div class="container">
@@ -104,7 +104,7 @@ function deleteFromProductGroup(productGroup: ProductGroup, print: Print) {
 
 const emits = defineEmits(['partnerOrder', 'guestOrder']);
 
-async function confirmOrder(values: any) {
+async function onSubmit(values: any) {
   let order: Order;
   if (props.partner && props.productGroups) {
     order = {

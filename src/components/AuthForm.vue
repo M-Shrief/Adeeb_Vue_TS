@@ -7,11 +7,6 @@
         <Field name="name" id="name" autocomplete="name"  :rules="nameRules" />
         <ErrorMessage name="name" class="error" />
       </div>
-      <div v-if="!isRegistered" class="input-cont">
-        <label for="address">العنوان: </label>
-        <Field name="address" id="address" autocomplete="address" :rules="addressRules" />
-        <ErrorMessage name="address" class="error" />
-      </div>
       <div class="input-cont">
         <label for="phone">رقم الهاتف: </label>
         <Field name="phone" id="phone" autocomplete="phone"  :rules="phoneRules" />

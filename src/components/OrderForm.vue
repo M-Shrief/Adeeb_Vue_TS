@@ -111,7 +111,6 @@ async function onSubmit(values: any) {
       partner: props.partner._id,
       name: props.partner.name,
       phone: props.partner.phone,
-      // address: props.partner.address,
       ...values,
       products: props.productGroups
     };

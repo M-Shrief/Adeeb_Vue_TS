@@ -45,7 +45,7 @@ import { usePrintsStore } from "@/stores/prints";
 import { usePartnerStore } from '@/stores/partners';
 import { useOrderStore } from "@/stores/orders";
 // types
-import type { Order, Print } from '@/stores/__types__'
+import type { Order, Print, ChosenVerse, Prose } from '@/stores/__types__'
 
 const printStore = usePrintsStore();
 const getPrints = computed(() => {
@@ -54,7 +54,7 @@ const getPrints = computed(() => {
 function removePrint(print: Print) {
   return printStore.removePrint(print);
 }
-function prepPrints(prints: Print[]) {
+function prepPrints(prints: ChosenVerse[] | Prose[]) {
   return printStore.prepPrints(prints)
 }
 
@@ -95,7 +95,9 @@ const proseStore = useProseStore();
 
 async function preparePoetry() {
   const num = (document.getElementById('poetry') as HTMLInputElement).valueAsNumber;
-  await chosenVerseStore.fetchRandomChosenVerses(num).then(() => prepPrints(chosenVerseStore.getRandomChosenVerses as Print[]));
+  await chosenVerseStore.fetchRandomChosenVerses(num).then(() => {
+    prepPrints(chosenVerseStore.getRandomChosenVerses)
+  });
 }
 async function prepareProse() {
   const num = (document.getElementById('prose') as HTMLInputElement).valueAsNumber;

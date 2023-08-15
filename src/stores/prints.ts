@@ -1,7 +1,7 @@
 import {ref, computed} from 'vue';
 import { defineStore } from 'pinia';
 // Types
-import type { Print } from './__types__';
+import type { Print, ChosenVerse, Prose } from './__types__';
 // Composables
 import {useSessionStorage} from '@vueuse/core';
 
@@ -17,9 +17,9 @@ export const usePrintsStore = defineStore('prints', () => {
       prints.value.push(print);
     }
   };
-  function prepPrints(printsData: Print[]) {
+  function prepPrints(printsData: ChosenVerse[] | Prose[]) {
     // it's normal in big orders to repeat the same print
-    prints.value = prints.value.concat(printsData);
+    prints.value = prints.value.concat(printsData as Print[]);
   };
   function removePrint(print: Print) {
     let printIndex = prints.value

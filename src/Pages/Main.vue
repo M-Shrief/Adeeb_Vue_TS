@@ -12,7 +12,7 @@
         <h2 class="poets-title">الشعراء</h2>
       </ShowCasePoets>
 
-      <ShowCasePoetry :chosenVerses="getChosenVerses" :routeName="'main'"
+      <ShowCaseChosenVerse :chosenVerses="getChosenVerses" :routeName="'main'"
         @print="(print: Print) => addPrint(print)" />
 
       <ShowCaseProse :proses="getProses" :routeName="'main'"
@@ -35,7 +35,7 @@ import type { Print } from '@/stores/__types__';
 // components
 import ShowCasePoems from '@/components/ShowCasePoems.vue';
 import ShowCasePoets from '@/components/ShowCasePoets.vue';
-import ShowCasePoetry from '@/components/ShowCasePoetry.vue';
+import ShowCaseChosenVerse from '@/components/ShowCaseChosenVerse.vue';
 import ShowCaseProse from '@/components/ShowCaseProse.vue';
 import SelectedPrints from '@/components/SelectedPrints.vue';
 

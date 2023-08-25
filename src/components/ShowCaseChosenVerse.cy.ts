@@ -1,10 +1,10 @@
-import ShowCasePoetry from './ShowCasePoetry.vue';
+import ShowCaseChosenVerse from './ShowCaseChosenVerse.vue';
 
 describe('Renders properly', () => {
   it('a ChosenVerse on Main page with one Verse', () => {
     // see: https://on.cypress.io/mounting-vue
     const onPrintSpy = cy.spy().as('onPrintSpy');
-    cy.mount(ShowCasePoetry, {
+    cy.mount(ShowCaseChosenVerse, {
       props: {
         chosenVerses: [
           {
@@ -54,7 +54,7 @@ describe('Renders properly', () => {
   it('a ChosenVerse on Poet page with two Verse', () => {
     // see: https://on.cypress.io/mounting-vue
     const onPrintSpy = cy.spy().as('onPrintSpy');
-    cy.mount(ShowCasePoetry, {
+    cy.mount(ShowCaseChosenVerse, {
       props: {
         chosenVerses: [
           {

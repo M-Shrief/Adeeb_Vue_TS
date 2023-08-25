@@ -11,7 +11,7 @@
       </div>
 
       <!-- Add Pagination for poetry and proses -->
-      <ShowCasePoetry :chosen-verses="getPoet.chosenVerses"
+      <ShowCaseChosenVerse :chosen-verses="getPoet.chosenVerses"
         :route-name="'poet'" @print="(print: Print) => addPrint(print)" />
 
       <ShowCaseProse :proses="getPoet.proses" :route-name="'poet'"
@@ -33,7 +33,7 @@ import type { Print } from '@/stores/__types__';
 // components
 import ShowCasePoet from '@/components/ShowCasePoet.vue';
 import ShowCasePoems from '@/components/ShowCasePoems.vue';
-import ShowCasePoetry from '@/components/ShowCasePoetry.vue';
+import ShowCaseChosenVerse from '@/components/ShowCaseChosenVerse.vue';
 import ShowCaseProse from '@/components/ShowCaseProse.vue';
 import SelectedPrints from '@/components/SelectedPrints.vue';
 

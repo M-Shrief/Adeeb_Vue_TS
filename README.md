@@ -33,4 +33,4 @@
 - _./stores_ file for to manage our app state, logic and api requests, while
   leveraging its reactivity.
 
-- _App.vue & main.ts_ files to bootstrap our SPA. g
+- _App.vue & main.ts_ files to bootstrap our SPA.

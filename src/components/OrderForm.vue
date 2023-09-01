@@ -130,6 +130,7 @@ async function onSubmit(values: any) {
 
 $mainColor: var(--text1);
 $secondaryColor: var(--surface2);
+$inputsColor: var(--surface1);
 
 form {
   background-color: $secondaryColor;
@@ -152,17 +153,11 @@ form {
       #name,
       #phone,
       #address {
-        background: $mainColor;
+        color: $mainColor;
+        background: $inputsColor;
         box-shadow: 0 5px 5px rgba(0, 0, 0, 0.5);
         border: none;
         border-radius: 1rem;
-        color: $secondaryColor;
-      }
-
-      #address {
-        color: $secondaryColor;
-        background-color: $mainColor;
-        border: 1px solid $secondaryColor;
       }
 
       .error {

@@ -47,6 +47,7 @@ async function onSubmit(values: any) {
 <style lang="scss" scoped>
 $mainColor: var(--text1);
 $secondaryColor: var(--surface2);
+$inputsColor: var(--surface1);
 
 #authentication {
   display: flex;
@@ -74,8 +75,8 @@ $secondaryColor: var(--surface2);
     padding: 0.2rem;
     margin: 0.3rem;
     input {
-      color: $secondaryColor;
-      background: $mainColor;
+      color: $mainColor;
+      background: $inputsColor;
       box-shadow: 0 5px 5px rgba(0, 0, 0, 0.5);
       border: none;
       border-radius: 8px;
@@ -89,8 +90,8 @@ $secondaryColor: var(--surface2);
   }
 
   button {
-    background-color: $mainColor;
-    color: $secondaryColor;
+    color: $mainColor;
+    background: $inputsColor;
     border: none;
     border-radius: 1rem;
     padding: 0.5rem;

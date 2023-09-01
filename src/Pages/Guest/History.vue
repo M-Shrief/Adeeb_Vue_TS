@@ -78,6 +78,7 @@ async function onSubmit(values: any) {
 
 $mainColor: var(--text1);
 $secondaryColor: var(--surface2);
+$inputsColor: var(--surface1);
 
 h2 {
   text-align: center;
@@ -103,8 +104,8 @@ form {
 
     #name,
     #phone{
-      background: $mainColor;
-      color: $secondaryColor;
+      background: $inputsColor;
+      color: $mainColor;
       box-shadow: 0 5px 5px rgba(0, 0, 0, 0.5);
       border: none;
       border-radius: 8px;

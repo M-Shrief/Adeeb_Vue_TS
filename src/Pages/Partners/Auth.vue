@@ -86,7 +86,7 @@ aside {
 
 .direct-Order {
   $mainColor: var(--text1);
-  $secondaryColor: var(--surface2);
+  $secondaryColor: var(--surface1);
   position: relative;
   right: 45%;
   text-decoration: none;

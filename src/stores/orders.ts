@@ -1,7 +1,7 @@
 import {ref, computed} from 'vue';
 import { defineStore } from 'pinia';
 import  { AxiosError } from 'axios';
-import {baseHttp, withAuthHttp} from '../shared/axios'
+import {baseHttp, withAuthHttp} from '../utils/axios'
 // types
 import type { Order, Product, ProductGroup, Print } from './__types__';
 // Composables

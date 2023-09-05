@@ -71,7 +71,7 @@
 <script lang="ts" setup>
 // Validation
 import { Form, Field, ErrorMessage } from 'vee-validate';
-import { nameRules, phoneRules, addressRules } from '../shared/forms.schema'
+import { nameRules, phoneRules, addressRules } from '../utils/forms.schema'
 // types
 import type { Product, Print, ProductGroup, Partner, Order } from '@/stores/__types__';
 

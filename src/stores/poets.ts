@@ -1,7 +1,7 @@
 import {ref, computed} from 'vue';
 import { defineStore } from 'pinia';
 import { AxiosError } from 'axios';
-import {baseHttp} from '../shared/axios'
+import {baseHttp} from '../utils/axios'
 // Types
 import type { Poet } from './__types__';
 // Composables

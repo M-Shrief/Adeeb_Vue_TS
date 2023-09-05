@@ -54,7 +54,7 @@
 import { computed } from 'vue';
 // Validation
 import { Form, Field, ErrorMessage } from 'vee-validate';
-import { nameRules, phoneRules, addressRules } from '../../shared/forms.schema'
+import { nameRules, phoneRules, addressRules } from '../../utils/forms.schema'
 // Stores
 import { useOrderStore } from "@/stores/orders";
 // Types

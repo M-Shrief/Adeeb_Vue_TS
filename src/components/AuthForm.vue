@@ -30,7 +30,7 @@
 import { ref } from 'vue'
 // Validation
 import { Form, Field, ErrorMessage } from 'vee-validate';
-import { nameRules, phoneRules, addressRules, passwordRules } from '../shared/forms.schema'
+import { nameRules, phoneRules, addressRules, passwordRules } from '../utils/forms.schema'
 
 const isRegistered = ref(true);
 

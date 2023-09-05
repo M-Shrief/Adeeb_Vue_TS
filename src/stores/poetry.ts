@@ -8,7 +8,7 @@ import { useProseStore } from './proses';
 // types
 import type { Poetry } from './__types__';
 // Utils
-import {shuffle} from '../utils/shuffle'
+import {shufflePoetry} from '../utils/shuffle'
 // Composables
 import { useAxiosError } from '../composables/error';
 
@@ -28,7 +28,7 @@ export const usePoetryStore = defineStore('poetry', () => {
             ]);
     
             poetry.value = [...chosenVersesStore.getChosenVerses, ...prosesStore.getProses] as Poetry[];
-            await shuffle(poetry.value);
+            await Promise.all([shufflePoetry(poetry.value)]);
         } catch (error) {
             if (error instanceof AxiosError) {
                 useAxiosError(error);
@@ -42,11 +42,6 @@ export const usePoetryStore = defineStore('poetry', () => {
     const getPoetPoetry = computed(() => {
         return poetPoetry.value;
     })
-
-    async function shufflePoetPoetry(array: []) {
-        await shuffle(array);
-
-    }
 
     return {getPoetry, fetchPoetry};
 })

@@ -11,7 +11,7 @@
       </div>
 
       <!-- Add Pagination for poetry and proses -->
-        <ShowCasePoetry :poetry="([...getPoet.chosenVerses, ...getPoet.proses] as Poetry[])"
+        <ShowCasePoetry :poetry="(shufflePoetry([...getPoet.chosenVerses, ...getPoet.proses] as Poetry[]) as Poetry[])"
          :routeName="'poet'"  @print="(print: Print) => addPrint(print)" />
       
     </div>
@@ -27,12 +27,14 @@ import { useRoute } from 'vue-router';
 import { usePoetStore } from "@/stores/poets";
 import { usePrintsStore } from "@/stores/prints";
 // types
-import type { Print, Poetry, Prose, ChosenVerse } from '@/stores/__types__';
+import type { Print, Poetry } from '@/stores/__types__';
 // components
 import ShowCasePoet from '@/components/ShowCasePoet.vue';
 import ShowCasePoems from '@/components/ShowCasePoems.vue';
 import ShowCasePoetry from '@/components/ShowCasePoetry.vue';
 import SelectedPrints from '@/components/SelectedPrints.vue';
+// Utils
+import {shufflePoetry} from '@/utils/shuffle';
 
 const poetStore = usePoetStore();
 const getPoet = computed(() => {

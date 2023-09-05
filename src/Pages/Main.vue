@@ -11,13 +11,10 @@
       <ShowCasePoets :poets="getPoets">
         <h2 class="poets-title">الشعراء</h2>
       </ShowCasePoets>
-
-      <ShowCaseChosenVerse :chosenVerses="getChosenVerses" :routeName="'main'"
-        @print="(print: Print) => addPrint(print)" />
-
-      <ShowCaseProse :proses="getProses" :routeName="'main'"
-        @print="(print: Print) => addPrint(print)" />
     </div>
+
+      <ShowCasePoetry :poetry="getPoetry" :routeName="'main'"
+      @print="(print: Print) => addPrint(print)" />
     <SelectedPrints :prints="getPrints" @remove="(print) => removePrint(print)"
       :is-partner="isPartner" />
   </main>
@@ -27,16 +24,16 @@ import { onMounted, computed, inject } from 'vue';
 // stores
 import { usePoemStore } from '@/stores/poems';
 import { usePoetStore } from '@/stores/poets';
-import { useChosenVerseStore } from '@/stores/chosenVerses';
-import { useProseStore } from '@/stores/proses';
+import { usePoetryStore } from '@/stores/poetry';
 import { usePrintsStore } from '@/stores/prints';
 // Types
 import type { Print } from '@/stores/__types__';
 // components
 import ShowCasePoems from '@/components/ShowCasePoems.vue';
 import ShowCasePoets from '@/components/ShowCasePoets.vue';
-import ShowCaseChosenVerse from '@/components/ShowCaseChosenVerse.vue';
-import ShowCaseProse from '@/components/ShowCaseProse.vue';
+import ShowCasePoetry from '@/components/ShowCasePoetry.vue';
+// import ShowCaseChosenVerse from '@/components/ShowCaseChosenVerse.vue';
+// import ShowCaseProse from '@/components/ShowCaseProse.vue';
 import SelectedPrints from '@/components/SelectedPrints.vue';
 
 const poemsStore = usePoemStore();
@@ -49,21 +46,15 @@ const getPoets = computed(() => {
   return poetsStore.getPoets;
 });
 
-const chosenVersesStore = useChosenVerseStore();
-const getChosenVerses = computed(() => {
-  return chosenVersesStore.getChosenVerses;
-});
-
-const proseStore = useProseStore();
-const getProses = computed(() => {
-  return proseStore.getProses;
+const poetryStore = usePoetryStore();
+const getPoetry = computed(() => {
+  return poetryStore.getPoetry;
 });
 
 onMounted(() => {
   if (!getPoems.value.length) poemsStore.fetchPoems();
   if (!getPoets.value.length) poetsStore.fetchPoets();
-  if (!getChosenVerses.value.length) chosenVersesStore.fetchChosenVerses();
-  if (!getProses.value.length) proseStore.fetchProses();
+  if (!getPoetry.value.length) poetryStore.fetchPoetry();
 });
 // Should use Provide/Inject
 const printsStore = usePrintsStore();

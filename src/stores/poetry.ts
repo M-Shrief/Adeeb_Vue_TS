@@ -12,7 +12,7 @@ import {shuffle} from '../utils/shuffle'
 // Composables
 import { useAxiosError } from '../composables/error';
 
-export const usePoetryStore = defineStore('partners', () => {
+export const usePoetryStore = defineStore('poetry', () => {
     const poetry = ref<Poetry[]>([]);
     const getPoetry = computed(() => {
         return poetry.value;
@@ -36,6 +36,16 @@ export const usePoetryStore = defineStore('partners', () => {
             }
             alert(error);
         }
+    }
+
+    const poetPoetry = ref<Poetry[]>([]);
+    const getPoetPoetry = computed(() => {
+        return poetPoetry.value;
+    })
+
+    async function shufflePoetPoetry(array: []) {
+        await shuffle(array);
+
     }
 
     return {getPoetry, fetchPoetry};

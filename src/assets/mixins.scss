@@ -28,31 +28,6 @@ $breakpoint-xl: 1280px; // default development size
   }
 }
 
-@mixin add-print-btn {
-  background: $secondaryColor;
-  border: 1px solid $mainColor;
-  position: absolute;
-  bottom: 0.7rem;
-  left: 0.7rem;
-  border-radius: 1.5rem;
-  color: $mainColor;
-  padding: 0.1rem;
-  cursor: pointer;
-  &:hover {
-    background: $mainColor;
-    color: $secondaryColor;
-  }
-  @include mQ($breakpoint-sm) {
-    font-size: 0.5rem;
-  }
-  @include mQ($breakpoint-md) {
-    font-size: 0.6rem;
-  }
-  @include mQ($breakpoint-lg) {
-    font-size: 0.6rem;
-  }
-}
-
 @mixin submit-btn {
   border: none;
   border-radius: 1.5rem;

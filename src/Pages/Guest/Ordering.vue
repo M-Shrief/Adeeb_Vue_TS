@@ -96,7 +96,7 @@ function addProduct(productPrint: Print, colors: string[]) {
 const router = useRouter();
 
 const confirmGuestOrder = async (order: Order) => {
-    await orderStore.newOrder(order)
+    await orderStore.newGuestOrder(order)
     orderStore.reset()
     router.push('/history');
 }

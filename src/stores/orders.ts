@@ -33,7 +33,7 @@ export const useOrderStore = defineStore('orders',
     async function fetchPartnerOrders(partner: string) {
       try {
         const req = await withAuthHttp.get(
-          `/orders/${partner}`
+          `/orders/partner`
         );
         orders.value = req.data;
       } catch (error) {
@@ -44,10 +44,23 @@ export const useOrderStore = defineStore('orders',
         alert(error);
       }
     };
-    async function newOrder(order: Order) {
+
+    async function newGuestOrder(order: Order) {
       try {
-        let apiOrder = `/order`;
-        await baseHttp.post(apiOrder, order);
+        await baseHttp.post(`/order/guest`, order);
+        useSuccessNotification('Operation was made successfully');
+      } catch (error) {
+        if (error instanceof AxiosError) {
+          useAxiosError(error);
+          return;
+        }
+        alert(error);
+      }
+    };
+
+    async function newPartnerOrder(order: Order) {
+      try {
+        await withAuthHttp.post(`/order/partner`, order);
         useSuccessNotification('Operation was made successfully');
       } catch (error) {
         if (error instanceof AxiosError) {
@@ -111,6 +124,6 @@ export const useOrderStore = defineStore('orders',
       products.value = [];
     };
 
-    return { getOrders, fetchOrders, fetchPartnerOrders, newOrder,  getProductGroups, addProductGroup,  getProducts, addProduct, colors, reset}
+    return { getOrders, fetchOrders, fetchPartnerOrders, newGuestOrder, newPartnerOrder,  getProductGroups, addProductGroup,  getProducts, addProduct, colors, reset}
   },
 )

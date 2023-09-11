@@ -84,7 +84,7 @@ const partner = computed(() => {
 })
 
 const confirmPartnerOrder = async (order: Order) => {
-    await orderStore.newOrder(order)
+    await orderStore.newPartnerOrder(order)
     orderStore.reset()
     router.push('/partners/history');
 }

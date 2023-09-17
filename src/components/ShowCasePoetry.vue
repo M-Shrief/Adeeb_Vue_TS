@@ -5,10 +5,10 @@
             <div v-for="singlePiece in poetry" :key="singlePiece._id" class="poetry-item">
                 <div v-if="singlePiece.qoute" class="prose-item">
                     <p class="qoute">{{ singlePiece.qoute }}</p>
-                    <a v-if="!(routeName === 'poet')"
-                        :href="'/poet/' + singlePiece.poet._id" class="details">{{
+                    <router-link v-if="!(routeName === 'poet')"
+                        :to="'/poet/' + singlePiece.poet._id" class="details">{{
                         singlePiece.poet.name}}
-                    </a>
+                    </router-link>
 
                     <button @click="$emit('print', { _id: singlePiece._id, qoute: singlePiece.qoute })"
                         class="print-button">
@@ -21,11 +21,11 @@
                         <p class="first">{{ verse.first }}</p>
                         <p class="sec">{{ verse.sec }}</p>
                     </div>
-                    <a :href="'/poem/' + singlePiece.poem" class="details">{{
+                    <router-link :to="'/poem/' + singlePiece.poem" class="details">{{
                         routeName == 'poet'
                         ? 'القصيدة الكاملة'
                         : singlePiece.poet.name + ' - القصيدة الكاملة'}}
-                    </a>
+                    </router-link>
                     <button
                         @click="$emit('print', { _id: singlePiece._id, verses: singlePiece.verses })"
                         class="print-button">

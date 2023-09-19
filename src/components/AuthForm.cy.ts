@@ -35,7 +35,6 @@ describe('Authenticate partner successfully', () => {
 
     // form properties
     cy.get('#name').type('new User')
-    cy.get('#address').type('10th Cairo Street')
     cy.get('#phone').type('01235554567');
     cy.get('#password').type('P@ssword1');
 
@@ -46,7 +45,6 @@ describe('Authenticate partner successfully', () => {
       {
         name: 'new User',
         phone: '01235554567',
-        address: '10th Cairo Street',
         password: 'P@ssword1'
       });
   })

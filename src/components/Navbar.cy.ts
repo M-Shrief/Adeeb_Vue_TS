@@ -18,7 +18,8 @@ describe('Navbar links', () => {
   });
 
   // Still need to know how to deal with injectables
-  it('renders alright and reference right page when partner is logged in', () => {
+  it('renders alright and reference right page when partner is logged in, and the partner is able to logout.', () => {
+    const onLogoutSpy = cy.spy().as('onLogoutSpy')
     cy.mount(Navbar, {
       props: {
         partner: {
@@ -27,6 +28,7 @@ describe('Navbar links', () => {
           phone: '01023669999',
           address: '10th street, Cairo',
         },
+        onLogout: onLogoutSpy
       },
     });
 
@@ -36,6 +38,7 @@ describe('Navbar links', () => {
     cy.get('router-link[to*="/about"]').should('exist');
 
     cy.get('.partner-name').should('contain', 'Quasar SSR');
-    cy.get('span.nav-item').should('contain', 'تسجيل الخروج');
+    cy.get('span.nav-item').should('contain', 'تسجيل الخروج').click();
+    cy.get('@onLogoutSpy').should('be.calledOnce');
   });
 });

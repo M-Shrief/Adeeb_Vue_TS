@@ -43,17 +43,17 @@
           <p v-else-if="product.print.qoute">
             {{ product.print.qoute.slice(0, 30) }}...</p>
         </div>
-        <div v-for="productGroup, index in productGroups" :key="index">
+        <div v-for="productGroup, groupIndex in productGroups" :key="groupIndex">
           <div class="group-details"
             :style="{ color: productGroup.fontColor, background: productGroup.backgroundColor }">
             <p>نوع الخط: {{ productGroup.fontType }} </p>
             <p>{{ productGroup.prints.length }} طبعات</p>
           </div>
           <div class="group-prints">
-            <div v-for="print, index in productGroup.prints" :key="index"
+            <div v-for="print, printIndex in productGroup.prints" :key="printIndex"
               class="group-print"
               :style="{ color: productGroup.fontColor, background: productGroup.backgroundColor }"
-              @dblclick="deleteFromProductGroup(productGroup, print)">
+              @dblclick="deleteFromProductGroup(groupIndex, printIndex)">
               <p v-if="print.verses"> {{ print.verses[0].first }}...</p>
               <p v-else-if="print.qoute"> {{ print.qoute.slice(0, 30) }}...</p>
             </div>
@@ -84,13 +84,13 @@ function deleteProduct(index: number) {
 }
 
 // ProductGroup
-function deleteFromProductGroup(productGroup: ProductGroup, print: Print) {
-  if (props.productGroups && productGroup.prints.length == 1) {
-    let productGroupIndex = props.productGroups.map(productGroup => productGroup.prints.length).indexOf(1);
-    props.productGroups.splice(productGroupIndex, 1);
-  } else {
-    let printIndex = productGroup.prints.map(print => print._id).indexOf(print._id);
-    productGroup.prints.splice(printIndex, 1);
+function deleteFromProductGroup(groupIndex:number, printIndex: number) {
+  if(props.productGroups) {
+    if (props.productGroups[groupIndex].prints.length == 1) {
+      props.productGroups.splice(groupIndex, 1);
+    } else {
+      props.productGroups[groupIndex].prints.splice(printIndex, 1);
+    }
   }
 }
 

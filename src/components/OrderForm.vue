@@ -31,15 +31,12 @@
           <ErrorMessage name="address" class="error" />
         </div>
       </div>
-      <div class="errors">
-      </div>
-
 
       <div id="products">
         <div v-for="product, index in products" class="product-details"
           :key="index"
           :style="{ color: product.fontColor, background: product.backgroundColor }"
-          @dblclick="deleteProduct(products as Product[], product)">
+          @dblclick="deleteProduct(index)">
           <p>{{ product.fontType }}</p>
           <p v-if="product.print.verses"> {{ product.print.verses[0].first
           }}...</p>
@@ -82,14 +79,8 @@ const props = defineProps<{
 }>();
 
 
-function deleteProduct(products: Product[], product: Product) {
-  let productIndex = products.map(product => product.print._id).indexOf(product.print._id);
-  products.splice(productIndex, 1);
-}
-
-function deletePrint(productGroup: ProductGroup, print: Print) {
-  let printIndex = productGroup.prints.map(print => print._id).indexOf(print._id);
-  productGroup.prints.splice(printIndex, 1);
+function deleteProduct(index: number) {
+  if(props.products) props.products.splice(index, 1);
 }
 
 // ProductGroup
@@ -98,7 +89,8 @@ function deleteFromProductGroup(productGroup: ProductGroup, print: Print) {
     let productGroupIndex = props.productGroups.map(productGroup => productGroup.prints.length).indexOf(1);
     props.productGroups.splice(productGroupIndex, 1);
   } else {
-    deletePrint(productGroup, print)
+    let printIndex = productGroup.prints.map(print => print._id).indexOf(print._id);
+    productGroup.prints.splice(printIndex, 1);
   }
 }
 

@@ -1,3 +1,5 @@
+import type {Combine} from '../utils/combineTypes'
+
 export interface Verse {
   _id: string;
   first: string;
@@ -46,7 +48,7 @@ export interface Prose {
   updatedAt: string;
 }
 
-export interface Poetry extends ChosenVerse, Prose {};
+export interface Poetry extends Combine<ChosenVerse, Prose> {};
 
 export interface Print {
   _id: string;

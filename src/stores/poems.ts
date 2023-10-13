@@ -1,4 +1,4 @@
-import {ref, computed} from 'vue';
+import {shallowRef, computed} from 'vue';
 import { defineStore } from 'pinia';
 import { AxiosError } from 'axios';
 import {baseHttp} from '../utils/axios'
@@ -8,7 +8,7 @@ import type { Poem } from './__types__';
 import { useAxiosError } from '../composables/error';
 
 export const usePoemStore = defineStore('poems', () => {
-  const poems = ref<Poem[]>([]);
+  const poems = shallowRef<Poem[]>([]);
   const getPoems = computed<Poem[]>(() => poems.value);
 
 
@@ -27,17 +27,18 @@ export const usePoemStore = defineStore('poems', () => {
     }
   };
 
-  const poem = ref<Poem>({});
-  const getPoem = computed<Poem>(() => poem.value);
+  const poem = shallowRef<Poem | null>(null);
+  const getPoem = computed<Poem | null>(() => poem.value);
+
+  const otherPoems = shallowRef<Poem[]>([]);
+  const getOtherPoems = computed<Poem[]>(() => { return otherPoems.value});
   async function fetchOtherPoems(id: string) {
     try {
-      let reqPoemsIntros = await baseHttp.get(`/poems_intros`);
-
-      let poemIndex = reqPoemsIntros.data
-        .map((poem: Poem) => poem._id)
-        .indexOf(id);
-      reqPoemsIntros.data.splice(poemIndex, 1);
-      poems.value = reqPoemsIntros.data;
+      if(getPoems.value.length === 0) await fetchPoems();
+      const poemsArr = [...getPoems.value];
+      let poemIndex = poemsArr.map((poem: Poem) => poem._id).indexOf(id);
+      poemsArr.splice(poemIndex, 1);
+      otherPoems.value = poemsArr;
     } catch (error) {
       if (error instanceof AxiosError) {
         useAxiosError(error);
@@ -62,5 +63,5 @@ export const usePoemStore = defineStore('poems', () => {
     }
   };
 
-  return {getPoems, getPoem, fetchPoems, fetchOtherPoems, fetchPoemAndSuggestedPoems}
+  return {getPoems, getPoem, getOtherPoems, fetchPoems, fetchOtherPoems, fetchPoemAndSuggestedPoems}
 });

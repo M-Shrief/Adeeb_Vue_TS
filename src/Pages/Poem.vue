@@ -1,18 +1,18 @@
 <template>
   <main>
-    <div class="container" dir="rtl">
-      <section id="related-data" v-if="getPoem.poet">
+    <div class="container" dir="rtl"  v-if="getPoem">
+      <section id="related-data" >
         <router-link :to="'/poet/' + getPoem.poet._id" class="link">
           <ShowCasePoet :details="getPoem.poet" />
         </router-link>
 
-        <ShowCasePoems :poems="getPoems">
+        <ShowCasePoems :poems="getOtherPoems">
           <h2>قصائد اخري</h2>
         </ShowCasePoems>
       </section>
       <!-- make print the same interface like chosenVerses -->
       <ShowCasePoem :verses="getPoem.verses"
-        @print="(poemVerse: Verse) => addPrint({ poem: getPoem._id, ...poemVerse })" />
+        @print="(poemVerse: Verse) => addPrint({ poem: getPoem?._id, ...poemVerse })" />
     </div>
     <SelectedPrints :prints="getPrints" @remove="(print) => removePrint(print)"
       :is-partner="isPartner" />
@@ -39,15 +39,16 @@ const poemStore = usePoemStore();
 const getPoem = computed(() => {
   return poemStore.getPoem;
 });
-const getPoems = computed(() => {
-  return poemStore.getPoems;
+
+const getOtherPoems = computed(() => {
+  return poemStore.getOtherPoems;
 });
 
 watch(
   () => route.params.id,
   (newPoemId) => {
     if (route.name === 'poem')
-      poemStore.fetchPoemAndSuggestedPoems(route.params.id as string);
+      poemStore.fetchPoemAndSuggestedPoems(newPoemId as string);
   }
 );
 

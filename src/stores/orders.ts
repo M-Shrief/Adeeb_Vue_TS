@@ -1,4 +1,4 @@
-import {ref, computed} from 'vue';
+import {ref, shallowRef, computed} from 'vue';
 import { defineStore } from 'pinia';
 import  { AxiosError } from 'axios';
 import {baseHttp, withAuthHttp} from '../utils/axios'
@@ -11,7 +11,7 @@ import { useSuccessNotification } from '../composables/success';
 
 export const useOrderStore = defineStore('orders', 
   () => {
-    const orders =  ref<Order[]>([]);
+    const orders =  shallowRef<Order[]>([]);
     const getOrders = computed<Order[]>(() => {
       return orders.value;
     });

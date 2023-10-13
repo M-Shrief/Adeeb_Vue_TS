@@ -1,4 +1,4 @@
-import {ref, computed} from 'vue';
+import {shallowRef, computed} from 'vue';
 import { defineStore } from 'pinia';
 import { AxiosError } from 'axios';
 import {baseHttp} from '../utils/axios'
@@ -8,7 +8,7 @@ import type { Prose } from './__types__';
 import { useAxiosError } from '../composables/error';
 
 export const useProseStore = defineStore('proses', () => {
-  const proses = ref<Prose[]>([]);
+  const proses = shallowRef<Prose[]>([]);
   const getProses = computed<Prose[]>(() => proses.value);
   async function fetchProses() {
     try {
@@ -23,7 +23,7 @@ export const useProseStore = defineStore('proses', () => {
     }
   };
 
-  const randomProses = ref<Prose[]>([]);
+  const randomProses = shallowRef<Prose[]>([]);
   const getRandomProses = computed<Prose[]>(() => randomProses.value);
   async function fetchRandomProses(num: number) {
     try {

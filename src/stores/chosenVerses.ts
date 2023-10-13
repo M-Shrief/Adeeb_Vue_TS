@@ -1,4 +1,4 @@
-import {ref, computed} from 'vue';
+import {shallowRef, computed} from 'vue';
 import { defineStore } from 'pinia';
 import { AxiosError } from 'axios';
 import {baseHttp} from '../utils/axios'
@@ -8,7 +8,7 @@ import type { ChosenVerse } from './__types__';
 import { useAxiosError } from '../composables/error';
 
 export const useChosenVerseStore = defineStore('chosenVerses', () => {
-  const chosenVerses =  ref<ChosenVerse[]>([]);
+  const chosenVerses =  shallowRef<ChosenVerse[]>([]);
   const getChosenVerses = computed<ChosenVerse[]>(() => chosenVerses.value);
   async function fetchChosenVerses() {
     try {
@@ -23,7 +23,7 @@ export const useChosenVerseStore = defineStore('chosenVerses', () => {
     }
   };
 
-  const randomChosenVerses =ref<ChosenVerse[]>([]);
+  const randomChosenVerses =shallowRef<ChosenVerse[]>([]);
   const getRandomChosenVerses = computed<ChosenVerse[]>(() => randomChosenVerses.value);
   async function fetchRandomChosenVerses(num: number) {
     try {

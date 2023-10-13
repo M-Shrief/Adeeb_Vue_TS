@@ -1,7 +1,6 @@
-import {ref, computed} from 'vue';
+import {shallowRef, computed} from 'vue';
 import { defineStore } from 'pinia';
 import  { AxiosError } from 'axios';
-import {baseHttp} from '../utils/axios'
 // Stores
 import { useChosenVerseStore } from './chosenVerses';
 import { useProseStore } from './proses';
@@ -13,7 +12,7 @@ import {shufflePoetry} from '../utils/shuffle'
 import { useAxiosError } from '../composables/error';
 
 export const usePoetryStore = defineStore('poetry', () => {
-    const poetry = ref<Poetry[]>([]);
+    const poetry = shallowRef<Poetry[]>([]);
     const getPoetry = computed(() => {
         return poetry.value;
     })
@@ -37,11 +36,6 @@ export const usePoetryStore = defineStore('poetry', () => {
             alert(error);
         }
     }
-
-    const poetPoetry = ref<Poetry[]>([]);
-    const getPoetPoetry = computed(() => {
-        return poetPoetry.value;
-    })
 
     return {getPoetry, fetchPoetry};
 })

@@ -1,4 +1,4 @@
-import {ref, computed} from 'vue';
+import {shallowRef, computed} from 'vue';
 import { defineStore } from 'pinia';
 import { AxiosError } from 'axios';
 import {baseHttp} from '../utils/axios'
@@ -8,7 +8,7 @@ import type { Poet } from './__types__';
 import { useAxiosError } from '../composables/error';
 
 export const usePoetStore = defineStore('poets', () => {
- const poets = ref<Poet['details'][]>([])
+ const poets = shallowRef<Poet['details'][]>([])
  const getPoets = computed<Poet['details'][]>(() => poets.value)
  async function fetchPoets() {
   try {
@@ -23,7 +23,7 @@ export const usePoetStore = defineStore('poets', () => {
   }
 };
 
- const poet = ref<Poet | null>(null)
+ const poet = shallowRef<Poet | null>(null)
  const getPoet = computed<Poet | null>(() => poet.value)
  async function fetchPoet(id: string) {
   try {

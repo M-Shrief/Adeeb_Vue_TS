@@ -29,7 +29,7 @@ describe('Renders poem properly', () => {
     cy.get('.verse').dblclick();
     cy.get('@onPrintSpy').should('be.calledOnce');
     cy.get('@onPrintSpy').should('have.been.calledWith', {
-      _id: '11212441',
+      _id: 'وَجَدتُ وَعدَكَ زوراً في مُزَوَّرَةٍ'.slice(0,5),
       verses: [
         {
           first: 'وَجَدتُ وَعدَكَ زوراً في مُزَوَّرَةٍ',

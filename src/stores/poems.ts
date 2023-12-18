@@ -1,11 +1,11 @@
 import {shallowRef, computed} from 'vue';
 import { defineStore } from 'pinia';
-import { AxiosError } from 'axios';
-import {baseHttp} from '../utils/axios'
+// Utils
+import { apiURL } from '@/utils/fetch';
 // types
 import type { Poem } from './__types__';
 // Composables
-import { useAxiosError } from '../composables/error';
+import { useFetchError } from '../composables/error';
 
 export const usePoemStore = defineStore('poems', () => {
   const poems = shallowRef<Poem[]>([]);
@@ -13,17 +13,17 @@ export const usePoemStore = defineStore('poems', () => {
 
 
   async function fetchPoems() {
-    try {
-      const req = await baseHttp.get(
-        `/poems_intros`
-      );
-      poems.value = req.data;
-    } catch (error) {
-      if (error instanceof AxiosError) {
-        useAxiosError(error);
-        return;
+    const res = await fetch(
+      apiURL('/poems_intros'),
+      {
+        method: "GET"
       }
-      alert(error);
+    )
+
+    if(res.ok) {
+      poems.value = await res.json()
+    } else {
+      useFetchError(await res.json())
     }
   };
 
@@ -33,33 +33,23 @@ export const usePoemStore = defineStore('poems', () => {
   const otherPoems = shallowRef<Poem[]>([]);
   const getOtherPoems = computed<Poem[]>(() => { return otherPoems.value});
   async function fetchOtherPoems(id: string) {
-    try {
-      if(getPoems.value.length === 0) await fetchPoems();
-      const poemsArr = [...getPoems.value];
-      let poemIndex = poemsArr.map((poem: Poem) => poem._id).indexOf(id);
-      poemsArr.splice(poemIndex, 1);
-      otherPoems.value = poemsArr;
-    } catch (error) {
-      if (error instanceof AxiosError) {
-        useAxiosError(error);
-        return;
-      }
-      alert(error);
-    }
+    if(getPoems.value.length === 0) await fetchPoems();
+    const poemsArr = [...getPoems.value];
+    let poemIndex = poemsArr.map((poem: Poem) => poem._id).indexOf(id);
+    poemsArr.splice(poemIndex, 1);
+    otherPoems.value = poemsArr;
   };
     
   async function fetchPoemAndSuggestedPoems(id: string) {
-    try {
-      let reqPoem = await baseHttp.get(`/poem/${id}`);
-      poem.value = reqPoem.data;
+    const res = await fetch(
+      apiURL(`/poem/${id}`)
+    )
 
+    if(res.ok) {
+      poem.value = await res.json()
       fetchOtherPoems(id);
-    } catch (error) {
-      if (error instanceof AxiosError) {
-        useAxiosError(error);
-        return;
-      }
-      alert(error);
+    } else {
+      useFetchError(await res.json())
     }
   };
 

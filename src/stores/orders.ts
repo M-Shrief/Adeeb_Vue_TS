@@ -1,12 +1,12 @@
 import {ref, shallowRef, computed} from 'vue';
 import { defineStore } from 'pinia';
-import  { AxiosError } from 'axios';
-import {baseHttp, withAuthHttp} from '../utils/axios'
+// Utils
+import { ContentType, apiURL } from '@/utils/fetch';
 // types
 import type { Order, Product, ProductGroup, Print } from './__types__';
 // Composables
 import {useSessionStorage} from '@vueuse/core';
-import { useAxiosError } from '../composables/error';
+import { useFetchError } from '../composables/error';
 import { useSuccessNotification } from '../composables/success';
 
 export const useOrderStore = defineStore('orders', 
@@ -16,58 +16,77 @@ export const useOrderStore = defineStore('orders',
       return orders.value;
     });
     async function fetchOrders(name: string, phone: string) {
-      try {
-        const req = await baseHttp.post(
-          `/orders/guest`,
-          { name, phone }
-        );
-        orders.value = req.data;
-      } catch (error) {
-        if (error instanceof AxiosError) {
-          useAxiosError(error);
-          return;
+      const res = await fetch(
+        apiURL(`/orders/guest`), 
+        {
+          method: "POST",
+          headers: {
+            'Content-Type': ContentType.JSON, 
+          },
+          body: JSON.stringify({name, phone})
         }
-        alert(error);
+      )
+      if (res.ok) {
+        orders.value = await res.json()
+      } else {
+        useFetchError(await res.json())
       }
     };
     async function fetchPartnerOrders(partner: string) {
-      try {
-        const req = await withAuthHttp.get(
-          `/orders/partner`
-        );
-        orders.value = req.data;
-      } catch (error) {
-        if (error instanceof AxiosError) {
-          useAxiosError(error);
-          return;
+      const res = await fetch(
+        apiURL(`/orders/partner`), 
+        {
+          method: "GET",
+          credentials: "same-origin",
+          headers: {
+            Authorization: `Bearer ${sessionStorage.getItem("accessToken")}`
+          }
         }
-        alert(error);
+      )
+      if (res.ok) {
+        orders.value = await res.json()
+      } else {
+        useFetchError(await res.json())
       }
     };
 
     async function newGuestOrder(order: Order) {
-      try {
-        await baseHttp.post(`/order/guest`, order);
-        useSuccessNotification('Operation was made successfully');
-      } catch (error) {
-        if (error instanceof AxiosError) {
-          useAxiosError(error);
-          return;
+      const res = await fetch(
+        apiURL(`/order/guest`),
+        {
+          method: "POST",
+          headers: {
+            'Content-Type': ContentType.JSON, 
+          },
+          body: JSON.stringify(order),
+          
         }
-        alert(error);
+      )
+      if(res.ok) {
+        useSuccessNotification('Operation was made successfully');
+      } else {
+        useFetchError(await res.json())
       }
     };
 
     async function newPartnerOrder(order: Order) {
-      try {
-        await withAuthHttp.post(`/order/partner`, order);
-        useSuccessNotification('Operation was made successfully');
-      } catch (error) {
-        if (error instanceof AxiosError) {
-          useAxiosError(error);
-          return;
+      const res = await fetch(
+        apiURL(`/order/partner`),
+        {
+          method: "POST",
+          credentials: "same-origin",
+          headers: {
+            'Content-Type': ContentType.JSON, 
+            Authorization: `Bearer ${sessionStorage.getItem("accessToken")}`
+          },
+          body: JSON.stringify(order),
+          
         }
-        alert(error);
+      )
+      if(res.ok) {
+        useSuccessNotification('Operation was made successfully');
+      } else {
+        useFetchError(await res.json())
       }
     };
 

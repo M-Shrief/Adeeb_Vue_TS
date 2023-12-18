@@ -1,14 +1,14 @@
 import {ref, computed} from 'vue';
 import { defineStore } from 'pinia';
-import  { AxiosError } from 'axios';
-import {baseHttp} from '../utils/axios'
+// Utils
+import {ContentType, apiURL} from '../utils/fetch'
 // Stores
 import { useOrderStore } from './orders';
 // types
 import type { Partner } from './__types__';
 
 // Composables
-import { useAxiosError } from '../composables/error';
+import { useFetchError } from '../composables/error';
 import { useSessionStorage } from '@vueuse/core';
 
 export const usePartnerStore = defineStore('partners', () => {
@@ -23,30 +23,42 @@ export const usePartnerStore = defineStore('partners', () => {
     }); 
 
     async function signup(partnerData: Partner) {
-      try {
-        const req = await baseHttp.post(`/partner/signup`, partnerData);
-        partner.value = JSON.stringify(req.data.partner);
-        sessionStorage.setItem("accessToken", req.data.accessToken);
-      } catch (error) {
-        if (error instanceof AxiosError) {
-          useAxiosError(error);
-          return;
+      const res = await fetch(
+        apiURL(`/partner/signup`), 
+        {
+          method: "POST",
+          headers: {
+            'Content-Type': ContentType.JSON, 
+          },
+          body: JSON.stringify(partnerData)
         }
-        alert(error);
+      )
+      if(res.ok) {
+        const data = await res.json()
+        partner.value = JSON.stringify(data.partner)
+        sessionStorage.setItem("accessToken", data.accessToken);
+      } else {
+        useFetchError(await res.json())
       }
     };
     
     async function login(partnerData: Partner) {
-      try {
-        const req = await baseHttp.post(`/partner/login`, partnerData);
-        partner.value = JSON.stringify(req.data.partner);
-        sessionStorage.setItem("accessToken", req.data.accessToken);
-      } catch (error) {
-        if (error instanceof AxiosError) {
-          useAxiosError(error);
-          return;
+      const res = await fetch(
+        apiURL(`/partner/login`), 
+        {
+          method: "POST",
+          headers: {
+            'Content-Type': ContentType.JSON, 
+          },
+          body: JSON.stringify(partnerData)
         }
-        alert(error);
+      )
+      if(res.ok) {
+        const data = await res.json()
+        partner.value = JSON.stringify(data.partner)
+        sessionStorage.setItem("accessToken", data.accessToken);
+      } else {
+        useFetchError(await res.json())
       }
     };
     

@@ -1,41 +1,37 @@
 import {shallowRef, computed} from 'vue';
 import { defineStore } from 'pinia';
-import { AxiosError } from 'axios';
-import {baseHttp} from '../utils/axios'
+// Utils
+import {apiURL} from '../utils/fetch'
 // types
 import type { ChosenVerse } from './__types__';
 // Composables
-import { useAxiosError } from '../composables/error';
+import { useFetchError } from '../composables/error';
 
 export const useChosenVerseStore = defineStore('chosenVerses', () => {
   const chosenVerses =  shallowRef<ChosenVerse[]>([]);
   const getChosenVerses = computed<ChosenVerse[]>(() => chosenVerses.value);
   async function fetchChosenVerses() {
-    try {
-      const req = await baseHttp.get(`/chosenverses`);
-      chosenVerses.value = req.data;
-    } catch (error) {
-      if (error instanceof AxiosError) {
-        useAxiosError(error);
-        return;
-      }
-      alert(error);
+    const res = await fetch(
+      apiURL(`/chosenverses`)
+    )
+    if(res.ok) {
+      chosenVerses.value = await res.json()
+    } else {
+      useFetchError(await res.json())
     }
   };
 
   const randomChosenVerses =shallowRef<ChosenVerse[]>([]);
   const getRandomChosenVerses = computed<ChosenVerse[]>(() => randomChosenVerses.value);
   async function fetchRandomChosenVerses(num: number) {
-    try {
-      const req = await baseHttp.get(`/chosenverses/random?num=${num}`);
-      randomChosenVerses.value = req.data;
-    } catch (error) {
-      if (error instanceof AxiosError) {
-        useAxiosError(error);
-        return;
+      const res = await fetch(
+        apiURL(`/chosenverses/random?num=${num}`)
+      )
+      if(res.ok) {
+        randomChosenVerses.value = await res.json()
+      } else {
+        useFetchError(await res.json())
       }
-      alert(error);
-    }
   };
 
     return {getChosenVerses, fetchChosenVerses, getRandomChosenVerses, fetchRandomChosenVerses}

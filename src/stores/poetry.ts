@@ -1,6 +1,5 @@
 import {shallowRef, computed} from 'vue';
 import { defineStore } from 'pinia';
-import  { AxiosError } from 'axios';
 // Stores
 import { useChosenVerseStore } from './chosenVerses';
 import { useProseStore } from './proses';
@@ -9,7 +8,7 @@ import type { Poetry } from './__types__';
 // Utils
 import {shufflePoetry} from '../utils/shuffle'
 // Composables
-import { useAxiosError } from '../composables/error';
+import { useFetchError } from '../composables/error';
 
 export const usePoetryStore = defineStore('poetry', () => {
     const poetry = shallowRef<Poetry[]>([]);
@@ -20,21 +19,13 @@ export const usePoetryStore = defineStore('poetry', () => {
     const chosenVersesStore = useChosenVerseStore();
     const prosesStore = useProseStore();
     async function fetchPoetry() {
-        try {
             await Promise.allSettled([
                 await chosenVersesStore.fetchChosenVerses(),
                 await prosesStore.fetchProses(),
             ]);
-    
+            
             poetry.value = [...chosenVersesStore.getChosenVerses, ...prosesStore.getProses] as Poetry[];
             await Promise.all([shufflePoetry(poetry.value)]);
-        } catch (error) {
-            if (error instanceof AxiosError) {
-                useAxiosError(error);
-                return;
-            }
-            alert(error);
-        }
     }
 
     return {getPoetry, fetchPoetry};

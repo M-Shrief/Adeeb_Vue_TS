@@ -1,6 +1,6 @@
 import { ref } from 'vue';
 
-export let success = ref();
+export let success = ref<{message: string} | null>();
 
 export const useSuccessNotification = async (message: string) => {
   success.value = { message };

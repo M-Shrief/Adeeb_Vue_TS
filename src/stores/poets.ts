@@ -1,40 +1,44 @@
 import {shallowRef, computed} from 'vue';
 import { defineStore } from 'pinia';
-import { AxiosError } from 'axios';
-import {baseHttp} from '../utils/axios'
+// Utils
+import {apiURL} from '../utils/fetch'
 // Types
 import type { Poet } from './__types__';
 // Composables
-import { useAxiosError } from '../composables/error';
+import {useFetchError } from '../composables/error';
 
 export const usePoetStore = defineStore('poets', () => {
  const poets = shallowRef<Poet['details'][]>([])
  const getPoets = computed<Poet['details'][]>(() => poets.value)
  async function fetchPoets() {
-  try {
-    const req = await baseHttp.get(`/poets`);
-    poets.value = req.data;
-  } catch (error) {
-    if (error instanceof AxiosError) {
-      useAxiosError(error);
-      return;
+  const res = await fetch(
+    apiURL(`/poets`), 
+    {
+      method: "GET"
     }
-    alert(error);
+  )
+
+  if (res.ok) {
+    poets.value = await res.json()
+  } else {
+    useFetchError(await res.json())
   }
 };
 
  const poet = shallowRef<Poet | null>(null)
  const getPoet = computed<Poet | null>(() => poet.value)
  async function fetchPoet(id: string) {
-  try {
-    const req = await baseHttp.get(`/poet/${id}`);
-    poet.value = req.data;
-  } catch (error) {
-    if (error instanceof AxiosError) {
-      useAxiosError(error);
-      return;
+  const res = await fetch(
+    apiURL(`/poet/${id}`), 
+    {
+      method: "GET"
     }
-    alert(error);
+  )
+
+  if (res.ok) {
+    poet.value = await res.json()
+  } else {
+    useFetchError(await res.json())
   }
  };
 

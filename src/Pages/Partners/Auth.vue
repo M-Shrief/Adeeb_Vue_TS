@@ -26,8 +26,6 @@ import { useRouter } from 'vue-router';
 import AuthForm from '@/components/AuthForm.vue';
 // stores
 import { usePartnerStore } from '@/stores/partners';
-// Composables
-import { useAxiosError } from '@/composables/error';
 
 const router = useRouter();
 
@@ -43,7 +41,6 @@ async function onLogin(values: any) {
       .then(() => {
         if (partner.value) router.push('/');
       })
-      .catch(error => useAxiosError(error));
 }
 
 async function onSignup(values: any) {

@@ -11,7 +11,7 @@
       </div>
 
       <!-- Add Pagination for poetry and proses -->
-        <ShowCasePoetry :poetry="(shufflePoetry([...getPoet.chosenVerses, ...getPoet.proses] as Poetry[]) as Poetry[])"
+        <ShowCasePoetry :poetry="poetPoetry"
          :routeName="'poet'"  @print="(print: Print) => addPrint(print)" />
       
     </div>
@@ -40,6 +40,14 @@ const poetStore = usePoetStore();
 const getPoet = computed(() => {
   return poetStore.getPoet
 })
+
+const poetPoetry = computed<Poetry[]>(() => {
+  if (getPoet.value) {
+    return shufflePoetry([...getPoet.value.chosenVerses, ...getPoet.value.proses])
+  }
+   return []
+})
+
 const route = useRoute();
 onMounted(() => {
   if(getPoet.value === null || getPoet.value.details._id === route.params.id) poetStore.fetchPoet(route.params.id as string);

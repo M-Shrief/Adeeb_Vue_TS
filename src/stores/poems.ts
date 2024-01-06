@@ -13,6 +13,7 @@ export const usePoemStore = defineStore('poems', () => {
 
 
   async function fetchPoems() {
+    if(poems.value.length !== 0) return 
     const res = await fetch(
       apiURL('/poems_intros'),
       {
@@ -29,18 +30,10 @@ export const usePoemStore = defineStore('poems', () => {
 
   const poem = shallowRef<Poem | null>(null);
   const getPoem = computed<Poem | null>(() => poem.value);
-
-  const otherPoems = shallowRef<Poem[]>([]);
-  const getOtherPoems = computed<Poem[]>(() => { return otherPoems.value});
-  async function fetchOtherPoems(id: string) {
-    if(getPoems.value.length === 0) await fetchPoems();
-    const poemsArr = [...getPoems.value];
-    let poemIndex = poemsArr.map((poem: Poem) => poem._id).indexOf(id);
-    poemsArr.splice(poemIndex, 1);
-    otherPoems.value = poemsArr;
-  };
     
   async function fetchPoemAndSuggestedPoems(id: string) {
+    if(poem.value && poem.value._id == id) return
+
     const res = await fetch(
       apiURL(`/poem/${id}`)
     )
@@ -51,6 +44,17 @@ export const usePoemStore = defineStore('poems', () => {
     } else {
       useFetchError(await res.json())
     }
+  };
+
+
+  const otherPoems = shallowRef<Poem[]>([]);
+  const getOtherPoems = computed<Poem[]>(() => { return otherPoems.value});
+  async function fetchOtherPoems(id: string) {
+    if(getPoems.value.length === 0) await fetchPoems();
+    const poemsArr = [...getPoems.value];
+    let poemIndex = poemsArr.map((poem: Poem) => poem._id).indexOf(id);
+    poemsArr.splice(poemIndex, 1);
+    otherPoems.value = poemsArr;
   };
 
   return {getPoems, getPoem, getOtherPoems, fetchPoems, fetchOtherPoems, fetchPoemAndSuggestedPoems}

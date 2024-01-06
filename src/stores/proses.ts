@@ -11,6 +11,8 @@ export const useProseStore = defineStore('proses', () => {
   const proses = shallowRef<Prose[]>([]);
   const getProses = computed<Prose[]>(() => proses.value);
   async function fetchProses() {
+    if(proses.value.length != 0) return
+
     const res = await fetch(
       apiURL(`/proses`)
     )

@@ -11,6 +11,8 @@ export const useChosenVerseStore = defineStore('chosenVerses', () => {
   const chosenVerses =  shallowRef<ChosenVerse[]>([]);
   const getChosenVerses = computed<ChosenVerse[]>(() => chosenVerses.value);
   async function fetchChosenVerses() {
+    if(chosenVerses.value.length != 0) return
+
     const res = await fetch(
       apiURL(`/chosenverses`)
     )

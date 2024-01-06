@@ -52,9 +52,9 @@ const getPoetry = computed(() => {
 });
 
 onMounted(() => {
-  if (!getPoems.value.length) poemsStore.fetchPoems();
-  if (!getPoets.value.length) poetsStore.fetchPoets();
-  if (!getPoetry.value.length) poetryStore.fetchPoetry();
+  poemsStore.fetchPoems();
+  poetsStore.fetchPoets();
+  poetryStore.fetchPoetry();
 });
 // Should use Provide/Inject
 const printsStore = usePrintsStore();

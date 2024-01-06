@@ -33,8 +33,6 @@ import ShowCasePoet from '@/components/ShowCasePoet.vue';
 import ShowCasePoems from '@/components/ShowCasePoems.vue';
 import ShowCasePoetry from '@/components/ShowCasePoetry.vue';
 import SelectedPrints from '@/components/SelectedPrints.vue';
-// Utils
-import {shufflePoetry} from '@/utils/shuffle';
 
 const poetStore = usePoetStore();
 const getPoet = computed(() => {
@@ -42,15 +40,13 @@ const getPoet = computed(() => {
 })
 
 const poetPoetry = computed<Poetry[]>(() => {
-  if (getPoet.value) {
-    return shufflePoetry([...getPoet.value.chosenVerses, ...getPoet.value.proses])
-  }
-   return []
+  if (getPoet.value) return getPoet.value.poetry;
+  return [];
 })
 
 const route = useRoute();
 onMounted(() => {
-  if(getPoet.value === null || getPoet.value.details._id === route.params.id) poetStore.fetchPoet(route.params.id as string);
+  poetStore.fetchPoet(route.params.id as string);
 })
 
 // Should use Provide/Inject

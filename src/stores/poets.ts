@@ -2,8 +2,9 @@ import {shallowRef, computed} from 'vue';
 import { defineStore } from 'pinia';
 // Utils
 import {apiURL} from '../utils/fetch'
+import {shuffle} from '../utils/shuffle'
 // Types
-import type { Poet } from './__types__';
+import type { Poet, Poetry } from './__types__';
 // Composables
 import {useFetchError } from '../composables/error';
 
@@ -11,6 +12,8 @@ export const usePoetStore = defineStore('poets', () => {
  const poets = shallowRef<Poet['details'][]>([])
  const getPoets = computed<Poet['details'][]>(() => poets.value)
  async function fetchPoets() {
+  if (poets.value.length != 0) return
+
   const res = await fetch(
     apiURL(`/poets`), 
     {
@@ -28,7 +31,10 @@ export const usePoetStore = defineStore('poets', () => {
  const poet = shallowRef<Poet | null>(null)
  const getPoet = computed<Poet | null>(() => poet.value)
  async function fetchPoet(id: string) {
+  if(poet.value && poet.value.details._id == id) return
+
   const res = await fetch(
+    
     apiURL(`/poet/${id}`), 
     {
       method: "GET"
@@ -37,6 +43,16 @@ export const usePoetStore = defineStore('poets', () => {
 
   if (res.ok) {
     poet.value = await res.json()
+    if(poet.value) {
+    // Combining Poet's poetry and shuffling it.
+
+      const poetry = [
+        ...poet.value.chosenVerses,
+        ...poet.value.proses,
+    ] as Poetry[];
+      // await shuffle(poetry);
+      poet.value.poetry = poetry;
+    }
   } else {
     useFetchError(await res.json())
   }

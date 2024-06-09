@@ -2,15 +2,14 @@ import {shallowRef, computed} from 'vue';
 import { defineStore } from 'pinia';
 // Utils
 import {apiURL} from '../utils/fetch'
-import {shuffle} from '../utils/shuffle'
 // Types
 import type { Poet, Poetry } from './__types__';
 // Composables
 import {useFetchError } from '../composables/error';
 
 export const usePoetStore = defineStore('poets', () => {
- const poets = shallowRef<Poet['details'][]>([])
- const getPoets = computed<Poet['details'][]>(() => poets.value)
+ const poets = shallowRef<Poet[]>([])
+ const getPoets = computed<Poet[]>(() => poets.value)
  async function fetchPoets() {
   if (poets.value.length != 0) return
 
@@ -31,7 +30,7 @@ export const usePoetStore = defineStore('poets', () => {
  const poet = shallowRef<Poet | null>(null)
  const getPoet = computed<Poet | null>(() => poet.value)
  async function fetchPoet(id: string) {
-  if(poet.value && poet.value.details._id == id) return
+  if(poet.value && poet.value._id == id) return
 
   const res = await fetch(
     

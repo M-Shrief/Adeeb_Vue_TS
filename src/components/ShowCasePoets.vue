@@ -15,7 +15,7 @@
 import type { Poet } from '@/stores/__types__';
 
 defineProps<{
-  poets: Poet['details'][]
+  poets: Poet[]
 }>()
 </script>
 

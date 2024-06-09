@@ -3,7 +3,7 @@
   <main>
     <div v-if="getPoet" dir="rtl">
       <div class="container">
-        <ShowCasePoet :details="getPoet.details" />
+        <ShowCasePoet :poet="getPoet" />
 
         <ShowCasePoems :poems="getPoet.poems">
           <h3 class="poems-title">قصائده</h3>

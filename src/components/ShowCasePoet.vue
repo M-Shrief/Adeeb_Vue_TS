@@ -1,7 +1,7 @@
 <template>
-  <section v-if="details" class="poet" dir="rtl">
-    <h2>{{ details.name }} - {{ details.time_period }}</h2>
-    <p class="bio">{{ details.bio }}</p>
+  <section v-if="poet" class="poet" dir="rtl">
+    <h2>{{ poet.name }} - {{ poet.time_period }}</h2>
+    <p class="bio">{{ poet.bio }}</p>
   </section>
 </template>
 
@@ -9,7 +9,7 @@
 import type { Poet } from '@/stores/__types__';
 
 defineProps<{
-  details: Poet['details']
+  poet: Poet
 }>()
 </script>
 

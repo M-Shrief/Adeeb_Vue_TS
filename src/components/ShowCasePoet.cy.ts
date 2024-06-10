@@ -5,7 +5,7 @@ describe('Poet details', () => {
     // see: https://on.cypress.io/mounting-vue
     cy.mount(ShowCasePoet, {
       props: {
-        details: {
+        poet: {
           _id: '6371e9ce885e286801facca2',
           name: 'عنترة بن شداد',
           time_period: 'العصر الجاهلي',

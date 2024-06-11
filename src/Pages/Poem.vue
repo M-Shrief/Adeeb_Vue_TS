@@ -2,7 +2,7 @@
   <main>
     <div class="container" dir="rtl"  v-if="getPoem">
       <section id="related-data" >
-        <router-link :to="'/poet/' + getPoem.poet._id" class="link">
+        <router-link :to="'/poets/' + getPoem.poet._id" class="link">
           <ShowCasePoet :poet="getPoem.poet" />
         </router-link>
 

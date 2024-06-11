@@ -32,12 +32,12 @@ const routes = [
     component: Main,
   },
   {
-    path: '/poet/:id',
+    path: '/poets/:id',
     name: 'poet',
     component: Poet,
   },
   {
-    path: '/poem/:id',
+    path: '/poems/:id',
     name: 'poem',
     component: Poem,
   },

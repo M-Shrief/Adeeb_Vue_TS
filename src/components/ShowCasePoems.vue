@@ -7,7 +7,7 @@
     <slot />
     <div :class="grid">
       <router-link v-for="poem in props.poems" :key="poem._id"
-        :to="`/poem/${poem._id}`" class="poem" replace>
+        :to="`/poems/${poem._id}`" class="poem" replace>
         <!-- for Main & Poem pages -->
         <p v-if="poem.poet">{{ poem.intro }} - {{ poem.poet.name }}</p>
         <!-- for Poet's Page -->

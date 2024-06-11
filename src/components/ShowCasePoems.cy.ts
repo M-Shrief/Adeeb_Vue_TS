@@ -36,7 +36,7 @@ describe("render a group of poems' intros", () => {
     cy.get('.poem', { multiple: true }).should(
       'have.attr',
       'to',
-      '/poem/6371eb6690c2ad965846c221'
+      '/poems/6371eb6690c2ad965846c221'
     );
   });
 });

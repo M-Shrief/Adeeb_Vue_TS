@@ -16,6 +16,6 @@ describe('Poets', () => {
     });
 
     cy.get('.poet>p').should('contain', 'عنترة بن شداد');
-    cy.get('.poet').should('have.attr', 'to', '/poet/6371e9ce885e286801facca2');
+    cy.get('.poet').should('have.attr', 'to', '/poets/6371e9ce885e286801facca2');
   });
 });

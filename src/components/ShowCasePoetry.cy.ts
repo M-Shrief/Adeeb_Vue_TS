@@ -139,7 +139,7 @@ describe('<ShowCasePoetry />', () => {
     cy.get('.details').should(
       'have.attr',
       'to',
-      '/poet/639b5cf712eec0bb274cecd4'
+      '/poets/639b5cf712eec0bb274cecd4'
     );
 
     cy.get('.print-button').click();

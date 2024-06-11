@@ -6,7 +6,7 @@
                 <div v-if="singlePiece.qoute" class="prose-item">
                     <p class="qoute">{{ singlePiece.qoute }}</p>
                     <router-link v-if="!(routeName === 'poet')"
-                        :to="'/poet/' + singlePiece.poet._id" class="details">{{
+                        :to="'/poets/' + singlePiece.poet._id" class="details">{{
                         singlePiece.poet.name}}
                     </router-link>
 
@@ -21,7 +21,7 @@
                         <p class="first">{{ verse.first }}</p>
                         <p class="sec">{{ verse.sec }}</p>
                     </div>
-                    <router-link :to="'/poem/' + singlePiece.poem" class="details">{{
+                    <router-link :to="'/poems/' + singlePiece.poem" class="details">{{
                         routeName == 'poet'
                         ? 'القصيدة الكاملة'
                         : singlePiece.poet.name + ' - القصيدة الكاملة'}}

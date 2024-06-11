@@ -15,7 +15,7 @@ export const usePoemStore = defineStore('poems', () => {
   async function fetchPoems() {
     if(poems.value.length !== 0) return 
     const res = await fetch(
-      apiURL('/poems_intros'),
+      apiURL('/poems'),
       {
         method: "GET"
       }
@@ -35,7 +35,7 @@ export const usePoemStore = defineStore('poems', () => {
     if(poem.value && poem.value._id == id) return
 
     const res = await fetch(
-      apiURL(`/poem/${id}`)
+      apiURL(`/poems/${id}`)
     )
 
     if(res.ok) {

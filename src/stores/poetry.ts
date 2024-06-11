@@ -7,8 +7,6 @@ import { useProseStore } from './proses';
 import type { Poetry } from './__types__';
 // Utils
 import {shuffle} from '../utils/shuffle'
-// Composables
-import { useFetchError } from '../composables/error';
 
 export const usePoetryStore = defineStore('poetry', () => {
     const poetry = ref<Poetry[]>([]);

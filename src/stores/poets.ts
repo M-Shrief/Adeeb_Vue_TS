@@ -34,7 +34,7 @@ export const usePoetStore = defineStore('poets', () => {
 
   const res = await fetch(
     
-    apiURL(`/poet/${id}`), 
+    apiURL(`/poets/${id}`), 
     {
       method: "GET"
     }

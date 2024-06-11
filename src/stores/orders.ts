@@ -17,13 +17,9 @@ export const useOrderStore = defineStore('orders',
     });
     async function fetchOrders(name: string, phone: string) {
       const res = await fetch(
-        apiURL(`/orders/guest`), 
+        apiURL(`/orders/guest?name=${name}&phone=${phone}`), 
         {
-          method: "POST",
-          headers: {
-            'Content-Type': ContentType.JSON, 
-          },
-          body: JSON.stringify({name, phone})
+          method: "GET",
         }
       )
       if (res.ok) {
@@ -52,7 +48,7 @@ export const useOrderStore = defineStore('orders',
 
     async function newGuestOrder(order: Order) {
       const res = await fetch(
-        apiURL(`/order/guest`),
+        apiURL(`/orders/guest`),
         {
           method: "POST",
           headers: {
@@ -71,7 +67,7 @@ export const useOrderStore = defineStore('orders',
 
     async function newPartnerOrder(order: Order) {
       const res = await fetch(
-        apiURL(`/order/partner`),
+        apiURL(`/orders/partner`),
         {
           method: "POST",
           credentials: "same-origin",
